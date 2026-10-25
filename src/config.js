@@ -1,9 +1,11 @@
-// Dados de contato da Atalia. ⚠️ PENDENTE: confirmar número e perfis reais.
+// Dados de contato da Atalia Brechó
 export const CONTATO = {
-  whatsapp: '5581900000000', // TODO: número real da Atalia (55 + DDD + número)
-  instagram: 'https://www.instagram.com/', // TODO: perfil real
-  facebook: 'https://www.facebook.com/', // TODO: página real
-  email: 'wirlla.lima@gmail.com',
+  whatsapp: '558189086177', // +55 81 8908-6177
+  whatsappExibicao: '(81) 8908-6177',
+  instagram: 'https://www.instagram.com/ataliabrecho/',
+  instagramUsuario: '@ataliabrecho',
+  facebook: null, // preencher quando houver página; o link só aparece se existir
+  email: 'ataliabrecho@gmail.com',
   cidade: 'Paulista, PE',
 }
 

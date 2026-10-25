@@ -161,5 +161,5 @@ $$;
 -- Depois de criar o usuário da Wirlla em Authentication > Users,
 -- rode (trocando o e-mail):
 --   insert into public.admins (user_id, nome)
---   select id, 'Wirlla Dantas' from auth.users where email = 'wirlla.lima@gmail.com';
+--   select id, 'Wirlla Dantas' from auth.users where email = 'ataliabrecho@gmail.com';
 -- -------------------------------------------------------------

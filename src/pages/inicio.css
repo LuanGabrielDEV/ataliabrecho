@@ -373,3 +373,51 @@
   font-size: 1.0625rem;
   color: var(--tinta-suave);
 }
+
+/* ---------- Instagram: o @ em letra de cartaz, de ponta a ponta ---------- */
+.insta {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  border-block: 2px solid var(--tinta);
+  background: var(--papel-claro);
+}
+
+.insta__chamada {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.insta__usuario {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.6rem, 2vw, 1.25rem);
+  margin-top: 0.5rem;
+  max-width: 100%;
+  font-family: var(--fonte-cartaz);
+  font-size: clamp(2.6rem, 10.5vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.insta__usuario svg {
+  flex: none;
+  width: 0.55em;
+  height: 0.55em;
+  color: var(--oliva-escuro);
+}
+
+.insta__usuario:hover {
+  color: var(--oliva-escuro);
+  text-decoration: none;
+}
+
+.insta__texto {
+  margin: 1rem 0 1.75rem;
+  max-width: 46ch;
+  color: var(--tinta-suave);
+  font-size: 1.0625rem;
+}

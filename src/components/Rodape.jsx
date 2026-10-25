@@ -30,19 +30,21 @@ export default function Rodape() {
         <ul className="rodape__contato">
           <li>
             <a href={linkWhatsapp('Oi, Atalia! Vim pelo site.')} target="_blank" rel="noreferrer">
-              <IconeMarca icone={siWhatsapp} tamanho={18} /> WhatsApp
+              <IconeMarca icone={siWhatsapp} tamanho={18} /> {CONTATO.whatsappExibicao}
             </a>
           </li>
           <li>
             <a href={CONTATO.instagram} target="_blank" rel="noreferrer">
-              <IconeMarca icone={siInstagram} tamanho={18} /> Instagram
+              <IconeMarca icone={siInstagram} tamanho={18} /> {CONTATO.instagramUsuario}
             </a>
           </li>
-          <li>
-            <a href={CONTATO.facebook} target="_blank" rel="noreferrer">
-              <IconeMarca icone={siFacebook} tamanho={18} /> Facebook
-            </a>
-          </li>
+          {CONTATO.facebook && (
+            <li>
+              <a href={CONTATO.facebook} target="_blank" rel="noreferrer">
+                <IconeMarca icone={siFacebook} tamanho={18} /> Facebook
+              </a>
+            </li>
+          )}
           <li>
             <a href={`mailto:${CONTATO.email}`}>
               <Mail size={18} strokeWidth={1.6} aria-hidden="true" /> {CONTATO.email}

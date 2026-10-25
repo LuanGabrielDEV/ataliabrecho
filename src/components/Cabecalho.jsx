@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, ShoppingBag, X } from 'lucide-react'
-import { siWhatsapp } from 'simple-icons'
+import { siInstagram, siWhatsapp } from 'simple-icons'
 import { LogoHorizontal } from './Marca'
 import { useSacola } from '../features/sacola/Sacola'
-import { linkWhatsapp } from '../config'
+import { CONTATO, linkWhatsapp } from '../config'
 import './cabecalho.css'
 
 const LINKS = [
@@ -51,6 +51,15 @@ export default function Cabecalho() {
             aria-label="Falar no WhatsApp"
           >
             <IconeMarca icone={siWhatsapp} />
+          </a>
+          <a
+            className="cabecalho__icone"
+            href={CONTATO.instagram}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Instagram ${CONTATO.instagramUsuario}`}
+          >
+            <IconeMarca icone={siInstagram} />
           </a>
           <Link to="/sacola" className="cabecalho__icone cabecalho__sacola" aria-label={`Sacola, ${itens.length} ${itens.length === 1 ? 'peça' : 'peças'}`}>
             <ShoppingBag size={22} strokeWidth={1.6} aria-hidden="true" />

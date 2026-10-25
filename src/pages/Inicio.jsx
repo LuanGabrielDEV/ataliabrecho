@@ -4,6 +4,9 @@ import { ArrowRight } from 'lucide-react'
 import Cordao from '../features/cordel/Cordao'
 import { Simbolo } from '../components/Marca'
 import { CATEGORIAS, PECAS_DEMO } from '../data/pecasDemo'
+import { siInstagram } from 'simple-icons'
+import { IconeMarca } from '../components/Cabecalho'
+import { CONTATO } from '../config'
 import './inicio.css'
 
 const PASSOS = [
@@ -115,6 +118,21 @@ export default function Inicio() {
           <h2 id="aviso-titulo">Não achou no seu tamanho?</h2>
           <p>Peça de brechó não repete. Deixe seu WhatsApp e seus tamanhos e a gente te chama quando chegar algo para você.</p>
           <Link to="/avise-me?origem=inicio" className="botao">Quero ser avisada</Link>
+        </div>
+      </section>
+
+      {/* ---------- Instagram ---------- */}
+      <section className="insta" aria-labelledby="insta-titulo">
+        <div className="conteiner">
+          <h2 id="insta-titulo" className="insta__chamada">Acompanhe a Atalia no Instagram</h2>
+          <a className="insta__usuario" href={CONTATO.instagram} target="_blank" rel="noreferrer">
+            <IconeMarca icone={siInstagram} tamanho={48} />
+            <span>{CONTATO.instagramUsuario}</span>
+          </a>
+          <p className="insta__texto">Peças novas, looks e novidades do brechó. Siga e não perca a próxima peça no seu tamanho.</p>
+          <a className="botao" href={CONTATO.instagram} target="_blank" rel="noreferrer">
+            Seguir no Instagram
+          </a>
         </div>
       </section>
 

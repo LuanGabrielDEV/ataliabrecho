@@ -30,7 +30,7 @@ Cada peça é única e passa pela curadoria de uma bióloga que defende o consum
 - Fotos reais em manequim, sobre fundo de parede texturizada cinza. Algumas peças têm também fotos "Provador IA" (modelo gerada por IA vestindo a peça).
 - Entrega: **retirada combinada** (grátis) ou **entrega por Uber**, com valor variável combinado pelo WhatsApp no momento do envio e pago à parte. Não há taxa fixa nem envio nacional.
 - **Consignação / parceria:** 50% para cada parte, exposição por 60 dias e repasse em até 7 dias úteis, conforme os termos vigentes.
-- Atendimento e dúvidas pelo WhatsApp. Formulário de contato vai para wirlla.lima@gmail.com.
+- Atendimento e dúvidas pelo WhatsApp. Formulário de contato vai para ataliabrecho@gmail.com.
 
 ## Capabilities and Constraints
 

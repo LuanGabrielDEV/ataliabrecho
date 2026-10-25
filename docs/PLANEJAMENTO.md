@@ -28,7 +28,7 @@
 - **Sacola + checkout** Mercado Pago, com reserva temporária da peça.
 - **Consigne / Seja parceira:** uma página só, porque a parceria com lojas e empreendedoras segue o mesmo modelo da consignação (50/50, 60 dias, repasse em até 7 dias úteis). O formulário pergunta se quem envia é pessoa física ou loja/empreendedora.
 - **Avise-me no meu tamanho:** faixa discreta no rodapé, mais a página `/avise-me` para o link da bio do Instagram. ✅ Construído.
-- **Dúvidas frequentes + Contato:** formulário enviado para wirlla.lima@gmail.com, WhatsApp, Instagram e Facebook.
+- **Dúvidas frequentes + Contato:** formulário enviado para ataliabrecho@gmail.com, WhatsApp, Instagram e Facebook.
 - **Políticas e termos:** privacidade (LGPD), trocas e devoluções, termos de consignação.
 - **Painel /admin:** peças, fotos, status, pedidos, consignadoras, repasses, formulários recebidos, contatos captados, bairros de entrega.
 
