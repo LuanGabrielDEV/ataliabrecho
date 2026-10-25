@@ -97,7 +97,7 @@ export default function Cordao({ pecas, rotulo }) {
           <ul className="cordao__lista">
           {pecas.map((p, i) => (
             <li key={p.id} className="cordao__item" style={{ '--peso': i % 3 === 1 ? 0.7 : i % 3 === 2 ? 1.2 : 1 }}>
-              <PecaPendurada peca={p} prioridade={i < 2} />
+              <PecaPendurada peca={p} prioridade={i < 2} alternada={i % 2 === 1} />
             </li>
           ))}
           <li className="cordao__borboleta" ref={borboletaRef} aria-hidden="true">

@@ -30,7 +30,7 @@ function Carimbo({ texto }) {
   )
 }
 
-export default function PecaPendurada({ peca, prioridade = false }) {
+export default function PecaPendurada({ peca, prioridade = false, alternada = false }) {
   const { tem, adicionar } = useSacola()
   const naSacola = tem(peca.id)
   const indisponivel = peca.status !== 'disponivel'
@@ -42,7 +42,7 @@ export default function PecaPendurada({ peca, prioridade = false }) {
   else if (naSacola) rotulo = 'Na sacola'
 
   return (
-    <article className="peca" data-status={peca.status}>
+    <article className={`peca${alternada ? ' peca--alt' : ''}`} data-status={peca.status}>
       <Prendedor />
       <Link to={url} className="peca__foto" tabIndex={-1} aria-hidden="true">
         <img

@@ -7,6 +7,8 @@ import AviseMeFaixa from './features/avise-me/AviseMeFaixa'
 import AviseMePage from './pages/AviseMePage'
 import Inicio from './pages/Inicio'
 import SacolaPage from './pages/SacolaPage'
+import Comprar from './pages/Comprar'
+import Peca from './pages/Peca'
 
 // Páginas que ainda vão ser construídas
 function EmBreve({ titulo }) {
@@ -39,8 +41,8 @@ function Layout() {
         <Route path="/" element={<Inicio />} />
         <Route path="/sacola" element={<SacolaPage />} />
         <Route path="/avise-me" element={<AviseMePage />} />
-        <Route path="/comprar" element={<EmBreve titulo="Comprar peças" />} />
-        <Route path="/peca/:id" element={<EmBreve titulo="Peça" />} />
+        <Route path="/comprar" element={<Comprar />} />
+        <Route path="/peca/:id" element={<Peca />} />
         <Route path="/consigne" element={<EmBreve titulo="Consigne suas peças" />} />
         <Route path="/duvidas" element={<EmBreve titulo="Dúvidas e contato" />} />
         <Route path="/politicas" element={<EmBreve titulo="Políticas e termos" />} />

@@ -1,0 +1,234 @@
+.peca-pagina {
+  padding-block: 1rem clamp(3rem, 7vw, 5rem);
+}
+
+.peca-pagina__trilha a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--tinta-suave);
+}
+
+.peca-pagina__trilha a:hover {
+  color: var(--tinta);
+}
+
+.peca-pagina__grade {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 900px) {
+  .peca-pagina__grade {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .peca-pagina__foto {
+    position: sticky;
+    top: 96px;
+  }
+}
+
+/* ---------- Foto pendurada ---------- */
+.peca-pagina__foto {
+  position: relative;
+  margin: 0;
+  padding-top: 22px;
+  max-width: 34rem;
+}
+
+.peca-pagina__foto::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: calc(-1 * var(--margem));
+  right: calc(-1 * var(--margem));
+  height: 1.6px;
+  background: var(--oliva);
+}
+
+.peca-pagina__prendedor {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  width: 20px;
+  translate: -50% 0;
+  fill: #c7ad84;
+  stroke: var(--marrom);
+  stroke-width: 1.2;
+}
+
+.peca-pagina__prendedor circle {
+  fill: none;
+  stroke: #6f6a63;
+  stroke-width: 1.6;
+}
+
+.peca-pagina__foto img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: var(--sombra);
+}
+
+.peca-pagina__foto[data-status='vendida'] img {
+  filter: saturate(0.35);
+  opacity: 0.8;
+}
+
+.peca-pagina__foto .carimbo {
+  top: 45%;
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.peca-pagina__foto[data-status='reservada'] .carimbo {
+  color: var(--oliva-escuro);
+}
+
+.peca-pagina__foto figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Ficha ---------- */
+.peca-pagina__codigo {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--tinta-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.peca-pagina__ficha h1 {
+  margin: 0.35rem 0 0;
+  font-family: var(--fonte-cartaz);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.02;
+}
+
+.peca-pagina__preco {
+  margin: 0.75rem 0 0;
+  font-family: var(--fonte-cartaz);
+  font-size: clamp(2.4rem, 5vw, 3.25rem);
+  line-height: 1;
+  color: var(--oliva-escuro);
+}
+
+.peca-pagina__status {
+  margin: 1.25rem 0 0;
+  padding: 0.9rem 1rem;
+  background: var(--papel-claro);
+  border-radius: var(--raio);
+  color: var(--tinta);
+  max-width: 46ch;
+}
+
+.peca-pagina__dados {
+  margin: 1.75rem 0 0;
+  border-top: 2px solid var(--tinta);
+}
+
+.peca-pagina__dados > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.peca-pagina__dados dt {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.peca-pagina__dados dd {
+  margin: 0;
+}
+
+.peca-pagina__dados dd span {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+}
+
+.peca-pagina__medidas {
+  margin-top: 2rem;
+}
+
+.peca-pagina__medidas h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--fonte-cartaz);
+  font-weight: 400;
+  font-size: 1.75rem;
+}
+
+.peca-pagina__medidas table {
+  width: 100%;
+  max-width: 24rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.peca-pagina__medidas th,
+.peca-pagina__medidas td {
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--linha);
+  text-align: left;
+  font-weight: 400;
+}
+
+.peca-pagina__medidas td {
+  text-align: right;
+  font-weight: 650;
+}
+
+.peca-pagina__medidas p {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+}
+
+.peca-pagina__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 2rem;
+}
+
+.peca-pagina__acoes .botao {
+  flex: 1 1 14rem;
+}
+
+.peca-pagina__entrega {
+  margin: 1.5rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--tinta-suave);
+  max-width: 50ch;
+}
+
+.peca-pagina__entrega strong {
+  color: var(--tinta);
+}
+
+.peca-pagina__parecidas {
+  margin-top: clamp(4rem, 8vw, 6rem);
+}
+
+.peca-pagina__parecidas h2 {
+  margin: 0;
+  font-family: var(--fonte-cartaz);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
