@@ -1,0 +1,165 @@
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--papel);
+  border-bottom: 1px solid var(--linha);
+}
+
+.cabecalho__barra {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 64px;
+}
+
+.cabecalho__logo {
+  color: var(--oliva-escuro);
+  display: block;
+  margin-right: auto;
+}
+
+.cabecalho__logo svg {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
+.cabecalho__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.75rem;
+}
+
+.cabecalho__nav a {
+  color: var(--tinta);
+  text-decoration: none;
+  font-weight: 550;
+  font-size: 0.9375rem;
+  padding-block: 0.5rem;
+  border-bottom: 1.5px solid transparent;
+}
+
+.cabecalho__nav a:hover,
+.cabecalho__nav a[aria-current='page'] {
+  border-bottom-color: var(--oliva);
+}
+
+.cabecalho__acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cabecalho__icone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.cabecalho__icone:hover {
+  background: rgb(47 32 23 / 0.06);
+}
+
+.cabecalho__contador {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--oliva-escuro);
+  color: var(--papel-claro);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.cabecalho__menu {
+  display: none;
+}
+
+.cabecalho__aviso {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.cabecalho__aviso p {
+  pointer-events: auto;
+  margin: 0.5rem var(--margem) 0;
+  padding: 0.6rem 1rem;
+  background: var(--tinta);
+  color: var(--papel-claro);
+  border-radius: var(--raio);
+  font-size: 0.875rem;
+  box-shadow: var(--sombra);
+  animation: aviso-entra 0.4s var(--ease);
+}
+
+.cabecalho__aviso a {
+  color: #e3dc8a;
+  font-weight: 650;
+}
+
+@keyframes aviso-entra {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+}
+
+@media (max-width: 860px) {
+  .cabecalho__menu {
+    display: grid;
+  }
+
+  .cabecalho__logo svg {
+    height: 22px;
+  }
+
+  .cabecalho__nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--papel);
+    border-bottom: 1px solid var(--linha);
+    padding: 0.5rem var(--margem) 1.5rem;
+  }
+
+  .cabecalho__nav--aberta {
+    display: block;
+  }
+
+  .cabecalho__nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cabecalho__nav a {
+    display: block;
+    padding: 0.9rem 0;
+    font-family: var(--fonte-cartaz);
+    font-weight: 400;
+    font-size: 1.75rem;
+    border-bottom: 1px solid var(--linha);
+  }
+}

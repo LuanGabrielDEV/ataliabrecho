@@ -1,0 +1,66 @@
+.rodape {
+  background: var(--tinta);
+  color: #e9dfcd;
+  padding: clamp(3rem, 7vw, 5rem) 0 1.5rem;
+}
+
+.rodape a {
+  color: #e9dfcd;
+  text-decoration: none;
+}
+
+.rodape a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.rodape :focus-visible {
+  outline-color: #e3dc8a;
+}
+
+.rodape__grade {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .rodape__grade {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+}
+
+.rodape__marca svg {
+  height: 30px;
+  width: auto;
+  color: #c9c46a;
+}
+
+.rodape__marca p {
+  margin: 1rem 0 0;
+  max-width: 32ch;
+  color: #cbbda7;
+}
+
+.rodape ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.rodape li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 40px;
+}
+
+.rodape__fim {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(233 223 205 / 0.18);
+  font-size: 0.8125rem;
+  color: #b3a58f;
+}
