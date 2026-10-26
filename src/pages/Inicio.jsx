@@ -13,7 +13,7 @@ import '../features/catalogo/card-peca.css'
 import './inicio.css'
 
 const VANTAGENS = [
-  { icone: Shirt, titulo: 'Peças selecionadas', texto: 'Escolhidas uma a uma, com fotos reais e medidas.' },
+  { icone: Shirt, titulo: 'Peças selecionadas', texto: 'Escolhidas uma a uma, com fotos reais.' },
   { icone: Tag, titulo: 'Preço justo', texto: 'Moda boa sem pagar preço de loja.' },
   { icone: MapPin, titulo: 'Retirada grátis', texto: 'Em Paulista, PE, ou entrega por Uber.' },
   { icone: Recycle, titulo: 'Moda circular', texto: 'Cada peça ganha uma nova história.' },
@@ -54,7 +54,6 @@ export default function Inicio() {
           <div className="banner__fotos">
             <Link to={`/peca/${capa.id}`} className="banner__foto banner__foto--1" viewTransition>
               <img src={capa.fotoIa} alt={`Modelo gerada por IA vestindo ${capa.titulo.toLowerCase()}`} fetchPriority="high" />
-              <span className="selo-ia">Simulação por IA</span>
               <span className="banner__etiqueta">
                 {capa.titulo} <strong>R$ {capa.preco}</strong>
               </span>
@@ -62,9 +61,9 @@ export default function Inicio() {
             {capa2 && (
               <Link to={`/peca/${capa2.id}`} className="banner__foto banner__foto--2" viewTransition>
                 <img src={capa2.fotoIa} alt={`Modelo gerada por IA vestindo ${capa2.titulo.toLowerCase()}`} />
-                <span className="selo-ia">Simulação por IA</span>
-              </Link>
+                </Link>
             )}
+            <p className="banner__legenda">Looks com peças do brechó e modelo criada por IA.</p>
           </div>
         )}
       </section>
@@ -140,8 +139,7 @@ export default function Inicio() {
               <Link to={`/peca/${l.id}`} className="look" viewTransition>
                 <span className="look__foto">
                   <img src={l.fotoIa} alt={`Modelo gerada por IA vestindo ${l.titulo.toLowerCase()}`} loading="lazy" />
-                  <span className="selo-ia">Simulação por IA</span>
-                  <span className="look__peca">
+                      <span className="look__peca">
                     <img src={l.recorte || l.foto} alt="" loading="lazy" />
                   </span>
                 </span>

@@ -11,7 +11,7 @@ export const FAQ = [
       },
       {
         p: 'Como sei se a peça vai me servir?',
-        r: 'Cada peça tem tamanho e medidas em centímetros. Compare com uma roupa sua que veste bem. Se ficar em dúvida, chame no WhatsApp pelo botão "Tirar dúvida" da peça.',
+        r: 'Cada peça informa o tamanho. Se ficar em dúvida, chame no WhatsApp pelo botão "Tirar dúvida" da peça que a gente te ajuda.',
       },
       {
         p: 'Cada peça tem uma unidade só?',

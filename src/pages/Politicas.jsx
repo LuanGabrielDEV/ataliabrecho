@@ -90,7 +90,7 @@ export default function Politicas() {
         <h3>Peças únicas</h3>
         <p>
           Todas as peças são de segunda mão e únicas. O estado de cada uma (nova com etiqueta, ótimo ou bom estado) e
-          eventuais detalhes aparecem na página da peça, junto com fotos reais e medidas. Algumas peças também têm fotos de
+          eventuais detalhes aparecem na página da peça, junto com fotos reais e o tamanho. Algumas peças também têm fotos de
           “Provador IA”, uma simulação feita por inteligência artificial que aparece sempre identificada.
         </p>
         <h3>Pagamento e reserva</h3>

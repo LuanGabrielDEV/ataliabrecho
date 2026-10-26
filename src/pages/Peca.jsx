@@ -11,15 +11,6 @@ import { useCatalogo } from '../data/catalogo'
 import { formatarPreco, linkWhatsapp } from '../config'
 import './peca.css'
 
-const NOMES_MEDIDAS = {
-  busto: 'Busto',
-  cintura: 'Cintura',
-  quadril: 'Quadril',
-  ombro: 'Ombro a ombro',
-  manga: 'Manga',
-  comprimento: 'Comprimento',
-}
-
 export default function Peca() {
   const { id } = useParams()
   const { pecas, buscar, carregando } = useCatalogo()
@@ -54,7 +45,6 @@ export default function Peca() {
   const categoria = CATEGORIAS.find((c) => c.slug === peca.categoria)
   const condicao = CONDICOES[peca.condicao]
   const parecidas = pecas.filter((p) => p.id !== peca.id && p.categoria === peca.categoria && p.status !== 'vendida').slice(0, 8)
-  const medidas = peca.medidas ? Object.entries(NOMES_MEDIDAS).filter(([k]) => peca.medidas[k]) : []
   const STATUS = { vendida: 'Vendida', reservada: 'Reservada' }
 
   return (
@@ -78,7 +68,6 @@ export default function Peca() {
               {vista === 'look' && peca.fotoIa && (
                 <>
                   <img src={peca.fotoIa} alt={`Modelo gerada por IA vestindo ${peca.titulo.toLowerCase()}`} />
-                  <span className="selo-ia peca-pagina__selo-ia">Simulação por IA</span>
                 </>
               )}
               {STATUS[peca.status] && <span className="peca-pagina__status-selo">{STATUS[peca.status]}</span>}
@@ -159,25 +148,6 @@ export default function Peca() {
               )}
             </dl>
 
-            {medidas.length > 0 && (
-              <section className="peca-pagina__medidas" aria-labelledby="medidas-titulo">
-                <h2 id="medidas-titulo" className="titulo">
-                  Medidas
-                </h2>
-                <table>
-                  <caption className="sr-only">Medidas da peça em centímetros</caption>
-                  <tbody>
-                    {medidas.map(([k, nome]) => (
-                      <tr key={k}>
-                        <th scope="row">{nome}</th>
-                        <td>{peca.medidas[k]} cm</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <p>Compare com uma peça sua que veste bem. Na dúvida, chame no WhatsApp.</p>
-              </section>
-            )}
 
             <p className="peca-pagina__entrega">
               <strong>Entrega:</strong> retirada sem custo em ponto combinado, ou por Uber em Paulista e região, com o

@@ -6,15 +6,6 @@ import { urlFoto } from '../data/catalogo'
 import { mensagemErro, prepararFoto, supabaseAdmin } from './supabaseAdmin'
 import { STATUS } from './status'
 
-const MEDIDAS = [
-  ['busto', 'Busto'],
-  ['cintura', 'Cintura'],
-  ['quadril', 'Quadril'],
-  ['comprimento', 'Comprimento'],
-  ['ombro', 'Ombro a ombro'],
-  ['manga', 'Manga'],
-]
-
 const hoje = () => new Date().toISOString().slice(0, 10)
 
 const VAZIA = {
@@ -79,8 +70,6 @@ export default function FormPeca() {
   }, [id, nova])
 
   const mudar = (campo, valor) => setDados((d) => ({ ...d, [campo]: valor }))
-  const mudarMedida = (campo, valor) =>
-    setDados((d) => ({ ...d, medidas: { ...d.medidas, [campo]: valor === '' ? undefined : Number(valor) } }))
 
   function adicionarFotos(lista) {
     const novas = [...lista].map((arquivo) => ({
@@ -350,19 +339,6 @@ export default function FormPeca() {
           </label>
         </fieldset>
 
-        {/* ---------- Medidas ---------- */}
-        <fieldset className="adm-grupo">
-          <legend>Medidas (cm)</legend>
-          <p className="adm-dica">Preencha só as que fazem sentido para a peça.</p>
-          <div className="adm-medidas">
-            {MEDIDAS.map(([k, nome]) => (
-              <label key={k} className="adm-campo">
-                <span>{nome}</span>
-                <input type="number" inputMode="decimal" min="0" step="0.5" value={dados.medidas[k] ?? ''} onChange={(e) => mudarMedida(k, e.target.value)} />
-              </label>
-            ))}
-          </div>
-        </fieldset>
 
         {/* ---------- Venda ---------- */}
         <fieldset className="adm-grupo">
