@@ -1,17 +1,17 @@
 // Textos e fotos de "Nossa história", enviados pela Wirlla (25/10/2026).
 // Tudo o que aparece na seção da página inicial e em /nossa-historia sai daqui.
-import fotoRetrato from '../assets/historia/wirlla-retrato.webp'
-import fotoSorriso from '../assets/historia/wirlla-sorriso.webp'
-import fotoTrabalho from '../assets/historia/wirlla-trabalho.webp'
-import fotoSacolas from '../assets/historia/sacolas-atalia.webp'
+import fotoPlaca from '../assets/historia/wirlla-placa.webp'
+import fotoPlacaSorriso from '../assets/historia/wirlla-placa-sorriso.webp'
+import fotoSentada from '../assets/historia/wirlla-sentada.webp'
+import fotoPB from '../assets/historia/wirlla-pb.webp'
 
 export const FUNDADORA = {
   nome: 'Wirlla Dantas',
   papel: 'Bióloga, empreendedora e fundadora da Atalia Brechó',
-  foto: fotoSorriso, // seção da página inicial
-  fotoRetrato, // abertura de /nossa-historia
-  fotoTrabalho,
-  fotoSacolas,
+  foto: fotoSentada, // seção da página inicial
+  fotoRetrato: fotoPlaca, // abertura de /nossa-historia
+  fotoTrabalho: fotoPB, // ao lado da trajetória
+  fotoHoje: fotoPlacaSorriso, // "A Atalia hoje"
   frase: 'Novas histórias para peças que ainda têm muito a oferecer.',
 }
 

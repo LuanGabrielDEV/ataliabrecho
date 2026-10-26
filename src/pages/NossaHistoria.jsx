@@ -62,7 +62,7 @@ export default function NossaHistoria() {
           ))}
         </div>
         <figure className="nh-bloco__foto revelar">
-          <img src={FUNDADORA.fotoTrabalho} alt={`${FUNDADORA.nome} trabalhando`} loading="lazy" />
+          <img src={FUNDADORA.fotoTrabalho} alt={`Retrato em preto e branco de ${FUNDADORA.nome}`} loading="lazy" />
         </figure>
       </section>
 
@@ -96,7 +96,7 @@ export default function NossaHistoria() {
       {/* ---------- Hoje ---------- */}
       <section className="conteiner nh-hoje" aria-labelledby="nh-hoje-titulo">
         <figure className="nh-hoje__foto">
-          <img src={FUNDADORA.fotoSacolas} alt="Sacolas de papel kraft com a marca Atalia Brechó" loading="lazy" />
+          <img src={FUNDADORA.fotoHoje} alt={`${FUNDADORA.nome} segurando a placa com a logo da Atalia Brechó`} loading="lazy" />
         </figure>
         <div className="nh-hoje__texto">
           <h2 id="nh-hoje-titulo" className="titulo">
