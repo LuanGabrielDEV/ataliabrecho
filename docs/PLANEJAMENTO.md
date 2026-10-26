@@ -30,10 +30,12 @@
 - **Avise-me no meu tamanho:** faixa discreta no rodapé, mais a página `/avise-me` para o link da bio do Instagram. ✅ Construído.
 - **Dúvidas frequentes + Contato:** formulário enviado para ataliabrecho@gmail.com, WhatsApp, Instagram e Facebook.
 - **Políticas e termos:** privacidade (LGPD), trocas e devoluções, termos de consignação.
-- **Painel /admin:** peças, fotos, status, pedidos, consignadoras, repasses, formulários recebidos, contatos captados, bairros de entrega.
+- **Painel /admin:** ✅ login, peças (cadastro, fotos, status), Avise-me com aviso pelo WhatsApp. Próximas etapas: pedidos, consignadoras e repasses, formulários recebidos.
+
+- **Nossa história:** ✅ seção na página inicial + página `/nossa-historia` (rascunho; aguardando foto e relatos da Wirlla).
 
 ### Fase 2
-Mala Atalia, Nossa história, Moda circular e impacto, **Estações Atalia**, **Depoimentos** e **Mentoria**.
+Mala Atalia, Moda circular e impacto, **Estações Atalia**, **Depoimentos** e **Mentoria**.
 
 ### Fora do escopo
 Programa de trocas por crédito (substituído pela consignação), blog e envio nacional.

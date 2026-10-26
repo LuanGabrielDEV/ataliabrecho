@@ -3,7 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, X } from 'lucide-react'
 import CardPeca from '../features/catalogo/CardPeca'
 import '../features/catalogo/card-peca.css'
-import { CATEGORIAS, CONDICOES, CORES, PECAS_DEMO } from '../data/pecasDemo'
+import { CATEGORIAS, CONDICOES, CORES } from '../data/pecasDemo'
+import { useCatalogo } from '../data/catalogo'
 import {
   FAIXAS_PRECO,
   ORDENS,
@@ -91,12 +92,13 @@ export default function Comprar() {
   const [params, setParams] = useSearchParams()
   const filtros = useMemo(() => lerFiltros(params), [params])
   const [painelAberto, setPainelAberto] = useState(false)
+  const { pecas: todas, carregando, erro } = useCatalogo()
 
   const daCategoria = useMemo(
-    () => PECAS_DEMO.filter((p) => !filtros.categoria || p.categoria === filtros.categoria),
-    [filtros.categoria],
+    () => todas.filter((p) => !filtros.categoria || p.categoria === filtros.categoria),
+    [todas, filtros.categoria],
   )
-  const pecas = useMemo(() => aplicarFiltros(PECAS_DEMO, filtros), [filtros])
+  const pecas = useMemo(() => aplicarFiltros(todas, filtros), [todas, filtros])
   const tamanhos = useMemo(() => tamanhosDisponiveis(daCategoria), [daCategoria])
   const categoria = CATEGORIAS.find((c) => c.slug === filtros.categoria)
   const ativos = contarFiltrosAtivos(filtros)
@@ -171,7 +173,11 @@ export default function Comprar() {
           </aside>
 
           <section className="comprar__resultado" aria-live="polite" aria-label="Peças">
-            {pecas.length === 0 ? (
+            {carregando ? (
+              <p className="comprar__carregando">Carregando as peças…</p>
+            ) : erro ? (
+              <p className="comprar__carregando" role="alert">{erro}</p>
+            ) : pecas.length === 0 ? (
               <div className="comprar__vazio">
                 <h2>Nenhuma peça com esses filtros agora.</h2>
                 <p>Peças novas chegam toda semana. Deixe seu tamanho e a gente te avisa quando chegar algo para você.</p>

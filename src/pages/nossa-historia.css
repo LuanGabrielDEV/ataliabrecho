@@ -1,0 +1,132 @@
+.nh {
+  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+
+.nh .historia__texto h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+  max-width: 16ch;
+}
+
+.nh__texto {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 1rem;
+  max-width: 60ch;
+}
+
+.nh__texto p {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+/* ---------- Diferenciais ---------- */
+.nh__diferenciais {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .nh__diferenciais {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.nh__diferenciais li {
+  padding-top: 1.1rem;
+  border-top: 2px solid var(--oliva);
+}
+
+.nh__diferenciais span {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--oliva-logo);
+}
+
+.nh__diferenciais h3 {
+  margin: 0.4rem 0 0;
+  font-size: 1.25rem;
+  letter-spacing: -0.015em;
+}
+
+.nh__diferenciais p {
+  margin: 0.4rem 0 0;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Caminhos ---------- */
+.nh__caminhos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+}
+
+.nh__caminhos li {
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  padding: 1.4rem;
+  border-radius: 18px;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+}
+
+.nh__caminhos svg {
+  color: var(--oliva);
+  margin-bottom: 0.4rem;
+}
+
+.nh__caminhos h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.nh__caminhos p {
+  margin: 0;
+  color: var(--tinta-suave);
+  font-size: 0.9375rem;
+}
+
+.nh__caminhos .link-seta {
+  margin-top: 0.4rem;
+  color: var(--oliva);
+}
+
+/* ---------- Contato ---------- */
+.nh__contato {
+  padding: clamp(2rem, 6vw, 3.5rem);
+  border-radius: 24px;
+  background: var(--oliva);
+  color: #fff;
+  text-align: center;
+}
+
+.nh__contato h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.nh__contato p {
+  margin: 0.75rem auto 1.5rem;
+  max-width: 46ch;
+  color: #e9e8cf;
+}
+
+.nh__contato-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.nh__contato :focus-visible {
+  outline-color: #fff;
+}

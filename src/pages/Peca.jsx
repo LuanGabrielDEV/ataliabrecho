@@ -4,10 +4,10 @@ import { ChevronLeft } from 'lucide-react'
 import { siWhatsapp } from '../components/iconesMarca'
 import CardPeca from '../features/catalogo/CardPeca'
 import '../features/catalogo/card-peca.css'
-import { LOOKS } from '../data/looks'
 import BotaoLevar from '../features/sacola/BotaoLevar'
 import { IconeMarca } from '../components/Cabecalho'
-import { CATEGORIAS, CONDICOES, PECAS_DEMO, buscarPeca } from '../data/pecasDemo'
+import { CATEGORIAS, CONDICOES } from '../data/pecasDemo'
+import { useCatalogo } from '../data/catalogo'
 import { formatarPreco, linkWhatsapp } from '../config'
 import './peca.css'
 
@@ -22,13 +22,22 @@ const NOMES_MEDIDAS = {
 
 export default function Peca() {
   const { id } = useParams()
-  const peca = buscarPeca(id)
+  const { pecas, buscar, carregando } = useCatalogo()
+  const peca = buscar(id)
   const recorteRef = useRef(null)
   const [vista, setVista] = useState('peca')
 
   useEffect(() => {
     document.title = peca ? `${peca.titulo} · Atalia Brechó` : 'Peça não encontrada · Atalia Brechó'
   }, [peca])
+
+  if (!peca && carregando) {
+    return (
+      <main id="conteudo" className="em-breve conteiner">
+        <p>Carregando a peça…</p>
+      </main>
+    )
+  }
 
   if (!peca) {
     return (
@@ -43,9 +52,8 @@ export default function Peca() {
   }
 
   const categoria = CATEGORIAS.find((c) => c.slug === peca.categoria)
-  const look = LOOKS.find((l) => l.peca.id === peca.id)
   const condicao = CONDICOES[peca.condicao]
-  const parecidas = PECAS_DEMO.filter((p) => p.id !== peca.id && p.categoria === peca.categoria && p.status !== 'vendida').slice(0, 8)
+  const parecidas = pecas.filter((p) => p.id !== peca.id && p.categoria === peca.categoria && p.status !== 'vendida').slice(0, 8)
   const medidas = peca.medidas ? Object.entries(NOMES_MEDIDAS).filter(([k]) => peca.medidas[k]) : []
   const STATUS = { vendida: 'Vendida', reservada: 'Reservada' }
 
@@ -67,9 +75,9 @@ export default function Peca() {
               {vista === 'original' && (
                 <img src={peca.foto} alt={`${peca.titulo}, foto original da peça no manequim`} width="720" height="960" />
               )}
-              {vista === 'look' && look && (
+              {vista === 'look' && peca.fotoIa && (
                 <>
-                  <img src={look.foto} alt={`Modelo gerada por IA vestindo ${peca.titulo.toLowerCase()}`} />
+                  <img src={peca.fotoIa} alt={`Modelo gerada por IA vestindo ${peca.titulo.toLowerCase()}`} />
                   <span className="selo-ia peca-pagina__selo-ia">Simulação por IA</span>
                 </>
               )}
@@ -83,7 +91,7 @@ export default function Peca() {
               <button type="button" aria-pressed={vista === 'original'} onClick={() => setVista('original')}>
                 Foto original
               </button>
-              {look && (
+              {peca.fotoIa && (
                 <button type="button" aria-pressed={vista === 'look'} onClick={() => setVista('look')}>
                   No corpo (IA)
                 </button>

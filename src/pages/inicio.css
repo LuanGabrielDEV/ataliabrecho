@@ -468,3 +468,123 @@
   color: var(--tinta-suave);
   max-width: 48ch;
 }
+
+/* ---------- Quem está por trás da Atalia ---------- */
+.historia {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .historia {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+}
+
+.historia__retrato {
+  position: relative;
+  margin: 0;
+  padding-bottom: 3.5rem;
+}
+
+.historia__retrato > img,
+.historia__marca {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.historia__marca {
+  display: grid;
+  place-items: center;
+  background: var(--areia);
+  color: var(--oliva-logo);
+}
+
+.historia__marca svg {
+  width: 42%;
+  height: auto;
+}
+
+.historia__frase {
+  position: absolute;
+  left: clamp(1rem, 4vw, 2rem);
+  right: clamp(1rem, 4vw, 2rem);
+  bottom: 0;
+  margin: 0;
+  padding: 1.25rem 1.4rem;
+  border-radius: 18px;
+  background: var(--branco);
+  box-shadow: var(--sombra);
+}
+
+.historia__frase p {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.historia__frase footer {
+  display: grid;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.historia__frase span {
+  color: var(--tinta-suave);
+}
+
+.historia__texto h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  max-width: 18ch;
+}
+
+.historia__resumo {
+  margin: 1.1rem 0 0;
+  max-width: 52ch;
+  font-size: 1.0625rem;
+  color: var(--tinta-suave);
+}
+
+.historia__diferenciais {
+  list-style: none;
+  margin: 1.75rem 0 2rem;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--linha);
+}
+
+.historia__diferenciais li {
+  padding: 1rem 0 1rem 1.1rem;
+  border-bottom: 1px solid var(--linha);
+  position: relative;
+}
+
+.historia__diferenciais li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.45rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--oliva-logo);
+}
+
+.historia__diferenciais h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.historia__diferenciais p {
+  margin: 0.2rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--tinta-suave);
+}

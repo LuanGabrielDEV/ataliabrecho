@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom'
 import Cabecalho from './components/Cabecalho'
 import Rodape from './components/Rodape'
@@ -10,6 +10,11 @@ import SacolaPage from './pages/SacolaPage'
 import Comprar from './pages/Comprar'
 import Peca from './pages/Peca'
 import Gaveta from './features/sacola/Gaveta'
+import NossaHistoria from './pages/NossaHistoria'
+import { CatalogoProvider } from './data/catalogo'
+
+// O painel só é baixado por quem acessa /admin
+const AdminApp = lazy(() => import('./admin/AdminApp'))
 
 // Páginas que ainda vão ser construídas
 function EmBreve({ titulo }) {
@@ -51,7 +56,18 @@ function Layout() {
     }
   }, [pathname])
 
-  const semMoldura = pathname === '/avise-me'
+  const noAdmin = pathname.startsWith('/admin')
+  const semMoldura = pathname === '/avise-me' || noAdmin
+
+  if (noAdmin) {
+    return (
+      <Suspense fallback={<main className="em-breve conteiner">Carregando o painel…</main>}>
+        <Routes>
+          <Route path="/admin/*" element={<AdminApp />} />
+        </Routes>
+      </Suspense>
+    )
+  }
 
   return (
     <>
@@ -66,12 +82,12 @@ function Layout() {
         <Route path="/consigne" element={<EmBreve titulo="Consigne suas peças" />} />
         <Route path="/duvidas" element={<EmBreve titulo="Dúvidas e contato" />} />
         <Route path="/politicas" element={<EmBreve titulo="Políticas e termos" />} />
-        <Route path="/nossa-historia" element={<EmBreve titulo="Nossa história" />} />
+        <Route path="/nossa-historia" element={<NossaHistoria />} />
         <Route path="*" element={<EmBreve titulo="Página não encontrada" />} />
       </Routes>
       {!semMoldura && <Rodape />}
       <Gaveta />
-      {!semMoldura && !pathname.startsWith('/admin') && <AviseMeFaixa />}
+      {!semMoldura && <AviseMeFaixa />}
     </>
   )
 }
@@ -79,9 +95,11 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <SacolaProvider>
-        <Layout />
-      </SacolaProvider>
+      <CatalogoProvider>
+        <SacolaProvider>
+          <Layout />
+        </SacolaProvider>
+      </CatalogoProvider>
     </BrowserRouter>
   )
 }

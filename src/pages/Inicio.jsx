@@ -4,16 +4,13 @@ import { ArrowRight, MapPin, Recycle, Shirt, Tag } from 'lucide-react'
 import CardPeca from '../features/catalogo/CardPeca'
 import { IconeMarca } from '../components/Cabecalho'
 import { siInstagram } from '../components/iconesMarca'
-import { CATEGORIAS, PECAS_DEMO } from '../data/pecasDemo'
-import { LOOKS } from '../data/looks'
+import { Simbolo } from '../components/Marca'
+import { CATEGORIAS } from '../data/pecasDemo'
+import { useCatalogo } from '../data/catalogo'
+import { DIFERENCIAIS, FUNDADORA, HISTORIA } from '../data/historia'
 import { CONTATO } from '../config'
 import '../features/catalogo/card-peca.css'
 import './inicio.css'
-
-const NOVIDADES = [...PECAS_DEMO]
-  .filter((p) => p.status !== 'vendida')
-  .sort((a, b) => b.chegouEm.localeCompare(a.chegouEm))
-  .slice(0, 8)
 
 const VANTAGENS = [
   { icone: Shirt, titulo: 'Peças selecionadas', texto: 'Escolhidas uma a uma, com fotos reais e medidas.' },
@@ -27,8 +24,10 @@ export default function Inicio() {
     document.title = 'Atalia Brechó · Moda com propósito'
   }, [])
 
-  const capa = LOOKS[0]
-  const capa2 = LOOKS[1]
+  const { pecas, looks } = useCatalogo()
+  const NOVIDADES = pecas.filter((p) => p.status !== 'vendida').slice(0, 8)
+  const capa = looks[0]
+  const capa2 = looks[1]
 
   return (
     <main id="conteudo" className="inicio">
@@ -51,30 +50,34 @@ export default function Inicio() {
             </Link>
           </div>
         </div>
-        <div className="banner__fotos">
-          <Link to={`/peca/${capa.peca.id}`} className="banner__foto banner__foto--1" viewTransition>
-            <img src={capa.foto} alt={`Modelo gerada por IA vestindo ${capa.peca.titulo.toLowerCase()}`} fetchPriority="high" />
-            <span className="selo-ia">Simulação por IA</span>
-            <span className="banner__etiqueta">
-              {capa.peca.titulo} <strong>R$ {capa.peca.preco}</strong>
-            </span>
-          </Link>
-          <Link to={`/peca/${capa2.peca.id}`} className="banner__foto banner__foto--2" viewTransition>
-            <img src={capa2.foto} alt={`Modelo gerada por IA vestindo ${capa2.peca.titulo.toLowerCase()}`} />
-            <span className="selo-ia">Simulação por IA</span>
-          </Link>
-        </div>
+        {capa && (
+          <div className="banner__fotos">
+            <Link to={`/peca/${capa.id}`} className="banner__foto banner__foto--1" viewTransition>
+              <img src={capa.fotoIa} alt={`Modelo gerada por IA vestindo ${capa.titulo.toLowerCase()}`} fetchPriority="high" />
+              <span className="selo-ia">Simulação por IA</span>
+              <span className="banner__etiqueta">
+                {capa.titulo} <strong>R$ {capa.preco}</strong>
+              </span>
+            </Link>
+            {capa2 && (
+              <Link to={`/peca/${capa2.id}`} className="banner__foto banner__foto--2" viewTransition>
+                <img src={capa2.fotoIa} alt={`Modelo gerada por IA vestindo ${capa2.titulo.toLowerCase()}`} />
+                <span className="selo-ia">Simulação por IA</span>
+              </Link>
+            )}
+          </div>
+        )}
       </section>
 
       {/* ---------- Categorias ---------- */}
       <section className="conteiner categorias" aria-label="Categorias">
         <ul className="categorias__lista">
           {CATEGORIAS.map((c) => {
-            const amostra = PECAS_DEMO.find((p) => p.categoria === c.slug && p.status === 'disponivel')
+            const amostra = pecas.find((p) => p.categoria === c.slug && p.status === 'disponivel')
             return (
               <li key={c.slug}>
                 <Link to={`/comprar?categoria=${c.slug}`} viewTransition>
-                  <span className="categorias__foto">{amostra && <img src={amostra.recorte} alt="" loading="lazy" />}</span>
+                  <span className="categorias__foto">{amostra && <img src={amostra.recorte || amostra.foto} alt="" loading="lazy" />}</span>
                   <span className="categorias__nome">{c.nome}</span>
                 </Link>
               </li>
@@ -121,6 +124,7 @@ export default function Inicio() {
       </section>
 
       {/* ---------- Looks ---------- */}
+      {looks.length > 1 && (
       <section className="conteiner secao" aria-labelledby="looks-titulo">
         <div className="secao-topo">
           <div>
@@ -131,24 +135,64 @@ export default function Inicio() {
           </div>
         </div>
         <ul className="looks">
-          {LOOKS.slice(1, 5).map((l) => (
+          {looks.slice(1, 5).map((l) => (
             <li key={l.id} className="revelar">
-              <Link to={`/peca/${l.peca.id}`} className="look" viewTransition>
+              <Link to={`/peca/${l.id}`} className="look" viewTransition>
                 <span className="look__foto">
-                  <img src={l.foto} alt={`Modelo gerada por IA vestindo ${l.peca.titulo.toLowerCase()}`} loading="lazy" />
+                  <img src={l.fotoIa} alt={`Modelo gerada por IA vestindo ${l.titulo.toLowerCase()}`} loading="lazy" />
                   <span className="selo-ia">Simulação por IA</span>
                   <span className="look__peca">
-                    <img src={l.peca.recorte} alt="" loading="lazy" />
+                    <img src={l.recorte || l.foto} alt="" loading="lazy" />
                   </span>
                 </span>
-                <span className="look__nome">{l.peca.titulo}</span>
+                <span className="look__nome">{l.titulo}</span>
                 <span className="look__preco">
-                  R$ {l.peca.preco} · Tam. {l.peca.tamanho}
+                  R$ {l.preco} · Tam. {l.tamanho}
                 </span>
               </Link>
             </li>
           ))}
         </ul>
+      </section>
+      )}
+
+      {/* ---------- Quem está por trás ---------- */}
+      <section className="conteiner secao" aria-labelledby="historia-titulo">
+        <div className="historia">
+          <figure className="historia__retrato">
+            {FUNDADORA.foto ? (
+              <img src={FUNDADORA.foto} alt={`${FUNDADORA.nome}, criadora da Atalia Brechó`} loading="lazy" />
+            ) : (
+              <div className="historia__marca" aria-hidden="true">
+                <Simbolo />
+              </div>
+            )}
+            <blockquote className="historia__frase">
+              <p>“{FUNDADORA.frase}”</p>
+              <footer>
+                <strong>{FUNDADORA.nome}</strong>
+                <span>{FUNDADORA.papel}</span>
+              </footer>
+            </blockquote>
+          </figure>
+          <div className="historia__texto">
+            <h2 id="historia-titulo" className="titulo">
+              {HISTORIA.titulo}
+            </h2>
+            <p className="historia__resumo">{HISTORIA.resumo}</p>
+            <ul className="historia__diferenciais">
+              {DIFERENCIAIS.map((d) => (
+                <li key={d.titulo}>
+                  <h3>{d.titulo}</h3>
+                  <p>{d.texto}</p>
+                </li>
+              ))}
+            </ul>
+            <Link to="/nossa-historia" className="botao botao--vazado" viewTransition>
+              Conheça a história da Atalia
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* ---------- Consignação ---------- */}
@@ -202,14 +246,14 @@ export default function Inicio() {
           </a>
         </div>
         <a className="insta__grade" href={CONTATO.instagram} target="_blank" rel="noreferrer" aria-label={`Abrir o Instagram ${CONTATO.instagramUsuario}`}>
-          {[LOOKS[2], NOVIDADES[0], LOOKS[3], NOVIDADES[3], LOOKS[4], NOVIDADES[5]].map((x, i) =>
-            x.foto && x.peca ? (
+          {[looks[2], NOVIDADES[0], looks[3], NOVIDADES[3], looks[4], NOVIDADES[5]].filter(Boolean).map((x, i) =>
+            i % 2 === 0 && x.fotoIa ? (
               <span key={i} className="insta__item insta__item--foto">
-                <img src={x.foto} alt="" loading="lazy" />
+                <img src={x.fotoIa} alt="" loading="lazy" />
               </span>
             ) : (
               <span key={i} className="insta__item">
-                <img src={x.recorte} alt="" loading="lazy" />
+                <img src={x.recorte || x.foto} alt="" loading="lazy" />
               </span>
             ),
           )}
