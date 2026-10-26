@@ -2,23 +2,176 @@
   padding-bottom: clamp(3.5rem, 8vw, 6rem);
 }
 
-.nh .historia__texto h1 {
-  margin: 0;
-  font-size: clamp(2rem, 4.6vw, 3.4rem);
-  max-width: 16ch;
+.nh-secao {
+  padding-top: clamp(3.5rem, 8vw, 6rem);
 }
 
-.nh__texto {
-  margin-top: 1.25rem;
+/* ---------- Abertura ---------- */
+.nh-abertura {
   display: grid;
-  gap: 1rem;
-  max-width: 60ch;
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-top: clamp(1.5rem, 4vw, 3rem);
 }
 
-.nh__texto p {
+@media (min-width: 900px) {
+  .nh-abertura {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+}
+
+.nh-abertura__foto {
+  position: relative;
   margin: 0;
+}
+
+.nh-abertura__foto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border-radius: 24px;
+}
+
+.nh-abertura__foto figcaption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  padding: 0.85rem 1.1rem;
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.94);
+  font-size: 0.875rem;
+}
+
+.nh-abertura__foto figcaption strong {
+  font-size: 1rem;
+}
+
+.nh-abertura__foto figcaption span {
+  color: var(--tinta-suave);
+}
+
+.nh-abertura__texto h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 4.25rem);
+}
+
+.nh-abertura__lead {
+  margin: 1.1rem 0 0;
+  max-width: 58ch;
+  font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+  line-height: 1.65;
+}
+
+.nh-marcos {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--linha);
+}
+
+.nh-marcos li {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.nh-marcos strong {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--oliva);
+  letter-spacing: -0.01em;
+}
+
+.nh-marcos span {
+  color: var(--tinta-suave);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Trajetória ---------- */
+.nh-bloco {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  padding-top: clamp(4rem, 9vw, 7rem);
+}
+
+@media (min-width: 900px) {
+  .nh-bloco {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+
+  .nh-bloco__foto {
+    position: sticky;
+    top: 120px;
+  }
+}
+
+.nh-bloco__texto h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+.nh-bloco__texto .nh-bloco__subtitulo {
+  margin-top: 2.5rem;
+}
+
+.nh-bloco__texto p {
+  margin: 0 0 1rem;
+  max-width: 62ch;
   font-size: 1.0625rem;
   line-height: 1.7;
+  color: var(--tinta);
+}
+
+.nh-bloco__foto {
+  margin: 0;
+}
+
+.nh-bloco__foto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 40% 30%;
+  border-radius: 24px;
+}
+
+/* ---------- O nome ---------- */
+.nh-nome {
+  margin-top: clamp(4rem, 9vw, 7rem);
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 6vw, 5rem);
+  border-radius: 28px;
+  background: var(--areia);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+
+.nh-nome__simbolo {
+  width: clamp(56px, 8vw, 84px);
+  height: auto;
+  color: var(--oliva-logo);
+  margin-bottom: 1.25rem;
+}
+
+.nh-nome h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.6vw, 3.25rem);
+}
+
+.nh-nome p {
+  margin: 1.1rem 0 0;
+  max-width: 54ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--tinta-suave);
 }
 
 /* ---------- Diferenciais ---------- */
@@ -27,13 +180,12 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 800px) {
   .nh__diferenciais {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
   }
 }
 
@@ -57,6 +209,54 @@
 .nh__diferenciais p {
   margin: 0.4rem 0 0;
   color: var(--tinta-suave);
+}
+
+/* ---------- Hoje ---------- */
+.nh-hoje {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-top: clamp(4rem, 9vw, 7rem);
+}
+
+@media (min-width: 900px) {
+  .nh-hoje {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+}
+
+.nh-hoje__foto {
+  margin: 0;
+}
+
+.nh-hoje__foto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.nh-hoje__texto h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+.nh-hoje__texto p {
+  margin: 1rem 0 0;
+  max-width: 56ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.nh-hoje__assinatura {
+  margin-top: 1.75rem !important;
+  padding-left: 1rem;
+  border-left: 3px solid var(--oliva-logo);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem) !important;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3 !important;
+  color: var(--oliva);
 }
 
 /* ---------- Caminhos ---------- */

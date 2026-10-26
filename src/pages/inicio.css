@@ -494,6 +494,7 @@
   aspect-ratio: 4 / 5;
   border-radius: 24px;
   object-fit: cover;
+  object-position: 55% 30%;
 }
 
 .historia__marca {
