@@ -250,8 +250,6 @@
 
 .nh-hoje__assinatura {
   margin-top: 1.75rem !important;
-  padding-left: 1rem;
-  border-left: 3px solid var(--oliva-logo);
   font-size: clamp(1.25rem, 2.4vw, 1.6rem) !important;
   font-weight: 700;
   letter-spacing: -0.015em;

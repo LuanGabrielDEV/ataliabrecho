@@ -26,13 +26,13 @@
 - **Início:** banner principal, vantagens, peças recém-chegadas, chamada para consignação, faixa de captação de contatos.
 - **Comprar peças (catálogo):** categorias (Vestidos, Blusas e Calças, Shorts e Saias, Moda Praia e Fitness, Acessórios), filtros (tamanho, cor, estado, preço), página da peça com fotos, medidas e status.
 - **Sacola + checkout** Mercado Pago, com reserva temporária da peça.
-- **Consigne / Seja parceira:** uma página só, porque a parceria com lojas e empreendedoras segue o mesmo modelo da consignação (50/50, 60 dias, repasse em até 7 dias úteis). O formulário pergunta se quem envia é pessoa física ou loja/empreendedora.
+- ✅ **Consigne / Seja parceira:** uma página só, porque a parceria com lojas e empreendedoras segue o mesmo modelo da consignação (50/50, 60 dias, repasse em até 7 dias úteis). O formulário pergunta se quem envia é pessoa física ou loja/empreendedora.
 - **Avise-me no meu tamanho:** faixa discreta no rodapé, mais a página `/avise-me` para o link da bio do Instagram. ✅ Construído.
-- **Dúvidas frequentes + Contato:** formulário enviado para ataliabrecho@gmail.com, WhatsApp, Instagram e Facebook.
-- **Políticas e termos:** privacidade (LGPD), trocas e devoluções, termos de consignação.
-- **Painel /admin:** ✅ login, peças (cadastro, fotos, status), Avise-me com aviso pelo WhatsApp. Próximas etapas: pedidos, consignadoras e repasses, formulários recebidos.
+- ✅ **Dúvidas frequentes + Contato:** formulário salvo no banco (aba Mensagens do painel), WhatsApp, Instagram e e-mail.
+- ✅ **Políticas e termos** (rascunho para revisão): privacidade (LGPD), trocas e devoluções, termos de consignação.
+- **Painel /admin:** ✅ login, peças (cadastro, fotos, status), Avise-me com aviso pelo WhatsApp. Mensagens de consignação/parceria/contato. Próximas etapas: pedidos, consignadoras e repasses.
 
-- **Nossa história:** ✅ seção na página inicial + página `/nossa-historia` (rascunho; aguardando foto e relatos da Wirlla).
+- **Nossa história:** ✅ seção na página inicial + página `/nossa-historia` com texto e fotos da Wirlla.
 
 ### Fase 2
 Mala Atalia, Moda circular e impacto, **Estações Atalia**, **Depoimentos** e **Mentoria**.

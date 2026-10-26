@@ -1,0 +1,46 @@
+.perguntas {
+  border-top: 1px solid var(--linha);
+}
+
+.perguntas__item {
+  border-bottom: 1px solid var(--linha);
+}
+
+.perguntas__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 60px;
+  padding: 0.9rem 0;
+  font-weight: 650;
+  font-size: 1rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.perguntas__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.perguntas__item summary svg {
+  flex: none;
+  color: var(--oliva);
+  transition: rotate 0.3s var(--ease);
+}
+
+.perguntas__item[open] summary svg {
+  rotate: 45deg;
+}
+
+.perguntas__item summary:hover span {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.perguntas__item p {
+  margin: 0 0 1.1rem;
+  max-width: 62ch;
+  color: var(--tinta-suave);
+  line-height: 1.65;
+}

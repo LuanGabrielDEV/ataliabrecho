@@ -11,6 +11,9 @@ import Comprar from './pages/Comprar'
 import Peca from './pages/Peca'
 import Gaveta from './features/sacola/Gaveta'
 import NossaHistoria from './pages/NossaHistoria'
+import Consigne from './pages/Consigne'
+import Duvidas from './pages/Duvidas'
+import Politicas from './pages/Politicas'
 import { CatalogoProvider } from './data/catalogo'
 
 // O painel só é baixado por quem acessa /admin
@@ -34,7 +37,7 @@ function Layout() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    if (!window.location.hash) window.scrollTo(0, 0)
   }, [pathname])
 
   // Revelação suave das seções ao entrar na tela
@@ -79,9 +82,9 @@ function Layout() {
         <Route path="/avise-me" element={<AviseMePage />} />
         <Route path="/comprar" element={<Comprar />} />
         <Route path="/peca/:id" element={<Peca />} />
-        <Route path="/consigne" element={<EmBreve titulo="Consigne suas peças" />} />
-        <Route path="/duvidas" element={<EmBreve titulo="Dúvidas e contato" />} />
-        <Route path="/politicas" element={<EmBreve titulo="Políticas e termos" />} />
+        <Route path="/consigne" element={<Consigne />} />
+        <Route path="/duvidas" element={<Duvidas />} />
+        <Route path="/politicas" element={<Politicas />} />
         <Route path="/nossa-historia" element={<NossaHistoria />} />
         <Route path="*" element={<EmBreve titulo="Página não encontrada" />} />
       </Routes>

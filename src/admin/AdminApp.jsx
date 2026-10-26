@@ -8,6 +8,7 @@ import Entrar from './Entrar'
 import ListaPecas from './ListaPecas'
 import FormPeca from './FormPeca'
 import Avisos from './Avisos'
+import Mensagens from './Mensagens'
 import './admin.css'
 
 function NovaSenha({ aoTerminar }) {
@@ -126,6 +127,7 @@ export default function AdminApp() {
             Peças
           </NavLink>
           <NavLink to="/admin/avisos">Avise-me</NavLink>
+          <NavLink to="/admin/mensagens">Mensagens</NavLink>
           <a href="/" target="_blank" rel="noreferrer">
             Ver site
           </a>
@@ -145,6 +147,7 @@ export default function AdminApp() {
         <Route path="pecas/nova" element={<FormPeca />} />
         <Route path="pecas/:id" element={<FormPeca />} />
         <Route path="avisos" element={<Avisos />} />
+        <Route path="mensagens" element={<Mensagens />} />
       </Routes>
     </div>
   )

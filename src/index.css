@@ -302,3 +302,11 @@ h3 {
     translate: none;
   }
 }
+
+/* campos focados não ficam escondidos atrás do cabeçalho fixo */
+input,
+select,
+textarea,
+[id] {
+  scroll-margin-top: 140px;
+}

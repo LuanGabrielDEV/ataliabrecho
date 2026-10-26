@@ -737,3 +737,57 @@
   align-items: center;
   gap: 0.75rem;
 }
+
+/* ---------- Mensagens ---------- */
+.adm-msgs {
+  margin-top: 1rem;
+}
+
+.adm-msgs li[data-nova='true'] {
+  border-color: var(--oliva);
+  box-shadow: inset 4px 0 0 var(--oliva);
+}
+
+.adm-tag {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--oliva-clara);
+  color: var(--oliva-escura);
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  vertical-align: 0.1em;
+}
+
+.adm-msgs__texto {
+  margin: 0.35rem 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: var(--fundo);
+  font-size: 0.9375rem;
+  color: var(--tinta);
+  white-space: pre-line;
+}
+
+.adm-msgs__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.adm-msgs__acoes .adm-campo select {
+  min-height: 46px;
+}
+
+.adm-abas {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.adm-abas a {
+  flex: none;
+  white-space: nowrap;
+}

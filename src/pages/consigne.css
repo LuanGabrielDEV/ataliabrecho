@@ -1,0 +1,273 @@
+.consigne-pagina {
+  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+
+.cs-secao {
+  padding-top: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* ---------- Abertura ---------- */
+.cs-abertura {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  margin-top: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1.75rem, 5vw, 4rem);
+  border-radius: 24px;
+  background: var(--areia);
+}
+
+@media (min-width: 900px) {
+  .cs-abertura {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.cs-abertura h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5.4vw, 4rem);
+  max-width: 14ch;
+}
+
+.cs-abertura p {
+  margin: 1rem 0 1.75rem;
+  max-width: 48ch;
+  font-size: 1.0625rem;
+  color: var(--tinta-suave);
+}
+
+.cs-termos {
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cs-termos > div {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  background: var(--branco);
+}
+
+.cs-termos dt {
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--oliva);
+  white-space: nowrap;
+}
+
+.cs-termos dd {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Passos ---------- */
+.cs-passos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .cs-passos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .cs-passos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.cs-passos li {
+  padding: 1.4rem;
+  border-radius: 18px;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+}
+
+.cs-passos span {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--oliva);
+  color: #fff;
+  font-weight: 800;
+}
+
+.cs-passos h3 {
+  margin: 1rem 0 0;
+  font-size: 1.125rem;
+}
+
+.cs-passos p {
+  margin: 0.35rem 0 0;
+  color: var(--tinta-suave);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Parceria ---------- */
+.cs-parceria h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+}
+
+.cs-parceria p {
+  margin: 0.9rem 0 0;
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Formulário ---------- */
+.cs-form-secao {
+  display: grid;
+  gap: 1.5rem 4rem;
+}
+
+@media (min-width: 960px) {
+  .cs-form-secao {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+
+  .cs-form-texto {
+    position: sticky;
+    top: 130px;
+  }
+}
+
+.cs-form-texto h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.cs-form-texto p {
+  margin: 0.75rem 0 0;
+  max-width: 40ch;
+  color: var(--tinta-suave);
+  font-size: 1.0625rem;
+}
+
+.cs-form-caixa {
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border-radius: 20px;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+}
+
+.cs-linha {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 620px) {
+  .cs-linha {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cs-form textarea {
+  font: inherit;
+  color: var(--tinta);
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 0.75rem 0.875rem;
+  min-height: 96px;
+  resize: vertical;
+}
+
+.cs-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--oliva);
+  box-shadow: 0 0 0 3px rgb(95 92 30 / 0.2);
+}
+
+.cs-tipo {
+  display: grid;
+  gap: 0.6rem;
+}
+
+@media (min-width: 620px) {
+  .cs-tipo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cs-tipo__opcao {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.9rem 1rem;
+  border: 1.5px solid var(--linha);
+  border-radius: 14px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s var(--ease),
+    background-color 0.2s var(--ease);
+}
+
+.cs-tipo__opcao input {
+  margin: 0.2rem 0 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--oliva);
+  flex: none;
+}
+
+.cs-tipo__opcao span {
+  display: grid;
+}
+
+.cs-tipo__opcao small {
+  font-size: 0.8125rem;
+  color: var(--tinta-suave);
+}
+
+.cs-tipo__opcao:has(input:checked) {
+  border-color: var(--oliva);
+  background: var(--oliva-clara);
+}
+
+.cs-enviar {
+  justify-self: start;
+  min-width: 14rem;
+}
+
+.cs-sucesso {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+}
+
+.cs-sucesso:focus {
+  outline: none;
+}
+
+.cs-sucesso svg {
+  color: var(--oliva);
+}
+
+.cs-sucesso h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.cs-sucesso p {
+  margin: 0 0 0.75rem;
+  color: var(--tinta-suave);
+  max-width: 48ch;
+}
