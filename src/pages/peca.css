@@ -35,7 +35,7 @@
   }
 }
 
-/* ---------- Vitrine: espelho grande ou foto original ---------- */
+/* ---------- Galeria ---------- */
 .peca-pagina__vitrine {
   position: relative;
   display: grid;
@@ -43,40 +43,53 @@
   gap: 1rem;
 }
 
-.espelho--grande {
+.peca-pagina__foto {
   position: relative;
-  right: auto;
-  bottom: auto;
-  width: min(100%, 26rem);
   margin: 0;
-}
-
-.espelho--grande .espelho__vidro {
-  padding: 12% 12% 5%;
-}
-
-.peca-pagina__original {
-  margin: 0;
-  width: min(100%, 26rem);
-}
-
-.peca-pagina__original img {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
+  display: block;
+  border-radius: 20px;
+  background: var(--tile);
+  overflow: hidden;
+}
+
+.peca-pagina__foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 999px 999px 6px 6px;
-  border: 2px solid var(--latao);
-  outline: 1px solid var(--latao-escuro);
-  outline-offset: 4px;
+  object-position: 50% 20%;
+}
+
+.peca-pagina__foto[data-vista='peca'] img {
+  inset: 7% 10% 5%;
+  width: 80%;
+  height: 88%;
+  object-fit: contain;
+  filter: var(--sombra-peca);
 }
 
 .peca-pagina__vitrine[data-status='vendida'] img {
-  filter: grayscale(0.7) opacity(0.65);
+  filter: grayscale(0.7) opacity(0.6);
+}
+
+.peca-pagina__selo-ia {
+  top: 0.85rem;
+  left: 0.85rem;
 }
 
 .peca-pagina__status-selo {
-  top: 45%;
-  font-size: 1.6rem;
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: var(--tinta);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
 }
 
 .peca-pagina__vistas {
@@ -105,28 +118,27 @@
 
 .peca-pagina__vistas button[aria-pressed='true'] {
   background: var(--tinta);
-  color: var(--parede-clara);
+  color: #fff;
 }
 
 /* ---------- Ficha ---------- */
 .peca-pagina__codigo {
   margin: 0;
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--latao-escuro);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
 }
 
 .peca-pagina__ficha h1 {
-  margin: 0.5rem 0 0;
-  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+  margin: 0.4rem 0 0;
+  font-size: clamp(1.75rem, 3.6vw, 2.6rem);
 }
 
 .peca-pagina__preco {
-  margin: 0.75rem 0 0;
-  font-size: clamp(2.4rem, 5vw, 3.5rem);
-  color: var(--linho);
+  margin: 0.6rem 0 0;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .peca-pagina__aviso {
@@ -151,7 +163,7 @@
 
 .peca-pagina__dados {
   margin: 2.25rem 0 0;
-  border-top: 1px solid var(--tinta);
+  border-top: 1px solid var(--linha);
 }
 
 .peca-pagina__dados > div {
@@ -183,7 +195,7 @@
 
 .peca-pagina__medidas h2 {
   margin: 0 0 0.75rem;
-  font-size: 2rem;
+  font-size: 1.25rem;
 }
 
 .peca-pagina__medidas table {
@@ -227,7 +239,4 @@
   margin-top: clamp(4rem, 8vw, 7rem);
 }
 
-.peca-pagina__parecidas h2 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(2.2rem, 5vw, 3.75rem);
-}
+

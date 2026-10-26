@@ -79,7 +79,7 @@ Cada peça é única, então não existe quantidade em estoque, só **status**.
 - Paleta a partir da logo: verde-oliva, bege/nude, marrom terroso e um toque dourado.
 - A borboleta em traço contínuo serve como elemento gráfico (divisórias, estados vazios, carregamento).
 - Mensagens: "Moda com propósito.", "O novo nem sempre precisa ser novo." e "Cada peça pode ganhar uma nova história."
-- **Direção visual atual: O provador** (ver `DESIGN.md`): cortinas de linho guiadas pela rolagem, espelho com a peça real, araras de latão, sacola em gaveta. Substituiu a direção anterior, (ver `DESIGN.md`). As peças ficam penduradas na linha da borboleta, com letra de cartaz, etiquetas de papel e carimbo "Vendida". ✅ Página inicial construída.
+- **Direção visual atual: loja limpa e moderna** no padrão de ThredUp, Modare, Repassa e Enjoei (ver `DESIGN.md`). As direções "Cordel" e "O provador" foram testadas e descartadas.
 
 ## 8. Pendências
 - [x] Entrega: retirada ou Uber com valor combinado na hora.

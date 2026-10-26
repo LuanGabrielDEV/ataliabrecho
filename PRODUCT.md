@@ -42,6 +42,7 @@ Cada peça é única e passa pela curadoria de uma bióloga que defende o consum
 ## Brand Commitments
 
 - Nome: Atalia Brechó. Logo: o "a" em forma de gota com uma borboleta em traço contínuo, nas versões verde-oliva, marrom, bege, dourado, preto e branco (`Logomarca Vetorizada/`).
+- **Direção visual (escolha explícita da cliente após testar duas direções autorais): o padrão das lojas de brechó online, limpo e moderno — referências ThredUp, Modare (do PDF), Repassa, Enjoei.** Executar no nível dessas lojas, sem conceitos temáticos.
 - Estética pedida no briefing: minimalista, feminina, acolhedora e contemporânea; bege, nude, tons terrosos e verde-oliva.
 - Mensagens: "Moda com propósito.", "O novo nem sempre precisa ser novo." e "Cada peça pode ganhar uma nova história."
 - Fotos geradas por IA (Provador IA) sempre com o selo "Simulação por IA" e com a peça real recortada ao lado (no espelho).

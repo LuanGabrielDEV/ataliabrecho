@@ -1,7 +1,8 @@
 import { useEffect, useId, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, X } from 'lucide-react'
-import PecaNoCabide from '../features/arara/PecaNoCabide'
+import CardPeca from '../features/catalogo/CardPeca'
+import '../features/catalogo/card-peca.css'
 import { CATEGORIAS, CONDICOES, CORES, PECAS_DEMO } from '../data/pecasDemo'
 import {
   FAIXAS_PRECO,
@@ -182,10 +183,10 @@ export default function Comprar() {
                 </div>
               </div>
             ) : (
-              <ul className="araras">
+              <ul className="grade-pecas">
                 {pecas.map((p, i) => (
-                  <li key={p.id} className="araras__item">
-                    <PecaNoCabide peca={p} prioridade={i < 4} />
+                  <li key={p.id}>
+                    <CardPeca peca={p} prioridade={i < 6} />
                   </li>
                 ))}
               </ul>

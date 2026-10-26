@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ChevronLeft } from 'lucide-react'
 import { siWhatsapp } from '../components/iconesMarca'
-import Arara from '../features/arara/Arara'
+import CardPeca from '../features/catalogo/CardPeca'
+import '../features/catalogo/card-peca.css'
+import { LOOKS } from '../data/looks'
 import BotaoLevar from '../features/sacola/BotaoLevar'
 import { IconeMarca } from '../components/Cabecalho'
 import { CATEGORIAS, CONDICOES, PECAS_DEMO, buscarPeca } from '../data/pecasDemo'
 import { formatarPreco, linkWhatsapp } from '../config'
-import '../features/provador/provador.css'
 import './peca.css'
 
 const NOMES_MEDIDAS = {
@@ -23,7 +24,7 @@ export default function Peca() {
   const { id } = useParams()
   const peca = buscarPeca(id)
   const recorteRef = useRef(null)
-  const [vista, setVista] = useState('espelho')
+  const [vista, setVista] = useState('peca')
 
   useEffect(() => {
     document.title = peca ? `${peca.titulo} · Atalia Brechó` : 'Peça não encontrada · Atalia Brechó'
@@ -42,6 +43,7 @@ export default function Peca() {
   }
 
   const categoria = CATEGORIAS.find((c) => c.slug === peca.categoria)
+  const look = LOOKS.find((l) => l.peca.id === peca.id)
   const condicao = CONDICOES[peca.condicao]
   const parecidas = PECAS_DEMO.filter((p) => p.id !== peca.id && p.categoria === peca.categoria && p.status !== 'vendida').slice(0, 8)
   const medidas = peca.medidas ? Object.entries(NOMES_MEDIDAS).filter(([k]) => peca.medidas[k]) : []
@@ -58,26 +60,34 @@ export default function Peca() {
 
         <div className="peca-pagina__grade">
           <div className="peca-pagina__vitrine" data-status={peca.status}>
-            {vista === 'espelho' ? (
-              <figure className="espelho espelho--grande">
-                <div className="espelho__vidro">
-                  <img ref={recorteRef} src={peca.recorte || peca.foto} alt={`${peca.titulo}, foto real da peça sem o fundo`} fetchPriority="high" />
-                </div>
-              </figure>
-            ) : (
-              <figure className="peca-pagina__original">
+            <figure className="peca-pagina__foto" data-vista={vista}>
+              {vista === 'peca' && (
+                <img ref={recorteRef} src={peca.recorte || peca.foto} alt={`${peca.titulo}, foto real da peça sem o fundo`} fetchPriority="high" />
+              )}
+              {vista === 'original' && (
                 <img src={peca.foto} alt={`${peca.titulo}, foto original da peça no manequim`} width="720" height="960" />
-              </figure>
-            )}
-            {STATUS[peca.status] && <span className="cabideiro__status peca-pagina__status-selo">{STATUS[peca.status]}</span>}
+              )}
+              {vista === 'look' && look && (
+                <>
+                  <img src={look.foto} alt={`Modelo gerada por IA vestindo ${peca.titulo.toLowerCase()}`} />
+                  <span className="selo-ia peca-pagina__selo-ia">Simulação por IA</span>
+                </>
+              )}
+              {STATUS[peca.status] && <span className="peca-pagina__status-selo">{STATUS[peca.status]}</span>}
+            </figure>
 
             <div className="peca-pagina__vistas" role="group" aria-label="Escolher foto">
-              <button type="button" aria-pressed={vista === 'espelho'} onClick={() => setVista('espelho')}>
-                No espelho
+              <button type="button" aria-pressed={vista === 'peca'} onClick={() => setVista('peca')}>
+                A peça
               </button>
               <button type="button" aria-pressed={vista === 'original'} onClick={() => setVista('original')}>
                 Foto original
               </button>
+              {look && (
+                <button type="button" aria-pressed={vista === 'look'} onClick={() => setVista('look')}>
+                  No corpo (IA)
+                </button>
+              )}
             </div>
           </div>
 
@@ -86,7 +96,7 @@ export default function Peca() {
               #{peca.codigo} <span aria-hidden="true">·</span> {categoria?.nome}
             </p>
             <h1 className="titulo">{peca.titulo}</h1>
-            <p className="peca-pagina__preco titulo">{formatarPreco(peca.preco)}</p>
+            <p className="peca-pagina__preco">{formatarPreco(peca.preco)}</p>
 
             {peca.status === 'reservada' && (
               <p className="peca-pagina__aviso">
@@ -172,11 +182,19 @@ export default function Peca() {
       {parecidas.length > 0 && (
         <section className="peca-pagina__parecidas" aria-labelledby="parecidas-titulo">
           <div className="conteiner">
-            <h2 id="parecidas-titulo" className="titulo">
-              Mais <em>{categoria?.nome.toLowerCase()}</em> na arara
-            </h2>
+            <div className="secao-topo">
+              <h2 id="parecidas-titulo" className="titulo">
+                Você também pode gostar
+              </h2>
+            </div>
+            <ul className="grade-pecas grade-pecas--4">
+              {parecidas.slice(0, 4).map((p) => (
+                <li key={p.id}>
+                  <CardPeca peca={p} />
+                </li>
+              ))}
+            </ul>
           </div>
-          <Arara pecas={parecidas} rotulo={`Mais ${categoria?.nome}. Role para o lado para ver mais.`} />
         </section>
       )}
     </main>

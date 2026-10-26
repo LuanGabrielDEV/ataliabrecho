@@ -3,7 +3,7 @@ import { useSacola } from './Sacola'
 import { voarParaSacola } from './voarParaSacola'
 
 /**
- * "Levar esta": põe a peça na sacola e faz a imagem voar até o ícone.
+ * "Adicionar à sacola": põe a peça na sacola e faz a imagem voar até o ícone.
  * `imagemRef` aponta para a <img> que vai voar (recorte da peça).
  */
 export default function BotaoLevar({ peca, imagemRef, className = '', compacto = false }) {
@@ -29,7 +29,7 @@ export default function BotaoLevar({ peca, imagemRef, className = '', compacto =
     return (
       <button type="button" className={`levar levar--na-sacola ${className}`} onClick={abrirGaveta}>
         <Check size={16} strokeWidth={2.2} aria-hidden="true" />
-        Na sacola{compacto ? '' : ' · ver'}
+        Na sacola{compacto ? '' : ' · ver sacola'}
       </button>
     )
   }
@@ -43,7 +43,7 @@ export default function BotaoLevar({ peca, imagemRef, className = '', compacto =
         adicionar(peca)
       }}
     >
-      {compacto ? 'Levar' : 'Levar esta'}
+      {compacto ? 'Adicionar' : 'Adicionar à sacola'}
     </button>
   )
 }

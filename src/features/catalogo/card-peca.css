@@ -1,0 +1,137 @@
+.card-peca {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.card-peca__foto {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--raio-card);
+  background: var(--tile);
+  overflow: hidden;
+}
+
+.card-peca__foto img {
+  position: absolute;
+  inset: 8% 10% 6%;
+  width: 80%;
+  height: 86%;
+  object-fit: contain;
+  filter: var(--sombra-peca);
+  transition: scale 0.5s var(--ease);
+}
+
+.card-peca__foto:hover img {
+  scale: 1.04;
+}
+
+.card-peca[data-status='vendida'] .card-peca__foto img {
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+
+.card-peca__tamanho {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 0.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.card-peca__selo {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: var(--oliva-clara);
+  color: var(--oliva-escura);
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+.card-peca__selo--status {
+  background: var(--tinta);
+  color: #fff;
+}
+
+.card-peca__info {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.card-peca__titulo {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 550;
+  line-height: 1.3;
+}
+
+.card-peca__titulo a {
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.card-peca__titulo a:hover {
+  text-decoration: underline;
+}
+
+.card-peca__detalhe {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--tinta-suave);
+}
+
+.card-peca__preco {
+  margin: 0.2rem 0 0;
+  font-size: 1.125rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-peca__botao {
+  margin-top: auto;
+  min-height: 44px;
+  font-size: 0.875rem;
+}
+
+/* grade de produtos usada no início e no catálogo */
+.grade-pecas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 4vw, 2.5rem) clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.grade-pecas > li {
+  display: flex;
+}
+
+.grade-pecas > li > .card-peca {
+  flex: 1;
+}
+
+@media (min-width: 760px) {
+  .grade-pecas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .grade-pecas--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,7 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/bodoni-moda/opsz.css'
-import '@fontsource-variable/bodoni-moda/opsz-italic.css'
 import '@fontsource-variable/figtree/wght.css'
 import './index.css'
 import App from './App.jsx'

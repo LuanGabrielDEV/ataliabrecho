@@ -6,13 +6,12 @@
   gap: 0.4rem;
   min-height: 48px;
   padding: 0 1.25rem;
-  border: 1px solid var(--tinta);
-  border-radius: var(--raio);
-  background: var(--tinta);
-  color: var(--parede-clara);
+  border: 1.5px solid var(--oliva);
+  border-radius: 999px;
+  background: var(--oliva);
+  color: #fff;
   font: inherit;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 650;
   cursor: pointer;
   transition:
     background-color 0.25s var(--ease),
@@ -93,7 +92,7 @@
 
 .gaveta__topo h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .gaveta__fechar,
@@ -145,7 +144,7 @@
   height: 96px;
   display: grid;
   place-items: center;
-  background: var(--parede);
+  background: var(--tile);
   border-radius: var(--raio);
 }
 
@@ -181,9 +180,8 @@
 
 .gaveta__preco {
   margin-top: 0.25rem !important;
-  font-family: var(--fonte-titulo);
-  font-size: 1.35rem;
-  font-weight: 500;
+  font-size: 1.0625rem;
+  font-weight: 750;
 }
 
 .gaveta__rodape {
@@ -201,9 +199,8 @@
 }
 
 .gaveta__total strong {
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  font-size: 2rem;
+  font-weight: 750;
+  font-size: 1.5rem;
 }
 
 .gaveta__nota {

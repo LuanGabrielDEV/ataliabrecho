@@ -4,7 +4,7 @@
 
 .comprar__topo h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 8vw, 5.75rem);
+  font-size: clamp(2rem, 5vw, 3.25rem);
 }
 
 .comprar__topo p {
@@ -51,7 +51,7 @@
 
 .comprar__categorias a[aria-current='page'] {
   color: var(--tinta);
-  border-bottom-color: var(--latao);
+  border-bottom-color: var(--oliva);
 }
 
 .comprar__barra {
@@ -69,7 +69,7 @@
   min-height: 44px;
   padding: 0 1rem;
   border: 1.5px solid var(--tinta);
-  border-radius: var(--raio);
+  border-radius: 999px;
   background: transparent;
   color: var(--tinta);
   font: inherit;
@@ -99,8 +99,8 @@
   min-height: 44px;
   padding: 0 2rem 0 0.75rem;
   border: 1px solid var(--linha);
-  border-radius: var(--raio);
-  background: var(--papel-claro)
+  border-radius: 999px;
+  background: var(--branco)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%232f2017' stroke-width='1.6'/%3E%3C/svg%3E")
     no-repeat right 0.75rem center;
   appearance: none;
@@ -157,9 +157,8 @@
 
 .filtros__cabeca h2 {
   margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  font-size: 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .filtros__fechar {
@@ -327,9 +326,9 @@
 
 .comprar__vazio h2 {
   margin: 0;
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
   line-height: 1.05;
 }
 

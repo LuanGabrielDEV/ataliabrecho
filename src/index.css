@@ -1,55 +1,54 @@
 /* ------------------------------------------------------------------
-   Mundo visual: O PROVADOR
-   Parede nude como chão, cortina de linho verde-oliva como a única
-   grande massa de cor, latão (o dourado da logo) em varões, araras e
-   moldura do espelho. Títulos em Bodoni Moda, texto em Figtree.
+   Atalia Brechó: loja limpa e moderna, no padrão das boas lojas de
+   brechó online (ThredUp, Modare, Repassa). Fundo claro, uma família
+   de letra sem serifa, verde-oliva da logo nos botões e destaques.
    ------------------------------------------------------------------ */
 :root {
-  /* parede e superfícies */
-  --parede: #f2ebe1;
-  --parede-clara: #faf6f0;
-  --parede-funda: #e6dbcb;
-  --linha: #d9ccb9;
+  --fundo: #fbfaf7;
+  --branco: #ffffff;
+  --tile: #f3efe8; /* fundo das fotos de produto */
+  --areia: #efe8dc; /* seções de destaque */
+  --linha: #e6e0d6;
 
-  /* linho da cortina */
-  --linho: #6b6830;
-  --linho-escuro: #4f4d1f;
-  --linho-claro: #8c8946;
+  --tinta: #1f1b17;
+  --tinta-suave: #6a6159;
 
-  /* latão */
-  --latao: #b08d4f;
-  --latao-escuro: #8a6c36;
+  --oliva: #5f5c1e; /* botões e links */
+  --oliva-escura: #4a4816;
+  --oliva-logo: #9a9727;
+  --oliva-clara: #eceac9; /* selos e fundos suaves */
+  --erro: #a3321f;
 
-  /* tinta */
-  --tinta: #2a1f18;
-  --tinta-suave: #5e4c3f;
-  --oliva-escuro: #4f4d18;
-  --marrom: #633922;
-  --erro: #9b2f1c;
-
-  /* aliases usados por componentes antigos (Avise-me) */
-  --papel: var(--parede);
-  --papel-claro: var(--parede-clara);
-  --papel-escuro: var(--parede-funda);
-  --fundo: var(--parede);
-  --superficie: var(--parede-clara);
-  --oliva: var(--linho-claro);
+  /* nomes usados por componentes mais antigos */
+  --superficie: var(--branco);
+  --papel: var(--fundo);
+  --papel-claro: var(--branco);
+  --papel-escuro: var(--tile);
+  --parede: var(--fundo);
+  --parede-clara: var(--branco);
+  --parede-funda: var(--tile);
+  --oliva-escuro: var(--oliva);
+  --linho: var(--oliva);
+  --linho-escuro: var(--oliva-escura);
+  --linho-claro: var(--oliva-logo);
+  --latao: var(--oliva-logo);
+  --latao-escuro: var(--oliva);
+  --marrom: var(--tinta);
   --bege: #d8cbb8;
 
   --fonte: 'Figtree Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --fonte-titulo: 'Bodoni Moda Variable', 'Bodoni 72', Didot, Georgia, serif;
-  --fonte-cartaz: var(--fonte-titulo);
+  --fonte-titulo: var(--fonte);
+  --fonte-cartaz: var(--fonte);
 
-  --raio: 4px;
+  --raio: 10px;
+  --raio-card: 14px;
   --raio-chip: 999px;
-  --sombra: 0 24px 48px -28px rgb(42 31 24 / 0.45), 0 4px 12px -6px rgb(42 31 24 / 0.12);
-  --sombra-peca: drop-shadow(0 18px 18px rgb(42 31 24 / 0.22)) drop-shadow(0 2px 3px rgb(42 31 24 / 0.12));
+  --sombra: 0 12px 32px -16px rgb(31 27 23 / 0.28);
+  --sombra-peca: drop-shadow(0 10px 12px rgb(31 27 23 / 0.16));
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-cortina: cubic-bezier(0.65, 0, 0.15, 1);
-  --mola: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --margem: clamp(1rem, 4vw, 3rem);
-  --largura: 80rem;
+  --margem: clamp(1rem, 4vw, 2.5rem);
+  --largura: 76rem;
 
   color-scheme: light;
 }
@@ -60,34 +59,29 @@
   box-sizing: border-box;
 }
 
-html {
-  scrollbar-color: var(--latao) var(--parede-funda);
-}
-
 body {
   margin: 0;
   font-family: var(--fonte);
   font-size: 1rem;
   line-height: 1.55;
   color: var(--tinta);
-  background: var(--parede);
+  background: var(--fundo);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--linho);
-  color: var(--parede-clara);
+  background: var(--oliva);
+  color: #fff;
 }
 
 a {
-  color: var(--oliva-escuro);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.22em;
+  color: var(--oliva);
+  text-underline-offset: 0.2em;
 }
 
 :focus-visible {
-  outline: 2px solid var(--linho-escuro);
+  outline: 2px solid var(--oliva);
   outline-offset: 3px;
 }
 
@@ -104,18 +98,15 @@ h3 {
 }
 
 .titulo {
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  font-optical-sizing: auto;
-  letter-spacing: -0.015em;
-  line-height: 1;
+  font-family: var(--fonte);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
 }
 
-.titulo em,
-.titulo i {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--linho);
+.titulo em {
+  font-style: normal;
+  color: var(--oliva);
 }
 
 .sr-only {
@@ -137,7 +128,7 @@ h3 {
   z-index: 100;
   padding: 0.75rem 1rem;
   background: var(--tinta);
-  color: var(--parede-clara);
+  color: #fff;
   border-radius: var(--raio);
 }
 
@@ -150,64 +141,64 @@ h3 {
   margin-inline: auto;
 }
 
-/* Botões: tinta chapada e cantos de etiqueta */
+/* ---------- Botões ---------- */
 .botao {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 52px;
-  padding: 0 1.6rem;
-  border: 1px solid var(--tinta);
-  border-radius: var(--raio);
-  background: var(--tinta);
-  color: var(--parede-clara);
+  min-height: 50px;
+  padding: 0 1.5rem;
+  border: 1.5px solid var(--oliva);
+  border-radius: 999px;
+  background: var(--oliva);
+  color: #fff;
   font: inherit;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 650;
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 0.25s var(--ease),
-    color 0.25s var(--ease),
-    border-color 0.25s var(--ease),
+    background-color 0.2s var(--ease),
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
     transform 0.2s var(--ease);
 }
 
 .botao:hover {
-  background: var(--linho-escuro);
-  border-color: var(--linho-escuro);
+  background: var(--oliva-escura);
+  border-color: var(--oliva-escura);
 }
 
 .botao:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
 }
 
 .botao:disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .botao--vazado {
   background: transparent;
   color: var(--tinta);
+  border-color: var(--tinta);
 }
 
 .botao--vazado:hover {
   background: var(--tinta);
-  color: var(--parede-clara);
   border-color: var(--tinta);
+  color: #fff;
 }
 
 .botao--claro {
-  background: var(--parede-clara);
-  border-color: var(--parede-clara);
+  background: #fff;
+  border-color: #fff;
   color: var(--tinta);
 }
 
 .botao--claro:hover {
-  background: #fff;
-  border-color: #fff;
+  background: var(--areia);
+  border-color: var(--areia);
   color: var(--tinta);
 }
 
@@ -216,13 +207,13 @@ h3 {
   align-items: center;
   gap: 0.35rem;
   min-height: 44px;
-  font-weight: 600;
+  font-weight: 650;
   text-decoration: none;
-  color: var(--oliva-escuro);
+  color: var(--tinta);
 }
 
 .link-seta svg {
-  transition: translate 0.3s var(--ease);
+  transition: translate 0.25s var(--ease);
 }
 
 .link-seta:hover {
@@ -230,37 +221,53 @@ h3 {
 }
 
 .link-seta:hover svg {
-  translate: 4px 0;
+  translate: 3px 0;
 }
 
 /* Selo honesto para fotos geradas por IA */
 .selo-ia {
   position: absolute;
   z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.6rem;
+  padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  background: rgb(250 246 240 / 0.88);
+  background: rgb(255 255 255 / 0.9);
   color: var(--tinta);
   font-size: 0.6875rem;
   font-weight: 650;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   backdrop-filter: blur(6px);
 }
 
-/* Revelação ao rolar: o conteúdo já está visível; só ganha um assentamento suave */
+/* Cabeçalho de seção: título à esquerda, link à direita */
+.secao-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.secao-topo h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+}
+
+.secao-topo p {
+  margin: 0.35rem 0 0;
+  color: var(--tinta-suave);
+}
+
+/* Entrada suave ao rolar; o conteúdo já é visível sem JavaScript */
 .revelar {
   transition:
-    opacity 0.9s var(--ease),
-    translate 0.9s var(--ease);
+    opacity 0.7s var(--ease),
+    translate 0.7s var(--ease);
 }
 
 .js .revelar:not(.revelado) {
   opacity: 0;
-  translate: 0 28px;
+  translate: 0 18px;
 }
 
 .em-breve {
@@ -268,40 +275,16 @@ h3 {
 }
 
 .em-breve h1 {
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-size: clamp(2.25rem, 7vw, 3.5rem);
+  line-height: 1.05;
   margin: 0 0 1rem;
 }
 
-/* Transição entre páginas (View Transitions) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.45s;
-  animation-timing-function: var(--ease);
-}
-
-::view-transition-old(root) {
-  animation-name: pagina-sai;
-}
-
-::view-transition-new(root) {
-  animation-name: pagina-entra;
-}
-
-@keyframes pagina-sai {
-  to {
-    opacity: 0;
-    translate: 0 -12px;
-  }
-}
-
-@keyframes pagina-entra {
-  from {
-    opacity: 0;
-    translate: 0 16px;
-  }
+  animation-duration: 0.3s;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -9,8 +9,9 @@ import './cabecalho.css'
 
 const LINKS = [
   { to: '/comprar', texto: 'Comprar peças' },
-  { to: '/consigne', texto: 'Consigne suas peças' },
-  { to: '/duvidas', texto: 'Dúvidas e contato' },
+  { to: '/consigne', texto: 'Consignar' },
+  { to: '/avise-me', texto: 'Avise-me' },
+  { to: '/duvidas', texto: 'Dúvidas' },
 ]
 
 export function IconeMarca({ icone, tamanho = 20 }) {
@@ -27,7 +28,28 @@ export default function Cabecalho() {
 
   return (
     <header className="cabecalho">
+      <p className="cabecalho__faixa">
+        <span>Peças únicas e selecionadas</span>
+        <span aria-hidden="true">·</span>
+        <span>Retirada grátis em Paulista, PE</span>
+        <span aria-hidden="true" className="cabecalho__faixa-extra">·</span>
+        <a href={CONTATO.instagram} target="_blank" rel="noreferrer" className="cabecalho__faixa-extra">
+          Siga {CONTATO.instagramUsuario}
+        </a>
+      </p>
+
       <div className="cabecalho__barra conteiner">
+        <button
+          type="button"
+          className="cabecalho__icone cabecalho__menu"
+          aria-expanded={aberto}
+          aria-controls="menu-principal"
+          onClick={() => setAberto((a) => !a)}
+        >
+          {aberto ? <X size={24} strokeWidth={1.7} aria-hidden="true" /> : <Menu size={24} strokeWidth={1.7} aria-hidden="true" />}
+          <span className="sr-only">{aberto ? 'Fechar menu' : 'Abrir menu'}</span>
+        </button>
+
         <Link to="/" className="cabecalho__logo" viewTransition>
           <LogoHorizontal titulo="Atalia Brechó" />
         </Link>
@@ -36,7 +58,9 @@ export default function Cabecalho() {
           <ul>
             {LINKS.map((l) => (
               <li key={l.to}>
-                <NavLink to={l.to} onClick={() => setAberto(false)} viewTransition>{l.texto}</NavLink>
+                <NavLink to={l.to} onClick={() => setAberto(false)} viewTransition>
+                  {l.texto}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -44,22 +68,22 @@ export default function Cabecalho() {
 
         <div className="cabecalho__acoes">
           <a
-            className="cabecalho__icone cabecalho__whats"
-            href={linkWhatsapp('Oi, Atalia! Vim pelo site.')}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Falar no WhatsApp"
-          >
-            <IconeMarca icone={siWhatsapp} />
-          </a>
-          <a
-            className="cabecalho__icone"
+            className="cabecalho__icone cabecalho__so-largo"
             href={CONTATO.instagram}
             target="_blank"
             rel="noreferrer"
             aria-label={`Instagram ${CONTATO.instagramUsuario}`}
           >
             <IconeMarca icone={siInstagram} />
+          </a>
+          <a
+            className="cabecalho__icone"
+            href={linkWhatsapp('Oi, Atalia! Vim pelo site.')}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Falar no WhatsApp"
+          >
+            <IconeMarca icone={siWhatsapp} />
           </a>
           <button
             type="button"
@@ -68,18 +92,12 @@ export default function Cabecalho() {
             onAnimationEnd={(e) => e.currentTarget.classList.remove('pulo')}
             aria-label={`Abrir sacola, ${itens.length} ${itens.length === 1 ? 'peça' : 'peças'}`}
           >
-            <ShoppingBag size={22} strokeWidth={1.5} aria-hidden="true" />
-            {itens.length > 0 && <span className="cabecalho__contador" aria-hidden="true">{itens.length}</span>}
-          </button>
-          <button
-            type="button"
-            className="cabecalho__icone cabecalho__menu"
-            aria-expanded={aberto}
-            aria-controls="menu-principal"
-            onClick={() => setAberto((a) => !a)}
-          >
-            {aberto ? <X size={24} strokeWidth={1.6} aria-hidden="true" /> : <Menu size={24} strokeWidth={1.6} aria-hidden="true" />}
-            <span className="sr-only">{aberto ? 'Fechar menu' : 'Abrir menu'}</span>
+            <ShoppingBag size={22} strokeWidth={1.7} aria-hidden="true" />
+            {itens.length > 0 && (
+              <span className="cabecalho__contador" aria-hidden="true">
+                {itens.length}
+              </span>
+            )}
           </button>
         </div>
       </div>

@@ -1,25 +1,25 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import { siInstagram } from '../components/iconesMarca'
-import Provador from '../features/provador/Provador'
-import Arara from '../features/arara/Arara'
+import { ArrowRight, MapPin, Recycle, Shirt, Tag } from 'lucide-react'
+import CardPeca from '../features/catalogo/CardPeca'
 import { IconeMarca } from '../components/Cabecalho'
-import { Simbolo } from '../components/Marca'
+import { siInstagram } from '../components/iconesMarca'
 import { CATEGORIAS, PECAS_DEMO } from '../data/pecasDemo'
 import { LOOKS } from '../data/looks'
 import { CONTATO } from '../config'
+import '../features/catalogo/card-peca.css'
 import './inicio.css'
 
 const NOVIDADES = [...PECAS_DEMO]
   .filter((p) => p.status !== 'vendida')
   .sort((a, b) => b.chegouEm.localeCompare(a.chegouEm))
-  .slice(0, 10)
+  .slice(0, 8)
 
-const PASSOS = [
-  ['Escolha', 'Cada peça tem foto real, medidas e código. Gostou? Leve antes que outra pessoa leve.'],
-  ['Pague', 'Pix, cartão ou boleto pelo Mercado Pago. Enquanto você paga, a peça fica reservada.'],
-  ['Receba', 'Retire sem custo em um ponto combinado ou receba por Uber, com o valor da corrida combinado no WhatsApp.'],
+const VANTAGENS = [
+  { icone: Shirt, titulo: 'Peças selecionadas', texto: 'Escolhidas uma a uma, com fotos reais e medidas.' },
+  { icone: Tag, titulo: 'Preço justo', texto: 'Moda boa sem pagar preço de loja.' },
+  { icone: MapPin, titulo: 'Retirada grátis', texto: 'Em Paulista, PE, ou entrega por Uber.' },
+  { icone: Recycle, titulo: 'Moda circular', texto: 'Cada peça ganha uma nova história.' },
 ]
 
 export default function Inicio() {
@@ -27,75 +27,55 @@ export default function Inicio() {
     document.title = 'Atalia Brechó · Moda com propósito'
   }, [])
 
-  const [primeiro, ...demais] = LOOKS
+  const capa = LOOKS[0]
+  const capa2 = LOOKS[1]
 
   return (
     <main id="conteudo" className="inicio">
-      {/* ---------- Abertura: a primeira cortina se abre sozinha ---------- */}
-      <section className="abertura" aria-label="Abertura">
-        <Provador
-          look={primeiro}
-          numero={1}
-          total={LOOKS.length}
-          modo="abertura"
-          chamada={
-            <>
-              <h1 className="titulo">
-                O novo nem sempre precisa ser <em>novo</em>.
-              </h1>
-              <p>Peças únicas de segunda mão, escolhidas uma a uma em Paulista, PE. Role a página e entre nos provadores.</p>
-            </>
-          }
-        />
-      </section>
-
-      {/* ---------- Provadores: cada cortina abre com a rolagem ---------- */}
-      <section className="provadores" aria-labelledby="provadores-titulo">
-        <header className="conteiner provadores__topo revelar">
-          <h2 id="provadores-titulo" className="titulo">
-            Entre nos <em>provadores</em>
-          </h2>
+      {/* ---------- Banner principal ---------- */}
+      <section className="conteiner banner" aria-labelledby="banner-titulo">
+        <div className="banner__texto">
+          <h1 id="banner-titulo" className="titulo">
+            O novo nem sempre precisa ser <em>novo</em>.
+          </h1>
           <p>
-            Role para abrir cada cortina. A modelo é uma simulação feita por IA; no espelho está a peça real, do jeito que
-            ela chega até você.
+            Roupas e acessórios de segunda mão, selecionados peça por peça em Paulista, PE. Cada peça é única: quando sai,
+            não volta.
           </p>
-        </header>
-        {demais.map((look, i) => (
-          <Provador key={look.id} look={look} numero={i + 2} total={LOOKS.length} modo="rolagem" />
-        ))}
-      </section>
-
-      {/* ---------- Arara de novidades ---------- */}
-      <section className="novidades" aria-labelledby="novidades-titulo">
-        <div className="conteiner novidades__topo revelar">
-          <h2 id="novidades-titulo" className="titulo">
-            Recém-chegadas na <em>arara</em>
-          </h2>
-          <Link to="/comprar" className="link-seta" viewTransition>
-            Ver todas as peças <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
+          <div className="banner__acoes">
+            <Link to="/comprar" className="botao" viewTransition>
+              Comprar peças
+            </Link>
+            <Link to="/consigne" className="botao botao--vazado" viewTransition>
+              Quero consignar
+            </Link>
+          </div>
+        </div>
+        <div className="banner__fotos">
+          <Link to={`/peca/${capa.peca.id}`} className="banner__foto banner__foto--1" viewTransition>
+            <img src={capa.foto} alt={`Modelo gerada por IA vestindo ${capa.peca.titulo.toLowerCase()}`} fetchPriority="high" />
+            <span className="selo-ia">Simulação por IA</span>
+            <span className="banner__etiqueta">
+              {capa.peca.titulo} <strong>R$ {capa.peca.preco}</strong>
+            </span>
+          </Link>
+          <Link to={`/peca/${capa2.peca.id}`} className="banner__foto banner__foto--2" viewTransition>
+            <img src={capa2.foto} alt={`Modelo gerada por IA vestindo ${capa2.peca.titulo.toLowerCase()}`} />
+            <span className="selo-ia">Simulação por IA</span>
           </Link>
         </div>
-        <Arara pecas={NOVIDADES} rotulo="Peças recém-chegadas. Role para o lado para ver mais." />
       </section>
 
-      {/* ---------- Categorias com as próprias peças ---------- */}
-      <section className="indice conteiner" aria-labelledby="indice-titulo">
-        <h2 id="indice-titulo" className="titulo revelar">
-          Procure por
-        </h2>
-        <ul className="indice__lista">
+      {/* ---------- Categorias ---------- */}
+      <section className="conteiner categorias" aria-label="Categorias">
+        <ul className="categorias__lista">
           {CATEGORIAS.map((c) => {
-            const amostras = PECAS_DEMO.filter((p) => p.categoria === c.slug && p.status !== 'vendida').slice(0, 3)
+            const amostra = PECAS_DEMO.find((p) => p.categoria === c.slug && p.status === 'disponivel')
             return (
-              <li key={c.slug} className="revelar">
+              <li key={c.slug}>
                 <Link to={`/comprar?categoria=${c.slug}`} viewTransition>
-                  <span className="indice__nome">{c.nome}</span>
-                  <span className="indice__amostras" aria-hidden="true">
-                    {amostras.map((p) => (
-                      <img key={p.id} src={p.recorte} alt="" loading="lazy" />
-                    ))}
-                  </span>
-                  <ArrowRight className="indice__seta" size={26} strokeWidth={1.3} aria-hidden="true" />
+                  <span className="categorias__foto">{amostra && <img src={amostra.recorte} alt="" loading="lazy" />}</span>
+                  <span className="categorias__nome">{c.nome}</span>
                 </Link>
               </li>
             )
@@ -103,108 +83,150 @@ export default function Inicio() {
         </ul>
       </section>
 
-      {/* ---------- Como comprar ---------- */}
-      <section className="passos conteiner" aria-labelledby="passos-titulo">
-        <h2 id="passos-titulo" className="titulo revelar">
-          Do provador <em>para casa</em>
-        </h2>
-        <ol className="passos__lista">
-          {PASSOS.map(([titulo, texto], i) => (
-            <li key={titulo} className="revelar" style={{ transitionDelay: `${i * 90}ms` }}>
-              <span className="passos__numero titulo" aria-hidden="true">
-                {i + 1}
-              </span>
-              <h3>{titulo}</h3>
-              <p>{texto}</p>
+      {/* ---------- Novidades ---------- */}
+      <section className="conteiner secao" aria-labelledby="novidades-titulo">
+        <div className="secao-topo">
+          <div>
+            <h2 id="novidades-titulo" className="titulo">
+              Acabaram de chegar
+            </h2>
+            <p>Peças únicas. Gostou? Garanta antes que outra pessoa leve.</p>
+          </div>
+          <Link to="/comprar" className="link-seta" viewTransition>
+            Ver todas <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
+          </Link>
+        </div>
+        <ul className="grade-pecas grade-pecas--4">
+          {NOVIDADES.map((p, i) => (
+            <li key={p.id} className="revelar" style={{ transitionDelay: `${(i % 4) * 60}ms` }}>
+              <CardPeca peca={p} prioridade={i < 4} />
             </li>
           ))}
-        </ol>
+        </ul>
       </section>
 
-      {/* ---------- Consignação: uma cortina inteira ---------- */}
-      <section className="consigne" aria-labelledby="consigne-titulo">
-        <div className="conteiner consigne__grade">
-          <div className="revelar">
-            <h2 id="consigne-titulo" className="titulo">
-              Seu guarda-roupa pode ganhar <em>outra história</em>.
+      {/* ---------- Vantagens ---------- */}
+      <section className="vantagens" aria-label="Por que comprar na Atalia">
+        <ul className="conteiner vantagens__lista">
+          {VANTAGENS.map(({ icone: Icone, titulo, texto }) => (
+            <li key={titulo}>
+              <Icone size={26} strokeWidth={1.6} aria-hidden="true" />
+              <div>
+                <h3>{titulo}</h3>
+                <p>{texto}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ---------- Looks ---------- */}
+      <section className="conteiner secao" aria-labelledby="looks-titulo">
+        <div className="secao-topo">
+          <div>
+            <h2 id="looks-titulo" className="titulo">
+              Inspire-se nos looks
             </h2>
-            <p className="consigne__texto">
-              Deixe com a Atalia as peças que você não usa mais: a gente expõe, divulga e vende. Vale para quem quer
-              desapegar e também para lojas e empreendedoras que querem ser parceiras.
+            <p>Peças reais do brechó vestidas por uma modelo criada por IA, para você ver o caimento.</p>
+          </div>
+        </div>
+        <ul className="looks">
+          {LOOKS.slice(1, 5).map((l) => (
+            <li key={l.id} className="revelar">
+              <Link to={`/peca/${l.peca.id}`} className="look" viewTransition>
+                <span className="look__foto">
+                  <img src={l.foto} alt={`Modelo gerada por IA vestindo ${l.peca.titulo.toLowerCase()}`} loading="lazy" />
+                  <span className="selo-ia">Simulação por IA</span>
+                  <span className="look__peca">
+                    <img src={l.peca.recorte} alt="" loading="lazy" />
+                  </span>
+                </span>
+                <span className="look__nome">{l.peca.titulo}</span>
+                <span className="look__preco">
+                  R$ {l.peca.preco} · Tam. {l.peca.tamanho}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ---------- Consignação ---------- */}
+      <section className="conteiner secao" aria-labelledby="consigne-titulo">
+        <div className="consigne">
+          <div className="consigne__texto">
+            <h2 id="consigne-titulo" className="titulo">
+              Desapegue e ganhe com suas roupas
+            </h2>
+            <p>
+              Deixe com a Atalia as peças que você não usa mais. A gente fotografa, expõe e vende, e você recebe metade do
+              valor. Vale também para lojas e empreendedoras parceiras.
             </p>
             <div className="consigne__acoes">
               <Link to="/consigne" className="botao botao--claro" viewTransition>
                 Quero consignar
               </Link>
-              <Link to="/politicas#consignacao" className="consigne__termos" viewTransition>
+              <Link to="/politicas#consignacao" className="consigne__link" viewTransition>
                 Ler os termos
               </Link>
             </div>
           </div>
-          <dl className="consigne__termos-lista revelar">
-            <div>
-              <dt className="titulo">50%</dt>
-              <dd>do valor de cada peça vendida fica com você.</dd>
-            </div>
-            <div>
-              <dt className="titulo">60 dias</dt>
-              <dd>de exposição para cada peça.</dd>
-            </div>
-            <div>
-              <dt className="titulo">7 dias úteis</dt>
-              <dd>no máximo para o repasse depois da venda.</dd>
-            </div>
-          </dl>
+          <ol className="consigne__passos">
+            <li>
+              <strong>50% para você</strong>
+              <span>do valor de cada peça vendida.</span>
+            </li>
+            <li>
+              <strong>60 dias de exposição</strong>
+              <span>para cada peça.</span>
+            </li>
+            <li>
+              <strong>Repasse em até 7 dias úteis</strong>
+              <span>depois da venda.</span>
+            </li>
+          </ol>
         </div>
       </section>
 
       {/* ---------- Instagram ---------- */}
-      <section className="insta" aria-labelledby="insta-titulo">
-        <div className="conteiner">
-          <h2 id="insta-titulo" className="insta__chamada revelar">
-            Acompanhe a Atalia no Instagram
-          </h2>
-          <a className="insta__usuario titulo revelar" href={CONTATO.instagram} target="_blank" rel="noreferrer">
-            <IconeMarca icone={siInstagram} tamanho={48} />
-            <span>
-              <em>@</em>ataliabrecho
-            </span>
-          </a>
-          <div className="insta__rodape revelar">
-            <p>Peças novas, looks e novidades do brechó. Siga e não perca a próxima peça no seu tamanho.</p>
-            <a className="botao" href={CONTATO.instagram} target="_blank" rel="noreferrer">
-              Seguir no Instagram
-            </a>
+      <section className="conteiner secao insta" aria-labelledby="insta-titulo">
+        <div className="secao-topo">
+          <div>
+            <h2 id="insta-titulo" className="titulo">
+              Siga <em>{CONTATO.instagramUsuario}</em>
+            </h2>
+            <p>Novidades, looks e peças novas da Atalia. Siga para não perder a próxima no seu tamanho.</p>
           </div>
+          <a className="botao" href={CONTATO.instagram} target="_blank" rel="noreferrer">
+            <IconeMarca icone={siInstagram} tamanho={18} /> Seguir no Instagram
+          </a>
         </div>
+        <a className="insta__grade" href={CONTATO.instagram} target="_blank" rel="noreferrer" aria-label={`Abrir o Instagram ${CONTATO.instagramUsuario}`}>
+          {[LOOKS[2], NOVIDADES[0], LOOKS[3], NOVIDADES[3], LOOKS[4], NOVIDADES[5]].map((x, i) =>
+            x.foto && x.peca ? (
+              <span key={i} className="insta__item insta__item--foto">
+                <img src={x.foto} alt="" loading="lazy" />
+              </span>
+            ) : (
+              <span key={i} className="insta__item">
+                <img src={x.recorte} alt="" loading="lazy" />
+              </span>
+            ),
+          )}
+        </a>
       </section>
 
       {/* ---------- Avise-me ---------- */}
-      <section className="aviso-tamanho conteiner" aria-labelledby="aviso-titulo">
-        <div className="aviso-tamanho__etiqueta revelar">
-          <h2 id="aviso-titulo" className="titulo">
-            Não achou no seu <em>tamanho</em>?
-          </h2>
-          <p>Peça de brechó não repete. Deixe seu WhatsApp e seus tamanhos e a gente te chama quando chegar algo para você.</p>
+      <section className="conteiner secao" aria-labelledby="aviso-titulo">
+        <div className="aviso-faixa">
+          <div>
+            <h2 id="aviso-titulo" className="titulo">
+              Não achou no seu tamanho?
+            </h2>
+            <p>Deixe seu WhatsApp e seus tamanhos. A gente te avisa quando chegar uma peça para você.</p>
+          </div>
           <Link to="/avise-me?origem=inicio" className="botao" viewTransition>
             Quero ser avisada
-          </Link>
-        </div>
-      </section>
-
-      {/* ---------- Propósito ---------- */}
-      <section className="proposito conteiner" aria-labelledby="proposito-titulo">
-        <Simbolo className="proposito__simbolo revelar" />
-        <div className="revelar">
-          <h2 id="proposito-titulo" className="titulo">
-            Moda com <em>propósito</em>.
-          </h2>
-          <p>
-            A Atalia Brechó foi criada por Wirlla Dantas, bióloga e empreendedora, para prolongar a vida das roupas e
-            tornar o consumo consciente acessível. Cada peça pode ganhar uma nova história.
-          </p>
-          <Link to="/nossa-historia" className="link-seta" viewTransition>
-            Conheça nossa história <ArrowRight size={18} strokeWidth={1.8} aria-hidden="true" />
           </Link>
         </div>
       </section>

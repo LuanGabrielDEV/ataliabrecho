@@ -327,7 +327,8 @@
 .am-faixa__titulo {
   margin: 0 0 0.5rem;
   font-family: var(--fonte-cartaz);
-  font-weight: 400;
+  font-weight: 750;
+  letter-spacing: -0.02em;
   font-size: 1.875rem;
   line-height: 1.05;
   color: var(--tinta);
@@ -365,7 +366,8 @@
 .am-pagina__titulo {
   margin: 0 0 0.5rem;
   font-family: var(--fonte-cartaz);
-  font-weight: 400;
+  font-weight: 750;
+  letter-spacing: -0.02em;
   font-size: clamp(2.5rem, 9vw, 3.75rem);
   line-height: 1;
   color: var(--tinta);
