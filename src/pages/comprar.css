@@ -4,10 +4,7 @@
 
 .comprar__topo h1 {
   margin: 0;
-  font-family: var(--fonte-cartaz);
-  font-weight: 400;
-  font-size: clamp(2.6rem, 7vw, 5rem);
-  line-height: 1;
+  font-size: clamp(2.8rem, 8vw, 5.75rem);
 }
 
 .comprar__topo p {
@@ -54,7 +51,7 @@
 
 .comprar__categorias a[aria-current='page'] {
   color: var(--tinta);
-  border-bottom-color: var(--oliva-escuro);
+  border-bottom-color: var(--latao);
 }
 
 .comprar__barra {
@@ -160,9 +157,9 @@
 
 .filtros__cabeca h2 {
   margin: 0;
-  font-family: var(--fonte-cartaz);
-  font-weight: 400;
-  font-size: 1.75rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: 2rem;
 }
 
 .filtros__fechar {
@@ -322,70 +319,6 @@
   }
 }
 
-/* ---------- Varal: grade de peças com um cordão por fileira ---------- */
-.varal {
-  --vao: clamp(1rem, 2.5vw, 2rem);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(46%, 220px), 1fr));
-  column-gap: var(--vao);
-  row-gap: clamp(2rem, 4vw, 3rem);
-}
-
-.varal__item {
-  position: relative;
-  padding-top: 18px;
-  transform-origin: 50% 12px;
-  transition: transform 0.9s var(--mola);
-}
-
-/* o cordão da fileira: cada item desenha o seu trecho e a fileira vira uma linha só */
-.varal__item::before {
-  content: '';
-  position: absolute;
-  top: 11px;
-  left: calc(var(--vao) / -2);
-  right: calc(var(--vao) / -2);
-  height: 1.6px;
-  background: var(--oliva);
-}
-
-@media (hover: hover) {
-  .varal__item:hover {
-    transform: rotate(1.5deg);
-  }
-
-  .varal__item:nth-child(even):hover {
-    transform: rotate(-1.5deg);
-  }
-}
-
-@media (max-width: 520px) {
-  .varal .peca__etiqueta {
-    margin-inline: 0.4rem;
-    padding: 1rem 0.7rem 0.75rem;
-  }
-
-  .varal .peca__codigo {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .varal .peca__titulo {
-    font-size: 0.875rem;
-  }
-
-  .varal .peca__preco {
-    font-size: 1.4rem;
-  }
-
-  .varal .peca__botao {
-    font-size: 0.8125rem;
-  }
-}
-
 /* ---------- Vazio ---------- */
 .comprar__vazio {
   max-width: 34rem;
@@ -394,9 +327,9 @@
 
 .comprar__vazio h2 {
   margin: 0;
-  font-family: var(--fonte-cartaz);
-  font-weight: 400;
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.8rem);
   line-height: 1.05;
 }
 

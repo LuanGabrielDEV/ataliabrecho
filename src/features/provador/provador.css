@@ -1,0 +1,374 @@
+/* ==================================================================
+   Provador: cabine com cortinas de linho, espelho e etiqueta
+   ================================================================== */
+
+/* ---------- Cortinas ---------- */
+.cortina {
+  position: absolute;
+  z-index: 3;
+  top: 8px;
+  bottom: -2px;
+  width: 50.5%;
+  /* pregas do linho: claro, médio, sombra, médio */
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.18), transparent 7%, transparent 90%, rgb(0 0 0 / 0.16)),
+    linear-gradient(
+      90deg,
+      var(--linho) 0%,
+      var(--linho-claro) 18%,
+      var(--linho) 38%,
+      var(--linho-escuro) 62%,
+      var(--linho) 82%,
+      var(--linho) 100%
+    );
+  background-size:
+    100% 100%,
+    clamp(34px, 6vw, 58px) 100%;
+  transform: scaleX(calc(1 - var(--abre, 0) * 0.88));
+  will-change: transform;
+}
+
+.cortina--esq {
+  left: 0;
+  transform-origin: 0 0;
+  box-shadow: inset -10px 0 18px -10px rgb(0 0 0 / 0.35);
+}
+
+.cortina--dir {
+  right: 0;
+  transform-origin: 100% 0;
+  box-shadow: inset 10px 0 18px -10px rgb(0 0 0 / 0.35);
+}
+
+/* varão de latão */
+.cabine__varao {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: -2%;
+  right: -2%;
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #d9bd84 0%, var(--latao) 45%, var(--latao-escuro) 100%);
+  box-shadow: 0 3px 6px -2px rgb(42 31 24 / 0.35);
+}
+
+/* ---------- Provador ---------- */
+.provador {
+  position: relative;
+  --abre: 0;
+}
+
+/* abertura automática (primeira tela) */
+.provador--abertura .cortina {
+  transition: transform 1.6s var(--ease-cortina);
+}
+
+.provador--abertura[data-aberto] {
+  --abre: 1;
+}
+
+.provador--abertura .provador__etiqueta > * {
+  transition:
+    opacity 0.9s var(--ease) 1s,
+    translate 0.9s var(--ease) 1s;
+}
+
+.provador--abertura:not([data-aberto]) .provador__etiqueta > * {
+  opacity: 0;
+  translate: 0 14px;
+}
+
+.provador--abertura .espelho {
+  transition:
+    opacity 1s var(--ease) 0.9s,
+    translate 1s var(--ease) 0.9s;
+}
+
+.provador--abertura:not([data-aberto]) .espelho {
+  opacity: 0;
+  translate: 0 24px;
+}
+
+/* guiado pela rolagem: a seção é mais alta que a tela e o palco fica fixo */
+.provador--rolagem {
+  height: 190svh;
+  --abre: clamp(0, calc(var(--p, 0) * 2.6), 1);
+  --mostra: clamp(0, calc((var(--p, 0) - 0.22) * 3.2), 1);
+}
+
+.provador--rolagem .provador__palco {
+  position: sticky;
+  top: 64px;
+  height: calc(100svh - 64px);
+}
+
+.provador--rolagem .provador__etiqueta,
+.provador--rolagem .espelho {
+  opacity: var(--mostra);
+  translate: 0 calc((1 - var(--mostra)) * 28px);
+}
+
+.provador__palco {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 0.5rem var(--margem) 1.25rem;
+  max-width: var(--largura);
+  margin-inline: auto;
+}
+
+.provador__cabine {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  background: var(--parede-funda);
+  border-radius: 2px;
+}
+
+.provador__modelo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  scale: calc(1.08 - var(--abre) * 0.08);
+  transition: scale 0.2s linear;
+}
+
+.provador--abertura .provador__modelo {
+  transition: scale 2.2s var(--ease);
+}
+
+.provador__selo {
+  z-index: 5;
+  top: 1.4rem;
+  left: 50%;
+  translate: -50% 0;
+  white-space: nowrap;
+  opacity: var(--abre);
+}
+
+/* ---------- Espelho em arco ---------- */
+.espelho {
+  position: absolute;
+  z-index: 5;
+  right: calc(var(--margem) + 0.5rem);
+  bottom: calc(var(--altura-etiqueta, 11.5rem) + 1.75rem);
+  width: clamp(110px, 30vw, 230px);
+  margin: 0;
+}
+
+.espelho__vidro {
+  aspect-ratio: 3 / 4.4;
+  border-radius: 999px 999px 6px 6px;
+  border: 2px solid var(--latao);
+  outline: 1px solid var(--latao-escuro);
+  outline-offset: 4px;
+  background:
+    linear-gradient(125deg, transparent 38%, rgb(255 255 255 / 0.55) 46%, transparent 54%),
+    linear-gradient(180deg, #f6f1ea, #e9e0d3);
+  display: grid;
+  place-items: end center;
+  padding: 14% 10% 6%;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.espelho__vidro img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: var(--sombra-peca);
+}
+
+.espelho figcaption {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-family: var(--fonte-titulo);
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Etiqueta do provador ---------- */
+.provador__etiqueta {
+  position: relative;
+  z-index: 5;
+}
+
+.provador__numero {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--latao-escuro);
+}
+
+.provador__titulo {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.6rem, 5.5vw, 3rem);
+  max-width: 16ch;
+}
+
+.provador__titulo a {
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.provador__titulo a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.provador__dados {
+  margin: 0.4rem 0 0;
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.provador__preco {
+  margin: 0.5rem 0 0;
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1;
+}
+
+.provador__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1rem;
+}
+
+/* ---------- Celular: etiqueta embaixo, espelho sobre a cabine ---------- */
+@media (max-width: 899px) {
+  .provador__palco {
+    --altura-etiqueta: 12.5rem;
+  }
+
+  .provador__etiqueta {
+    min-height: var(--altura-etiqueta);
+  }
+
+  .provador__titulo {
+    max-width: 62%;
+  }
+}
+
+/* ---------- Computador: cabine à esquerda, espelho + etiqueta à direita ---------- */
+@media (min-width: 900px) {
+  .provador__palco {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    padding-block: 1.25rem 2rem;
+    align-items: center;
+  }
+
+  .provador__cabine {
+    height: 100%;
+  }
+
+  .espelho {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    width: clamp(170px, 17vw, 250px);
+    margin-top: 1rem;
+  }
+
+  .provador__etiqueta {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 1rem;
+    padding-right: clamp(0px, 2vw, 2rem);
+  }
+
+  .provador__titulo {
+    max-width: 14ch;
+  }
+}
+
+/* ---------- Abertura (primeira tela): chamada + cabine + espelho + etiqueta ---------- */
+.provador--abertura .provador__palco {
+  height: calc(100svh - 64px);
+  min-height: 600px;
+  max-height: 980px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding-top: clamp(1rem, 3vw, 2rem);
+}
+
+.provador__chamada h1 {
+  margin: 0;
+  font-size: clamp(2.35rem, 9.6vw, 6.25rem);
+  line-height: 0.98;
+}
+
+.provador__chamada p {
+  margin: 0.75rem 0 0;
+  max-width: 40ch;
+  color: var(--tinta-suave);
+  font-size: clamp(0.9375rem, 1.4vw, 1.125rem);
+}
+
+@media (max-width: 899px) {
+  .provador--abertura .provador__chamada p {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .provador--abertura .provador__palco {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.42fr) minmax(0, 0.58fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      'cabine chamada chamada'
+      'cabine espelho etiqueta';
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+    row-gap: 2rem;
+    align-items: end;
+  }
+
+  .provador--abertura .provador__chamada h1 {
+    font-size: clamp(3rem, 5.4vw, 5.6rem);
+  }
+
+  .provador--abertura .provador__chamada {
+    grid-area: chamada;
+    align-self: start;
+    padding-top: clamp(0.5rem, 3vh, 3rem);
+  }
+
+  .provador--abertura .provador__cabine {
+    grid-area: cabine;
+  }
+
+  .provador--abertura .espelho {
+    grid-area: espelho;
+    justify-self: stretch;
+    align-self: end;
+    width: auto;
+    max-width: 200px;
+    max-height: 44vh;
+    margin: 0;
+  }
+
+  .provador--abertura .provador__etiqueta {
+    grid-area: etiqueta;
+    padding: 0 0 2.5rem;
+  }
+
+  .provador--abertura .provador__titulo {
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  }
+}

@@ -9,6 +9,7 @@ import Inicio from './pages/Inicio'
 import SacolaPage from './pages/SacolaPage'
 import Comprar from './pages/Comprar'
 import Peca from './pages/Peca'
+import Gaveta from './features/sacola/Gaveta'
 
 // Páginas que ainda vão ser construídas
 function EmBreve({ titulo }) {
@@ -31,6 +32,25 @@ function Layout() {
     window.scrollTo(0, 0)
   }, [pathname])
 
+  // Revelação suave das seções ao entrar na tela
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entradas) =>
+        entradas.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revelado')
+            io.unobserve(e.target)
+          }
+        }),
+      { rootMargin: '0px 0px -8% 0px' },
+    )
+    const t = setTimeout(() => document.querySelectorAll('.revelar:not(.revelado)').forEach((el) => io.observe(el)), 50)
+    return () => {
+      clearTimeout(t)
+      io.disconnect()
+    }
+  }, [pathname])
+
   const semMoldura = pathname === '/avise-me'
 
   return (
@@ -50,6 +70,7 @@ function Layout() {
         <Route path="*" element={<EmBreve titulo="Página não encontrada" />} />
       </Routes>
       {!semMoldura && <Rodape />}
+      <Gaveta />
       {!semMoldura && !pathname.startsWith('/admin') && <AviseMeFaixa />}
     </>
   )

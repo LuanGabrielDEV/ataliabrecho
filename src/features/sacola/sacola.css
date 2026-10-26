@@ -1,0 +1,213 @@
+/* ---------- Botão "Levar esta" ---------- */
+.levar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0 1.25rem;
+  border: 1px solid var(--tinta);
+  border-radius: var(--raio);
+  background: var(--tinta);
+  color: var(--parede-clara);
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.levar:hover:not(:disabled) {
+  background: var(--linho-escuro);
+  border-color: var(--linho-escuro);
+}
+
+.levar--na-sacola,
+.levar--na-sacola:hover:not(:disabled) {
+  background: transparent;
+  color: var(--oliva-escuro);
+  border-color: var(--oliva-escuro);
+}
+
+.levar:disabled {
+  background: transparent;
+  border-color: var(--linha);
+  color: var(--tinta-suave);
+  cursor: not-allowed;
+}
+
+/* ---------- Gaveta ---------- */
+.gaveta {
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  width: min(100vw, 30rem);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  background: transparent;
+  color: var(--tinta);
+  overflow: visible;
+}
+
+.gaveta::backdrop {
+  background: rgb(42 31 24 / 0.38);
+  backdrop-filter: blur(2px);
+  animation: gaveta-fundo 0.35s var(--ease);
+}
+
+.gaveta[open] .gaveta__painel {
+  animation: gaveta-entra 0.5s var(--ease-cortina);
+}
+
+@keyframes gaveta-entra {
+  from {
+    translate: 100% 0;
+  }
+}
+
+@keyframes gaveta-fundo {
+  from {
+    opacity: 0;
+  }
+}
+
+.gaveta__painel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--parede-clara);
+  box-shadow: -24px 0 48px -24px rgb(42 31 24 / 0.4);
+}
+
+.gaveta__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.25rem 1rem 1.5rem;
+  border-bottom: 1px solid var(--linha);
+}
+
+.gaveta__topo h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.gaveta__fechar,
+.gaveta__remover {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--tinta-suave);
+  cursor: pointer;
+}
+
+.gaveta__fechar:hover,
+.gaveta__remover:hover {
+  background: rgb(42 31 24 / 0.06);
+  color: var(--tinta);
+}
+
+.gaveta__vazia {
+  padding: 2rem 1.5rem;
+}
+
+.gaveta__vazia p {
+  margin: 0 0 1.5rem;
+  color: var(--tinta-suave);
+}
+
+.gaveta__lista {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+}
+
+.gaveta__lista li {
+  display: grid;
+  grid-template-columns: 72px 1fr 44px;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.gaveta__foto {
+  height: 96px;
+  display: grid;
+  place-items: center;
+  background: var(--parede);
+  border-radius: var(--raio);
+}
+
+.gaveta__foto img {
+  max-height: 88px;
+  width: auto;
+  filter: var(--sombra-peca);
+}
+
+.gaveta__lista p {
+  margin: 0;
+}
+
+.gaveta__codigo {
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  color: var(--tinta-suave);
+}
+
+.gaveta__titulo {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--tinta);
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.gaveta__titulo:hover {
+  text-decoration: underline;
+}
+
+.gaveta__preco {
+  margin-top: 0.25rem !important;
+  font-family: var(--fonte-titulo);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.gaveta__rodape {
+  padding: 1.25rem 1.5rem calc(1.25rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--linha);
+  display: grid;
+  gap: 0.85rem;
+}
+
+.gaveta__total {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.gaveta__total strong {
+  font-family: var(--fonte-titulo);
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.gaveta__nota {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+}

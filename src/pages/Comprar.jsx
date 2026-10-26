@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, X } from 'lucide-react'
-import PecaPendurada from '../features/cordel/PecaPendurada'
+import PecaNoCabide from '../features/arara/PecaNoCabide'
 import { CATEGORIAS, CONDICOES, CORES, PECAS_DEMO } from '../data/pecasDemo'
 import {
   FAIXAS_PRECO,
@@ -113,7 +113,7 @@ export default function Comprar() {
     <main id="conteudo" className="comprar">
       <div className="conteiner">
         <header className="comprar__topo">
-          <h1>{categoria ? categoria.nome : 'Comprar peças'}</h1>
+          <h1 className="titulo">{categoria ? categoria.nome : 'Comprar peças'}</h1>
           <p>
             {disponiveis} {disponiveis === 1 ? 'peça disponível' : 'peças disponíveis'}. Cada uma é única.
           </p>
@@ -122,7 +122,7 @@ export default function Comprar() {
         <nav className="comprar__categorias" aria-label="Categorias">
           <ul>
             <li>
-              <Link to="/comprar" aria-current={!filtros.categoria ? 'page' : undefined}>Todas</Link>
+              <Link to="/comprar" viewTransition aria-current={!filtros.categoria ? 'page' : undefined}>Todas</Link>
             </li>
             {CATEGORIAS.map((c) => (
               <li key={c.slug}>
@@ -182,10 +182,10 @@ export default function Comprar() {
                 </div>
               </div>
             ) : (
-              <ul className="varal">
+              <ul className="araras">
                 {pecas.map((p, i) => (
-                  <li key={p.id} className="varal__item">
-                    <PecaPendurada peca={p} prioridade={i < 4} alternada={i % 2 === 1} />
+                  <li key={p.id} className="araras__item">
+                    <PecaNoCabide peca={p} prioridade={i < 4} />
                   </li>
                 ))}
               </ul>

@@ -1,13 +1,23 @@
-import { createClient } from '@supabase/supabase-js'
-
 const url = import.meta.env.VITE_SUPABASE_URL
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const chave = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 /**
- * Cliente do Supabase. Fica `null` enquanto as variáveis de ambiente
- * não existirem. Nesse caso os serviços rodam em modo demonstração,
- * para o site funcionar localmente antes do banco estar criado.
+ * Sem as variáveis de ambiente, os serviços rodam em modo demonstração,
+ * para o site funcionar localmente antes do banco estar configurado.
  */
-export const supabase = url && anonKey ? createClient(url, anonKey) : null
+export const modoDemonstracao = !(url && chave)
 
-export const modoDemonstracao = !supabase
+let cliente = null
+
+/**
+ * O cliente do Supabase só é carregado quando um formulário é enviado.
+ * Assim a biblioteca não pesa na primeira visita.
+ */
+export async function obterSupabase() {
+  if (modoDemonstracao) return null
+  if (!cliente) {
+    const { createClient } = await import('@supabase/supabase-js')
+    cliente = createClient(url, chave, { auth: { persistSession: false } })
+  }
+  return cliente
+}

@@ -3,7 +3,9 @@
 // cores e descrições são exemplos até o catálogo vir do Supabase.
 
 const fotos = import.meta.glob('../assets/pecas/*.webp', { eager: true, import: 'default' })
+const recortes = import.meta.glob('../assets/recortes/*.webp', { eager: true, import: 'default' })
 const foto = (nome) => fotos[`../assets/pecas/${nome}.webp`]
+const recorte = (nome) => recortes[`../assets/recortes/${nome}.webp`]
 
 export const CATEGORIAS = [
   { slug: 'vestidos', nome: 'Vestidos' },
@@ -43,7 +45,8 @@ const p = (id, titulo, categoria, tamanho, preco, cor, condicao, medidas, fotoNo
   cor,
   condicao,
   medidas,
-  foto: foto(fotoNome),
+  foto: foto(fotoNome), // foto original, com o fundo
+  recorte: recorte(fotoNome), // mesma foto sem o fundo
   status: 'disponivel',
   chegouEm: '2026-10-20',
   ...extra,
@@ -71,6 +74,10 @@ export const PECAS_DEMO = [
   p('A119', 'Maiô estampado pôr do sol', 'praia-e-fitness', 'M', 55, 'estampado', 'otimo', { busto: 84, comprimento: 62 }, 'maio-por-do-sol', { chegouEm: '2026-10-18' }),
   p('A120', 'Conjunto fitness top e legging azul', 'praia-e-fitness', 'P', 59, 'azul', 'otimo', { cintura: 62, comprimento: 90 }, 'conjunto-fitness-azul', { chegouEm: '2026-10-18' }),
   p('A121', 'Biquíni vermelho e azul', 'praia-e-fitness', 'M', 35, 'vermelho', 'nova-com-etiqueta', null, 'biquini-vermelho-azul', { chegouEm: '2026-10-18' }),
+  p('A123', 'Camiseta New York e short de sarja', 'shorts-e-saias', 'M', 49, 'rosa', 'otimo', { busto: 92, comprimento: 62 }, 'camiseta-new-york-short', { chegouEm: '2026-10-24' }),
+  p('A124', 'Camiseta mostarda e calça jeans', 'blusas-e-calcas', '38', 65, 'laranja', 'otimo', { busto: 90, cintura: 72, quadril: 98, comprimento: 100 }, 'camiseta-amarela-jeans', { chegouEm: '2026-10-24' }),
+  p('A125', 'Regata listrada e calça branca', 'blusas-e-calcas', '38', 72, 'estampado', 'otimo', { busto: 84, cintura: 70, quadril: 96, comprimento: 104 }, 'regata-listrada-calca-branca', { chegouEm: '2026-10-24' }),
+  p('A126', 'Blusa de poá e calça jeans', 'blusas-e-calcas', '40', 68, 'preto', 'otimo', { busto: 94, cintura: 74, quadril: 100, comprimento: 100 }, 'blusa-poa-jeans', { chegouEm: '2026-10-23' }),
   p('A122', 'Maiô floral com bojo', 'praia-e-fitness', 'G', 49, 'estampado', 'otimo', { busto: 92, comprimento: 66 }, 'maio-floral', { chegouEm: '2026-10-18', status: 'vendida' }),
 ]
 

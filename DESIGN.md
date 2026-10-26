@@ -1,44 +1,50 @@
-# Design: Atalia Brechó, mundo "Cordel"
+# Design: Atalia Brechó, mundo "O provador"
 
-Na feira, o folheto de cordel fica pendurado num cordão, cada um único, até alguém levar. No site, as peças ficam penduradas na linha contínua da borboleta da logo.
+Comprar roupa é experimentar, e o site funciona como uma cabine de provador. Cortinas de linho verde-oliva se abrem e revelam cada look; no espelho aparece a peça real. As peças ficam penduradas em cabides, numa arara de latão.
+
+> Substituiu a direção "Cordel" em 25/10/2026. A cliente achou o visual anterior simples: faltava movimento, sofisticação e fotos melhores.
 
 ## Princípios
-- **Papel como chão, uma tinta por região.** Fundo de papel bege; o texto e os traços em tinta marrom; o verde-oliva funciona como segunda cor de impressão e domina regiões inteiras (como a faixa de consignação), nunca aparece como enfeite espalhado.
-- **A peça é a protagonista.** As fotos reais nunca recebem filtro, a não ser a peça vendida, que fica dessaturada e carimbada.
-- **Objetos do mundo, não ornamento:** cordão, prendedor, etiqueta de papel com furo e carimbo de borracha. Não usar gradiente, vidro, card genérico com sombra nem ícone emoji.
+- **A cortina é a única grande massa de cor.** O linho oliva aparece só nas cortinas e na faixa de consignação. O resto é parede nude e tinta.
+- **A peça sempre recortada.** As fotos reais ficam sem fundo (`src/assets/recortes`), penduradas em cabides ou dentro do espelho. A foto original continua disponível na página da peça ("Foto original").
+- **IA com honestidade.** A modelo do Provador IA sempre traz o selo "Simulação por IA", e a peça real aparece ao lado, no espelho.
+- **Latão como acabamento:** varão da cortina, tubo da arara, cabide e moldura do espelho.
 
 ## Tokens (`src/index.css`)
 | Token | Valor | Uso |
 |---|---|---|
-| `--papel` | `#efe6d6` | fundo |
-| `--papel-claro` | `#f8f2e7` | etiquetas, campos |
-| `--papel-escuro` | `#e3d6c1` | fundo de foto carregando |
-| `--tinta` | `#2f2017` | texto, botão principal, rodapé |
-| `--tinta-suave` | `#5c4737` | texto secundário (≥ 6:1 sobre o papel) |
-| `--marrom` | `#633922` | marrom da logo, hover dos botões |
-| `--oliva` | `#8f8c22` | cordão, borboleta, numerais (só decorativo) |
-| `--oliva-escuro` | `#55531a` | links, região de consignação, chips marcados |
-| `--carimbo` | `#7a3420` | carimbo "Vendida" |
-| `--linha` | `#d3c3aa` | réguas e bordas |
-| `--raio` | `6px` | cantos de papel; pílula só nos chips |
+| `--parede` | `#f2ebe1` | fundo |
+| `--parede-clara` | `#faf6f0` | superfícies, gaveta, etiquetas |
+| `--parede-funda` | `#e6dbcb` | fundo da cabine |
+| `--linho` / `--linho-escuro` / `--linho-claro` | `#6b6830` / `#4f4d1f` / `#8c8946` | cortinas, ênfase em itálico, hover de botão |
+| `--latao` / `--latao-escuro` | `#b08d4f` / `#8a6c36` | varões, araras, cabides, moldura do espelho, rótulos pequenos |
+| `--tinta` / `--tinta-suave` | `#2a1f18` / `#5e4c3f` | texto, botões |
+| `--raio` | `4px` | etiquetas e botões; arco só no espelho |
 
 ## Tipografia
-- **Cartaz:** Abril Fatface (`@fontsource/abril-fatface`), para títulos, preços, numerais e o menu do celular. É uma fat face de cartaz de tipografia de madeira, parente do traço de alto contraste da logo.
-- **Texto e interface:** Figtree Variable (`@fontsource-variable/figtree`), pesos 400 a 700.
-- Títulos com `text-wrap: balance`; tamanho máximo de 6rem.
+- **Títulos:** Bodoni Moda Variable (`@fontsource-variable/bodoni-moda`, com eixo óptico e itálico). Peso 500. O *itálico em linho* marca a palavra que importa ("ser *novo*", "nos *provadores*").
+- **Texto e interface:** Figtree Variable.
+- **Rótulos pequenos** (provador, código, Instagram): caixa alta, espaçamento de 0,14em, cor de latão escuro.
 
 ## Componentes
-- **Marca** (`src/components/Marca.jsx`): `LogoHorizontal`, `Borboleta` e `Simbolo`, vetorizados da logo oficial e coloridos via `currentColor`.
-- **Cordão** (`features/cordel/Cordao.jsx`): o SVG do cordão é recalculado pela posição das peças e termina na cauda da borboleta. No celular rola de lado com o dedo.
-- **Peça pendurada:** prendedor, foto 3:4, etiqueta de papel levemente girada (código, tamanho, título, preço em letra de cartaz) e botão "Pôr na sacola". Estados: disponível, na sacola, reservada (carimbo oliva), vendida (carimbo marrom com a foto dessaturada).
-- **Carimbo:** "cai" sobre a foto uma única vez, quando a peça aparece na tela.
-- **Botões:** `.botao` (tinta chapada), `.botao--vazado` e `.botao--papel` (sobre o oliva).
-- **Avise-me:** faixa no rodapé que abre o formulário para cima, sem bloquear a tela, e a página própria `/avise-me`.
+- **Provador** (`features/provador/Provador.jsx`), com dois modos. Em `abertura`, a cortina se abre sozinha ao carregar. Em `rolagem`, a seção tem 190svh, o palco fica fixo na tela e a cortina abre conforme a rolagem (`--p` vai de 0 a 1 e o CSS deriva `--abre` e `--mostra`).
+- **Espelho em arco:** moldura dupla de latão e um único reflexo diagonal.
+- **Peça no cabide** (`features/arara/PecaNoCabide.jsx`) e **Arara** horizontal com balanço ao arrastar. No catálogo, a grade `.araras` desenha um tubo de latão por fileira.
+- **Botão "Levar esta"** (`features/sacola/BotaoLevar.jsx`): a peça voa até a sacola (`voarParaSacola.js`, com a Web Animations API) e o ícone dá um pulo.
+- **Gaveta da sacola** (`features/sacola/Gaveta.jsx`): um `<dialog>` que desliza da direita.
 
 ## Movimento
-- **Assinatura:** o balanço do cordão. Ao arrastar, as peças giram até ±5° pelo prendedor e voltam com uma leve sobra de mola (`--mola`). É intencional, porque o pêndulo passa do ponto. É o único lugar onde se usa essa curva.
-- O resto usa `--ease` (ease-out exponencial). Com `prefers-reduced-motion` ativado, todo o movimento é desligado.
+- **Assinatura:** as cortinas guiadas pela rolagem e a peça que voa para a sacola.
+- **Mola (`--mola`):** usada só no balanço dos cabides e no pulo da sacola. É intencional, porque um pêndulo passa do ponto. O detector marca isso como aviso, e foi aceito.
+- **Entradas:** `.revelar`, um assentamento suave. O conteúdo já é visível sem JavaScript.
+- **Troca de página:** View Transitions (`viewTransition` nos links do React Router).
+- Com `prefers-reduced-motion`, a cortina já aparece aberta e não há voo nem animações.
+
+## Avisos aceitos do detector
+- `bounce-easing`: a curva `--mola`, explicada acima.
+- `side-tab` em `.consigne::before`: é o varão de latão sobre a faixa de linho, um objeto do mundo, não uma faixa decorativa.
 
 ## Acessibilidade
-- Foco visível em oliva-escuro. Alvos de toque com 44px ou mais. Link "Pular para o conteúdo".
-- O cordão é uma região rolável, focável e com rótulo. A foto é decorativa e o título da peça é o link.
+- Foco visível, alvos de toque com 44px ou mais, link "Pular para o conteúdo".
+- Texto alternativo diz o que é real ("foto real da peça") e o que é simulação ("modelo gerada por IA").
+- A gaveta usa um `<dialog>` nativo: foco preso enquanto aberta, Esc fecha.

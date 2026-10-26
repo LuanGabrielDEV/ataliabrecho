@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, ShoppingBag, X } from 'lucide-react'
-import { siInstagram, siWhatsapp } from 'simple-icons'
+import { siInstagram, siWhatsapp } from './iconesMarca'
 import { LogoHorizontal } from './Marca'
 import { useSacola } from '../features/sacola/Sacola'
 import { CONTATO, linkWhatsapp } from '../config'
@@ -22,13 +22,13 @@ export function IconeMarca({ icone, tamanho = 20 }) {
 }
 
 export default function Cabecalho() {
-  const { itens, aviso } = useSacola()
+  const { itens, aviso, abrirGaveta } = useSacola()
   const [aberto, setAberto] = useState(false)
 
   return (
     <header className="cabecalho">
       <div className="cabecalho__barra conteiner">
-        <Link to="/" className="cabecalho__logo">
+        <Link to="/" className="cabecalho__logo" viewTransition>
           <LogoHorizontal titulo="Atalia Brechó" />
         </Link>
 
@@ -36,7 +36,7 @@ export default function Cabecalho() {
           <ul>
             {LINKS.map((l) => (
               <li key={l.to}>
-                <NavLink to={l.to} onClick={() => setAberto(false)}>{l.texto}</NavLink>
+                <NavLink to={l.to} onClick={() => setAberto(false)} viewTransition>{l.texto}</NavLink>
               </li>
             ))}
           </ul>
@@ -61,10 +61,16 @@ export default function Cabecalho() {
           >
             <IconeMarca icone={siInstagram} />
           </a>
-          <Link to="/sacola" className="cabecalho__icone cabecalho__sacola" aria-label={`Sacola, ${itens.length} ${itens.length === 1 ? 'peça' : 'peças'}`}>
-            <ShoppingBag size={22} strokeWidth={1.6} aria-hidden="true" />
+          <button
+            type="button"
+            className="cabecalho__icone cabecalho__sacola"
+            onClick={abrirGaveta}
+            onAnimationEnd={(e) => e.currentTarget.classList.remove('pulo')}
+            aria-label={`Abrir sacola, ${itens.length} ${itens.length === 1 ? 'peça' : 'peças'}`}
+          >
+            <ShoppingBag size={22} strokeWidth={1.5} aria-hidden="true" />
             {itens.length > 0 && <span className="cabecalho__contador" aria-hidden="true">{itens.length}</span>}
-          </Link>
+          </button>
           <button
             type="button"
             className="cabecalho__icone cabecalho__menu"
@@ -81,7 +87,10 @@ export default function Cabecalho() {
       <div className="cabecalho__aviso" role="status" aria-live="polite">
         {aviso && (
           <p key={aviso.id}>
-            {aviso.texto} <Link to="/sacola">Ver sacola</Link>
+            {aviso.texto}{' '}
+            <button type="button" onClick={abrirGaveta}>
+              Ver sacola
+            </button>
           </p>
         )}
       </div>

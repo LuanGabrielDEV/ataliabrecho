@@ -2,7 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--papel);
+  background: rgb(242 235 225 / 0.86);
+  backdrop-filter: saturate(1.2) blur(12px);
   border-bottom: 1px solid var(--linha);
 }
 
@@ -78,8 +79,8 @@
   height: 18px;
   padding: 0 4px;
   border-radius: 9px;
-  background: var(--oliva-escuro);
-  color: var(--papel-claro);
+  background: var(--linho);
+  color: var(--parede-clara);
   font-size: 0.6875rem;
   font-weight: 700;
   line-height: 18px;
@@ -113,9 +114,28 @@
   animation: aviso-entra 0.4s var(--ease);
 }
 
-.cabecalho__aviso a {
-  color: #e3dc8a;
+.cabecalho__aviso button {
+  margin-left: 0.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   font-weight: 650;
+  color: #e8d9a9;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.cabecalho__sacola.pulo {
+  animation: sacola-pula 0.55s var(--mola);
+}
+
+@keyframes sacola-pula {
+  40% {
+    scale: 1.28;
+    rotate: -8deg;
+  }
 }
 
 @keyframes aviso-entra {
@@ -157,9 +177,9 @@
   .cabecalho__nav a {
     display: block;
     padding: 0.9rem 0;
-    font-family: var(--fonte-cartaz);
-    font-weight: 400;
-    font-size: 1.75rem;
+    font-family: var(--fonte-titulo);
+    font-weight: 500;
+    font-size: 2rem;
     border-bottom: 1px solid var(--linha);
   }
 }

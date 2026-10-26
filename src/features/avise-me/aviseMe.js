@@ -1,4 +1,4 @@
-import { supabase, modoDemonstracao } from '../../lib/supabase'
+import { obterSupabase, modoDemonstracao } from '../../lib/supabase'
 
 export const VERSAO_POLITICA = '2026-10'
 
@@ -63,6 +63,7 @@ export async function registrarAviso({ nome, whatsapp, tamanhos, categorias, con
     return 'novo'
   }
 
+  const supabase = await obterSupabase()
   const { data, error } = await supabase.rpc('registrar_aviso', payload)
   if (error) {
     if (!navigator.onLine) throw new Error('Parece que você está sem internet. Confira a conexão e tente de novo.')

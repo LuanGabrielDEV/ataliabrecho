@@ -44,7 +44,9 @@ Cada peça é única e passa pela curadoria de uma bióloga que defende o consum
 - Nome: Atalia Brechó. Logo: o "a" em forma de gota com uma borboleta em traço contínuo, nas versões verde-oliva, marrom, bege, dourado, preto e branco (`Logomarca Vetorizada/`).
 - Estética pedida no briefing: minimalista, feminina, acolhedora e contemporânea; bege, nude, tons terrosos e verde-oliva.
 - Mensagens: "Moda com propósito.", "O novo nem sempre precisa ser novo." e "Cada peça pode ganhar uma nova história."
-- Fotos geradas por IA sempre aparecem depois da foto real, com o selo "Simulação por IA".
+- Fotos geradas por IA (Provador IA) sempre com o selo "Simulação por IA" e com a peça real recortada ao lado (no espelho).
+- Fotos das peças exibidas recortadas, sem o fundo; a foto original continua disponível na página da peça.
+- Instagram @ataliabrecho com destaque no site (pedido explícito).
 
 ## Evidence on Hand
 

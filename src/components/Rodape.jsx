@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { siFacebook, siInstagram, siWhatsapp } from 'simple-icons'
+import { siFacebook, siInstagram, siWhatsapp } from './iconesMarca'
 import { Mail } from 'lucide-react'
 import { LogoHorizontal } from './Marca'
 import { IconeMarca } from './Cabecalho'
