@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { siWhatsapp } from '../components/iconesMarca'
 import { IconeMarca } from '../components/Cabecalho'
 import { TAMANHOS_ORDEM } from '../data/pecasDemo'
-import { normalizarPeca } from '../data/catalogo'
+import { normalizarPeca } from '../data/catalogoBase'
 import { formatarPreco } from '../config'
 import { mensagemErro, supabaseAdmin } from './supabaseAdmin'
 
@@ -53,6 +53,8 @@ export default function Avisos() {
   }, [pecaId])
 
   useEffect(() => {
+    // Recarrega ao trocar de peça; o indicador de carregamento precisa ligar antes da busca.
+    // oxlint-disable-next-line react/set-state-in-effect
     carregar()
   }, [carregar])
 
@@ -72,6 +74,8 @@ export default function Avisos() {
 
   async function avisar(lead) {
     window.open(`https://wa.me/${lead.whatsapp}?text=${encodeURIComponent(mensagem(lead))}`, '_blank', 'noopener')
+    // Roda em clique (não na renderização): a regra de pureza aponta falso positivo.
+    // oxlint-disable-next-line react/purity
     const agora = new Date().toISOString()
     setLeads((ls) => ls.map((l) => (l.id === lead.id ? { ...l, ultimo_aviso_em: agora } : l)))
     try {

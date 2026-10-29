@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Plus, Search } from 'lucide-react'
 import { mensagemErro, supabaseAdmin } from './supabaseAdmin'
-import { normalizarPeca } from '../data/catalogo'
+import { normalizarPeca } from '../data/catalogoBase'
 import { formatarPreco } from '../config'
 import { STATUS } from './status'
 
@@ -34,6 +34,8 @@ export default function ListaPecas() {
   }, [])
 
   useEffect(() => {
+    // O setState acontece depois do await (busca de dados), não de forma síncrona: falso positivo.
+      // oxlint-disable-next-line react/set-state-in-effect
     carregar()
   }, [carregar])
 

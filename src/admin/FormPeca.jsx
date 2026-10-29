@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ArrowDown, ArrowUp, BellRing, ChevronLeft, ImagePlus, Trash2 } from 'lucide-react'
 import { CATEGORIAS, CONDICOES, CORES, TAMANHOS_ORDEM } from '../data/pecasDemo'
-import { urlFoto } from '../data/catalogo'
+import { urlFoto } from '../data/catalogoBase'
 import { mensagemErro, prepararFoto, supabaseAdmin } from './supabaseAdmin'
 import { STATUS } from './status'
 

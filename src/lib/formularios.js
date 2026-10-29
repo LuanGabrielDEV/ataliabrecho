@@ -4,7 +4,7 @@ import { normalizarWhatsapp } from '../features/avise-me/aviseMe'
 export const VERSAO_TERMOS_CONSIGNACAO = '2026-10'
 
 const ERROS = {
-  muitos_envios: 'Recebemos vários envios seguidos deste contato. Aguarde alguns minutos ou fale com a gente no WhatsApp.',
+  muitos_envios: 'Recebemos muitos envios seguidos. Aguarde alguns minutos ou fale com a gente no WhatsApp.',
 }
 
 async function chamar(funcao, payload) {

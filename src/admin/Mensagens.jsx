@@ -53,6 +53,8 @@ export default function Mensagens() {
   }, [])
 
   useEffect(() => {
+    // O setState acontece depois do await (busca de dados), não de forma síncrona: falso positivo.
+      // oxlint-disable-next-line react/set-state-in-effect
     carregar()
   }, [carregar])
 

@@ -43,7 +43,7 @@ export function validar({ nome, whatsapp, tamanhos, consentimento }) {
 }
 
 /**
- * Envia o cadastro. Resolve com 'novo' | 'atualizado'.
+ * Envia o cadastro. Resolve com 'ok' (o servidor não revela se o número já existia).
  * Rejeita com Error cuja `message` já vem pronta para mostrar.
  */
 export async function registrarAviso({ nome, whatsapp, tamanhos, categorias, consentimento, origem }) {
@@ -60,12 +60,15 @@ export async function registrarAviso({ nome, whatsapp, tamanhos, categorias, con
   if (modoDemonstracao) {
     await new Promise((r) => setTimeout(r, 700))
     console.info('[Avise-me] modo demonstração, nada foi salvo:', payload)
-    return 'novo'
+    return 'ok'
   }
 
   const supabase = await obterSupabase()
   const { data, error } = await supabase.rpc('registrar_aviso', payload)
   if (error) {
+    if (error.message?.includes('muitos_envios')) {
+      throw new Error('Estamos recebendo muitos cadastros agora. Tente de novo em alguns minutos ou fale com a gente no WhatsApp.')
+    }
     if (!navigator.onLine) throw new Error('Parece que você está sem internet. Confira a conexão e tente de novo.')
     throw new Error('Não conseguimos salvar agora. Tente de novo em instantes ou fale com a gente no WhatsApp.')
   }

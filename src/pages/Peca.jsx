@@ -7,7 +7,7 @@ import '../features/catalogo/card-peca.css'
 import BotaoLevar from '../features/sacola/BotaoLevar'
 import { IconeMarca } from '../components/Cabecalho'
 import { CATEGORIAS, CONDICOES } from '../data/pecasDemo'
-import { useCatalogo } from '../data/catalogo'
+import { useCatalogo } from '../data/catalogoBase'
 import { formatarPreco, linkWhatsapp } from '../config'
 import './peca.css'
 

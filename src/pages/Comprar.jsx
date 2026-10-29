@@ -4,7 +4,7 @@ import { SlidersHorizontal, X } from 'lucide-react'
 import CardPeca from '../features/catalogo/CardPeca'
 import '../features/catalogo/card-peca.css'
 import { CATEGORIAS, CONDICOES, CORES } from '../data/pecasDemo'
-import { useCatalogo } from '../data/catalogo'
+import { useCatalogo } from '../data/catalogoBase'
 import {
   FAIXAS_PRECO,
   ORDENS,

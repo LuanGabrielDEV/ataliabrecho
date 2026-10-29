@@ -42,7 +42,11 @@ function NovaSenha({ aoTerminar }) {
 }
 
 function useSessao() {
-  const [estado, setEstado] = useState({ carregando: true, usuario: null, admin: false, erro: null })
+  const [estado, setEstado] = useState(
+    modoDemonstracao
+      ? { carregando: false, usuario: null, admin: false, erro: 'Supabase não configurado.' }
+      : { carregando: true, usuario: null, admin: false, erro: null },
+  )
   const [recuperando, setRecuperando] = useState(false)
 
   const verificar = useCallback(async (sessao) => {
@@ -61,10 +65,7 @@ function useSessao() {
   }, [])
 
   useEffect(() => {
-    if (modoDemonstracao) {
-      setEstado({ carregando: false, usuario: null, admin: false, erro: 'Supabase não configurado.' })
-      return
-    }
+    if (modoDemonstracao) return
     let inscricao
     supabaseAdmin().then(async (sb) => {
       const { data } = await sb.auth.getSession()

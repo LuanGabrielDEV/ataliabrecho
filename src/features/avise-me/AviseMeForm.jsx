@@ -27,7 +27,6 @@ export default function AviseMeForm({ origem = 'site', onSucesso, tituloId }) {
   const [dados, setDados] = useState(VAZIO)
   const [erros, setErros] = useState({})
   const [estado, setEstado] = useState('editando') // editando | enviando | sucesso
-  const [resultado, setResultado] = useState(null)
   const [erroEnvio, setErroEnvio] = useState('')
 
   const atualizar = (campo, valor) => {
@@ -52,10 +51,9 @@ export default function AviseMeForm({ origem = 'site', onSucesso, tituloId }) {
 
     setEstado('enviando')
     try {
-      const r = await registrarAviso({ ...dados, origem })
-      setResultado(r)
+      await registrarAviso({ ...dados, origem })
       setEstado('sucesso')
-      onSucesso?.(r)
+      onSucesso?.()
     } catch (e) {
       setErroEnvio(e.message)
       setEstado('editando')
@@ -67,7 +65,7 @@ export default function AviseMeForm({ origem = 'site', onSucesso, tituloId }) {
     return (
       <div className="am-sucesso" role="status" tabIndex={-1} ref={(el) => el?.focus()}>
         <p className="am-sucesso__titulo">
-          {resultado === 'atualizado' ? `Atualizado, ${primeiroNome}!` : `Combinado, ${primeiroNome}!`}
+          {`Combinado, ${primeiroNome}!`}
         </p>
         <p>
           Quando chegar peça no tamanho {listarComE(dados.tamanhos)}, você recebe o aviso no WhatsApp.

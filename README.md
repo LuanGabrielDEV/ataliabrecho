@@ -16,6 +16,7 @@ npm run dev
    - `supabase/migrations/20261025_001_admin_e_leads.sql`
    - `supabase/migrations/20261026_002_pecas_e_fotos.sql`
    - `supabase/migrations/20261026_003_formularios.sql`
+   - `supabase/migrations/20261029_004_seguranca.sql` (privacidade das peças consignadas, Avise-me e limites de envio)
 2. Em **Authentication > Users > Add user**, crie o usuário da Wirlla (e-mail e senha) e marque **Auto Confirm User**.
 3. No **SQL Editor**, transforme esse usuário em administradora:
    ```sql
@@ -23,6 +24,7 @@ npm run dev
    select id, 'Wirlla Dantas' from auth.users where email = 'ataliabrecho@gmail.com';
    ```
 4. Em **Authentication > URL Configuration**, coloque o endereço do site (ex.: `https://ataliabrecho.netlify.app`) em *Site URL*. Isso faz o link de "Esqueci a senha" funcionar.
+5. Em **Authentication > Sign In / Providers**, desligue **Allow new users to sign up**. Só a Wirlla deve ter conta.
 
 ## Painel da Wirlla: `/admin`
 
