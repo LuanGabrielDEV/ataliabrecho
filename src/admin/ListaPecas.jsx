@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Plus, Search } from 'lucide-react'
 import { mensagemErro, supabaseAdmin } from './supabaseAdmin'
-import { normalizarPeca } from '../data/catalogoBase'
+import { FONTE_CATALOGO, normalizarPeca } from '../data/catalogoBase'
 import { formatarPreco } from '../config'
 import { STATUS } from './status'
 
@@ -83,6 +83,13 @@ export default function ListaPecas() {
           <Plus size={18} aria-hidden="true" /> Nova peça
         </Link>
       </div>
+
+      {FONTE_CATALOGO === 'demo' && (
+        <p className="adm-aviso" role="status">
+          <strong>Atenção:</strong> o site ainda está mostrando as peças de demonstração. As peças cadastradas aqui só aparecem na
+          vitrine depois que a variável <code>VITE_CATALOGO</code> for trocada para <code>supabase</code> (na Vercel, com novo deploy).
+        </p>
+      )}
 
       <div className="adm-ferramentas">
         <label className="adm-busca">

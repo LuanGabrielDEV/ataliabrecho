@@ -17,6 +17,7 @@ npm run dev
    - `supabase/migrations/20261026_002_pecas_e_fotos.sql`
    - `supabase/migrations/20261026_003_formularios.sql`
    - `supabase/migrations/20261029_004_seguranca.sql` (privacidade das peças consignadas, Avise-me e limites de envio)
+   - `supabase/migrations/20261029_005_codigo_manual.sql` (aceita o ID informado na planilha de importação sem repetir códigos)
 2. Em **Authentication > Users > Add user**, crie o usuário da Wirlla (e-mail e senha) e marque **Auto Confirm User**.
 3. No **SQL Editor**, transforme esse usuário em administradora:
    ```sql
@@ -47,6 +48,17 @@ Quando a Wirlla cadastrar as primeiras peças, troque para `supabase`, no `.env.
 1. Importe o repositório do GitHub ("Add New > Project"). O framework Vite é detectado sozinho.
 2. O `vercel.json` já define o build, o redirecionamento das rotas (`/admin`, `/peca/...`) e o cache dos arquivos estáticos.
 3. Em **Settings > Environment Variables**, cadastre `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` e `VITE_CATALOGO`. Depois de alterar, faça **Redeploy** (as variáveis `VITE_*` entram no build).
+
+## Importar várias peças de uma vez
+
+No painel, aba **Importar**:
+
+1. Baixe o modelo (`public/modelo-importacao-pecas.xlsx`): aba "Peças" com listas suspensas e aba "Instruções".
+2. Uma peça por linha. A coluna **ID** é opcional (vazia = o sistema gera A128, A129...).
+3. Salve as fotos com o ID no nome: `A127.jpg` (principal), `A127_2.jpg`, `A127_3.jpg`. Sufixos `_recorte` (sem fundo) e `_ia` (Provador IA). Peça sem ID: `linha5.jpg` (número da linha na planilha) ou o título exato.
+4. Escolha a planilha e as fotos (ou a pasta) e confira a prévia. Só depois de confirmar as peças são gravadas.
+
+Regras: sem foto real a linha não entra; ID que já existe é pulado (nada é sobrescrito); até 1000 linhas por planilha. A lógica fica em `src/admin/importacao.js` e a tela em `src/admin/Importar.jsx`.
 
 ## Onde mexer
 
