@@ -60,6 +60,15 @@ No painel, aba **Importar**:
 
 Regras: sem foto real a linha não entra; ID que já existe é pulado (nada é sobrescrito); até 1000 linhas por planilha. A lógica fica em `src/admin/importacao.js` e a tela em `src/admin/Importar.jsx`.
 
+## Fotos sem fundo (recorte)
+
+O site mostra, nos cartões, a foto recortada sobre o fundo bege; na página da peça, a original. Dois jeitos de gerar o recorte, ambos gratuitos e mantendo a foto original:
+
+- **No painel (navegador):** no cadastro da peça, botão **Tirar o fundo** em cada foto ou **Tirar o fundo de todas as fotos**; na aba **Importar**, a opção "Tirar o fundo da foto principal de cada peça". É feito no aparelho, uma foto por vez, e baixa um modelo de 40 a 80 MB na primeira vez. Usa `@imgly/background-removal`, de licença **AGPL-3.0**.
+- **Script em lote (no seu computador):** `python scripts/recortar-fotos.py fotos/ recortes/` gera `A127_recorte.png` para cada foto principal, prontos para escolher junto das originais na aba Importar. Instalação: `pip install "rembg[cpu,cli]" pillow`. O script só aceita modelos de código livre (`isnet-general-use`, `birefnet-general`, `u2net`); o modelo `bria-rmbg` é proibido para uso comercial e fica bloqueado.
+
+Recorte automático erra em renda, tule, alças finas e peça no cabide: sempre confira o resultado.
+
 ## Onde mexer
 
 ```

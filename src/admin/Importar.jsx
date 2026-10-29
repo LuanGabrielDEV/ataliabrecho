@@ -4,6 +4,7 @@ import { Download, FileSpreadsheet, FolderOpen, Images } from 'lucide-react'
 import { formatarPreco } from '../config'
 import { mensagemErro, prepararFoto, supabaseAdmin } from './supabaseAdmin'
 import { EXTENSOES, classificar, lerPlanilha, ligarFotos } from './importacao'
+import { mensagemRecorte, recorteDisponivel, removerFundo } from './recorte'
 
 const ROTULO = {
   pronta: 'Pronta',
@@ -31,7 +32,7 @@ async function buscarCodigosExistentes() {
 }
 
 /** Grava uma peça e as fotos dela. Se algo falhar no meio, desfaz tudo da peça. */
-async function importarPeca(item) {
+async function importarPeca(item, { recortar = false } = {}) {
   const sb = await supabaseAdmin()
   const { data: peca, error } = await sb.from('pecas').insert(item.dados).select('id, codigo').single()
   if (error) {
@@ -39,9 +40,25 @@ async function importarPeca(item) {
     throw error
   }
 
+  // recorte automático: a primeira foto real sem fundo ganha uma irmã recortada (a original continua).
+  // Se o recorte falhar, a peça é importada do mesmo jeito e o aviso aparece na tabela.
+  let fotos = item.fotos
+  let aviso = null
+  if (recortar && !fotos.some((f) => f.recortada && !f.ia)) {
+    const base = fotos.find((f) => !f.ia && !f.recortada)
+    if (base) {
+      try {
+        const recorte = await removerFundo(base.arquivo)
+        fotos = [...fotos, { arquivo: recorte, recortada: true, ia: false, extensao: 'png' }]
+      } catch (e) {
+        aviso = mensagemRecorte(e)
+      }
+    }
+  }
+
   const enviados = []
   try {
-    for (const [ordem, f] of item.fotos.entries()) {
+    for (const [ordem, f] of fotos.entries()) {
       const blob = await prepararFoto(f.arquivo)
       const ext = blob.type === 'image/webp' ? 'webp' : f.extensao || 'jpg'
       const caminho = `${peca.id}/${Date.now()}-${ordem}.${ext}`
@@ -61,7 +78,7 @@ async function importarPeca(item) {
       })
       if (erroFoto) throw erroFoto
     }
-    return { ok: true, codigo: peca.codigo }
+    return { ok: true, codigo: peca.codigo, aviso }
   } catch (e) {
     // não deixa peça pela metade: apaga os arquivos e a peça (as linhas de foto caem junto)
     try {
@@ -87,6 +104,7 @@ export default function Importar() {
   const [fase, setFase] = useState('preparar') // preparar | importando | pronto
   const [resultado, setResultado] = useState({}) // linha -> { situacao, motivo, codigo }
   const [mostrarOrfas, setMostrarOrfas] = useState(false)
+  const [recortarAuto, setRecortarAuto] = useState(false)
 
   // a pasta precisa do atributo não padrão webkitdirectory
   useEffect(() => {
@@ -161,13 +179,13 @@ export default function Importar() {
         const item = fila[proximo++]
         let r
         try {
-          r = await importarPeca(item)
+          r = await importarPeca(item, { recortar: recortarAuto })
         } catch (e) {
           r = { ok: false, motivo: mensagemErro(e) }
         }
         setResultado((atual) => ({
           ...atual,
-          [item.linha]: r.ok ? { situacao: 'importada', codigo: r.codigo } : { situacao: 'falhou', motivo: r.motivo },
+          [item.linha]: r.ok ? { situacao: 'importada', codigo: r.codigo, aviso: r.aviso } : { situacao: 'falhou', motivo: r.motivo },
         }))
       }
     }
@@ -324,6 +342,7 @@ export default function Importar() {
                           {ROTULO[situacao]}
                         </span>
                         {r?.motivo && <span className="adm-imp-motivo">{r.motivo}</span>}
+                        {r?.aviso && <span className="adm-imp-motivo adm-imp-motivo--aviso">{r.aviso}</span>}
                         {!r && i.situacao === 'sem-foto' && <span className="adm-imp-motivo">Nenhuma foto real com este nome.</span>}
                         {!r && i.situacao === 'existe' && <span className="adm-imp-motivo">Este ID já está no site; será pulada.</span>}
                         {!r && i.erros.map((m) => (
@@ -351,6 +370,19 @@ export default function Importar() {
                 </div>
               ) : (
                 <>
+                  {recorteDisponivel() && (
+                    <label className="adm-check adm-imp-recorte">
+                      <input type="checkbox" checked={recortarAuto} onChange={(e) => setRecortarAuto(e.target.checked)} />
+                      <span>
+                        Tirar o fundo da foto principal de cada peça (a original é mantida)
+                        <small>
+                          Feito neste aparelho, uma foto por vez: leva alguns segundos por peça, e na primeira vez baixa um modelo de 40 a 80 MB.
+                          Confira o resultado depois no painel. Usa a biblioteca @imgly/background-removal (AGPL-3.0); o código do site é público em{' '}
+                          <a href="https://github.com/LuanGabrielDEV/ataliabrecho" target="_blank" rel="noreferrer">github.com/LuanGabrielDEV/ataliabrecho</a>.
+                        </small>
+                      </span>
+                    </label>
+                  )}
                   <button type="button" className="adm-botao" onClick={importar} disabled={contagem.pronta === 0}>
                     Importar {contagem.pronta} {contagem.pronta === 1 ? 'peça' : 'peças'}
                   </button>

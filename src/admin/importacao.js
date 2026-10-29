@@ -324,8 +324,8 @@ export function ligarFotos(itens, arquivos) {
   }
 
   for (const lista of fotosPorLinha.values()) {
-    // fotos reais primeiro, depois as do Provador IA; dentro de cada grupo, pela ordem do nome
-    lista.sort((a, b) => Number(a.ia) - Number(b.ia) || a.ordem - b.ordem || a.arquivo.name.localeCompare(b.arquivo.name, 'pt-BR', { numeric: true }))
+    // fotos reais primeiro, depois as do Provador IA; na mesma posição, a original vem antes do recorte
+    lista.sort((a, b) => Number(a.ia) - Number(b.ia) || a.ordem - b.ordem || Number(a.recortada) - Number(b.recortada) || a.arquivo.name.localeCompare(b.arquivo.name, 'pt-BR', { numeric: true }))
   }
   return { fotosPorLinha, orfas }
 }

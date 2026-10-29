@@ -1010,3 +1010,49 @@
   height: 0.75rem;
   accent-color: var(--oliva);
 }
+
+/* ---------- Recorte de fundo ---------- */
+.adm-recorte {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: start;
+  margin-bottom: 0.9rem;
+}
+
+.adm-recorte p {
+  margin: 0;
+}
+
+.adm-fotos__recortar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-height: 36px;
+  padding: 0 0.6rem;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: var(--branco);
+  color: var(--oliva-escura);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.adm-fotos__recortar:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.adm-imp-recorte {
+  align-items: flex-start;
+  max-width: 40rem;
+}
+
+.adm-imp-recorte small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.8125rem;
+  color: var(--tinta-suave);
+}

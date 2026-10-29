@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ArrowDown, ArrowUp, BellRing, ChevronLeft, ImagePlus, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, BellRing, ChevronLeft, ImagePlus, Scissors, Trash2 } from 'lucide-react'
 import { CATEGORIAS, CONDICOES, CORES, TAMANHOS_ORDEM } from '../data/pecasDemo'
 import { urlFoto } from '../data/catalogoBase'
 import { mensagemErro, prepararFoto, supabaseAdmin } from './supabaseAdmin'
 import { STATUS } from './status'
+import { mensagemRecorte, recorteDisponivel, removerFundo } from './recorte'
 
 const hoje = () => new Date().toISOString().slice(0, 10)
 
@@ -41,6 +42,10 @@ export default function FormPeca() {
   const [salvando, setSalvando] = useState(false)
   const [erro, setErro] = useState('')
   const [salvoId, setSalvoId] = useState(null)
+  // recorte automático: chaves das fotos em andamento, progresso e erro
+  const [recortando, setRecortando] = useState([])
+  const [progressoRecorte, setProgressoRecorte] = useState(null)
+  const [erroRecorte, setErroRecorte] = useState('')
 
   useEffect(() => {
     if (nova) return
@@ -100,12 +105,58 @@ export default function FormPeca() {
     })
   }
 
+
+  /** Gera uma foto sem fundo a partir de uma foto real e a coloca logo depois dela. A original continua. */
+  async function recortar(chave) {
+    const origem = fotos.find((f) => (f.id || f.previa) === chave)
+    if (!origem || origem.recortada || origem.gerada_por_ia) return
+    setErroRecorte('')
+    setRecortando((r) => [...r, chave])
+    try {
+      let arquivo = origem.arquivo
+      if (!arquivo) {
+        const resposta = await fetch(origem.previa)
+        if (!resposta.ok) throw new Error('Não consegui abrir a foto salva.')
+        arquivo = new File([await resposta.blob()], origem.caminho?.split('/').pop() || 'foto.webp')
+      }
+      const recorte = await removerFundo(arquivo, { aoProgredir: setProgressoRecorte })
+      setFotos((fs) => {
+        const i = fs.findIndex((f) => (f.id || f.previa) === chave)
+        const nova = {
+          arquivo: recorte,
+          previa: URL.createObjectURL(recorte),
+          recortada: true,
+          gerada_por_ia: false,
+          recorteDe: chave,
+        }
+        const c = [...fs]
+        c.splice(i < 0 ? c.length : i + 1, 0, nova)
+        return c
+      })
+    } catch (e) {
+      setErroRecorte(mensagemRecorte(e))
+    } finally {
+      setRecortando((r) => r.filter((k) => k !== chave))
+      setProgressoRecorte(null)
+    }
+  }
+
+  async function recortarTodas() {
+    const jaRecortadas = new Set(fotos.map((f) => f.recorteDe).filter(Boolean))
+    const alvo = fotos.filter((f) => !f.recortada && !f.gerada_por_ia && !jaRecortadas.has(f.id || f.previa))
+    // em fila, uma de cada vez
+    for (const f of alvo) await recortar(f.id || f.previa)
+  }
+
+  const recortesPossiveis = fotos.some((f) => !f.recortada && !f.gerada_por_ia)
+
   const alternarFoto = (i, campo) =>
     setFotos((fs) => fs.map((f, k) => (k === i ? { ...f, [campo]: !f[campo] } : f)))
 
   async function salvar(e) {
     e.preventDefault()
     setErro('')
+    if (recortando.length) return setErro('Espere o recorte das fotos terminar antes de salvar.')
     if (!dados.titulo.trim()) return setErro('Dê um nome para a peça.')
     if (dados.preco === '' || Number(dados.preco) < 0) return setErro('Informe o preço.')
     if (fotos.filter((f) => !f.gerada_por_ia).length === 0) return setErro('Adicione pelo menos uma foto real da peça.')
@@ -219,6 +270,25 @@ export default function FormPeca() {
             A primeira foto é a principal. Marque <strong>Sem fundo</strong> nas fotos recortadas e <strong>Provador IA</strong>{' '}
             nas fotos geradas por IA: elas aparecem com o selo de simulação.
           </p>
+          {recorteDisponivel() && recortesPossiveis && (
+            <div className="adm-recorte">
+              <button type="button" className="adm-botao adm-botao--vazado" onClick={recortarTodas} disabled={recortando.length > 0}>
+                <Scissors size={18} aria-hidden="true" /> Tirar o fundo de todas as fotos
+              </button>
+              <p className="adm-dica" role="status" aria-live="polite">
+                {recortando.length > 0
+                  ? progressoRecorte?.etapa === 'baixando'
+                    ? `Baixando o recorte automático (só na primeira vez)… ${Math.round(progressoRecorte.fracao * 100)}%`
+                    : 'Recortando… leva alguns segundos por foto.'
+                  : 'Feito no seu aparelho. A foto original é mantida e o recorte entra como uma foto a mais; apague o que não ficar bom.'}
+              </p>
+            </div>
+          )}
+          {erroRecorte && (
+            <p className="adm-erro" role="alert">
+              {erroRecorte}
+            </p>
+          )}
           <ul className="adm-fotos">
             {fotos.map((f, i) => (
               <li key={f.id || f.previa}>
@@ -231,6 +301,17 @@ export default function FormPeca() {
                     <input type="checkbox" checked={f.gerada_por_ia} onChange={() => alternarFoto(i, 'gerada_por_ia')} /> Provador IA
                   </label>
                 </div>
+                {recorteDisponivel() && !f.recortada && !f.gerada_por_ia && (
+                  <button
+                    type="button"
+                    className="adm-fotos__recortar"
+                    onClick={() => recortar(f.id || f.previa)}
+                    disabled={recortando.length > 0}
+                  >
+                    <Scissors size={14} aria-hidden="true" />
+                    {recortando.includes(f.id || f.previa) ? 'Recortando…' : 'Tirar o fundo'}
+                  </button>
+                )}
                 <div className="adm-fotos__acoes">
                   <button type="button" onClick={() => mover(i, -1)} disabled={i === 0} aria-label="Mover foto para antes">
                     <ArrowUp size={16} />
