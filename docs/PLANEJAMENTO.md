@@ -14,10 +14,10 @@
 | Camada | Escolha |
 |---|---|
 | Front | React + Vite + React Router |
-| Hospedagem | Netlify (deploy pelo GitHub) |
+| Hospedagem | Vercel (deploy pelo GitHub) |
 | Banco, fotos e login | Supabase (Postgres + Storage + Auth) |
 | Pagamento | Mercado Pago (Checkout Pro: Pix, cartão e boleto). Conta da Atalia ainda vai ser criada, então a v1 usa **modo de teste** |
-| Funções de servidor | Netlify Functions: criar preferência de pagamento, receber webhook, enviar e-mail dos formulários |
+| Funções de servidor | Vercel Functions (ou Supabase Edge Functions): criar preferência de pagamento, receber webhook, enviar e-mail dos formulários |
 | Atendimento | WhatsApp (links `wa.me` com mensagem pronta) |
 
 ## 3. Escopo

@@ -1,6 +1,6 @@
 # Atalia Brechó: site
 
-React + Vite, Supabase e Netlify. O planejamento completo está em [`docs/PLANEJAMENTO.md`](docs/PLANEJAMENTO.md) e o guia visual em [`DESIGN.md`](DESIGN.md).
+React + Vite, Supabase e Vercel. O planejamento completo está em [`docs/PLANEJAMENTO.md`](docs/PLANEJAMENTO.md) e o guia visual em [`DESIGN.md`](DESIGN.md).
 
 ## Rodar no computador
 
@@ -23,7 +23,7 @@ npm run dev
    insert into public.admins (user_id, nome)
    select id, 'Wirlla Dantas' from auth.users where email = 'ataliabrecho@gmail.com';
    ```
-4. Em **Authentication > URL Configuration**, coloque o endereço do site (ex.: `https://ataliabrecho.netlify.app`) em *Site URL*. Isso faz o link de "Esqueci a senha" funcionar.
+4. Em **Authentication > URL Configuration**, coloque o endereço do site (ex.: `https://ataliabrecho.vercel.app`) em *Site URL*. Isso faz o link de "Esqueci a senha" funcionar.
 5. Em **Authentication > Sign In / Providers**, desligue **Allow new users to sign up**. Só a Wirlla deve ter conta.
 
 ## Painel da Wirlla: `/admin`
@@ -40,13 +40,13 @@ A variável `VITE_CATALOGO` decide de onde vêm as peças do site:
 - `demo` (padrão): peças de demonstração, com as fotos reais e dados de exemplo.
 - `supabase`: as peças cadastradas no painel.
 
-Quando a Wirlla cadastrar as primeiras peças, troque para `supabase`, no `.env.local` e na Netlify.
+Quando a Wirlla cadastrar as primeiras peças, troque para `supabase`, no `.env.local` e na Vercel.
 
-## Publicar na Netlify
+## Publicar na Vercel
 
-1. Importe o repositório do GitHub ("Add new site > Import from Git").
-2. O `netlify.toml` já define o build e o redirecionamento das rotas.
-3. Em **Site settings > Environment variables**, cadastre `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` e `VITE_CATALOGO`.
+1. Importe o repositório do GitHub ("Add New > Project"). O framework Vite é detectado sozinho.
+2. O `vercel.json` já define o build, o redirecionamento das rotas (`/admin`, `/peca/...`) e o cache dos arquivos estáticos.
+3. Em **Settings > Environment Variables**, cadastre `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` e `VITE_CATALOGO`. Depois de alterar, faça **Redeploy** (as variáveis `VITE_*` entram no build).
 
 ## Onde mexer
 

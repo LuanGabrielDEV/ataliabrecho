@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-React + Vite (React Router), deploy na Netlify via GitHub. Supabase (Postgres, Storage, Auth) como banco, fotos e login do painel. Mercado Pago (Checkout Pro) para pagamento, com Netlify Functions para criar a preferência e receber o webhook. O desenvolvedor sobe o código para o próprio repositório no GitHub.
+React + Vite (React Router), deploy na Vercel via GitHub. Supabase (Postgres, Storage, Auth) como banco, fotos e login do painel. Mercado Pago (Checkout Pro) para pagamento, com funções de servidor (Vercel Functions ou Supabase Edge Functions) para criar a preferência e receber o webhook. O desenvolvedor sobe o código para o próprio repositório no GitHub.
 
 ## Users
 

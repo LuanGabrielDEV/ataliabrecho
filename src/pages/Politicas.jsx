@@ -75,7 +75,7 @@ export default function Politicas() {
         <h3>Com quem os dados ficam</h3>
         <p>
           Os dados ficam guardados no Supabase (banco de dados do site). Pagamentos são processados pelo Mercado Pago e o site
-          é hospedado na Netlify. Esses serviços tratam os dados apenas para fazer o site funcionar.
+          é hospedado na Vercel. Esses serviços tratam os dados apenas para fazer o site funcionar.
         </p>
         <h3>Seus direitos</h3>
         <p>
