@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { usePagina } from '../lib/seo'
 import { useLocation } from 'react-router-dom'
 import { CONTATO } from '../config'
 import './politicas.css'
@@ -16,9 +17,10 @@ const SECOES = [
 export default function Politicas() {
   const { hash } = useLocation()
 
-  useEffect(() => {
-    document.title = 'Políticas e termos · Atalia Brechó'
-  }, [])
+  usePagina({
+    titulo: 'Políticas e termos',
+    descricao: 'Privacidade, termos de compra e termos de consignação da Atalia Brechó.',
+  })
 
   useEffect(() => {
     if (!hash) return

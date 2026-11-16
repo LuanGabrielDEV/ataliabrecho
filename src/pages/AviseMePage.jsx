@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { usePagina } from '../lib/seo'
 import { Link } from 'react-router-dom'
 import AviseMeForm from '../features/avise-me/AviseMeForm'
 import { salvarEstadoFaixa } from '../features/avise-me/aviseMe'
@@ -9,9 +9,10 @@ import { LogoHorizontal } from '../components/Marca'
  * ataliabrecho.com.br/avise-me
  */
 export default function AviseMePage() {
-  useEffect(() => {
-    document.title = 'Avise-me no meu tamanho · Atalia Brechó'
-  }, [])
+  usePagina({
+    titulo: 'Avise-me no meu tamanho',
+    descricao: 'Deixe seu WhatsApp e seus tamanhos: a Atalia Brechó avisa quando chegar peça que serve em você.',
+  })
 
   const origem = new URLSearchParams(window.location.search).get('origem') || 'pagina'
 

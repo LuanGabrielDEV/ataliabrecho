@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin
+Disallow: /sacola
+Disallow: /api/
+
+Sitemap: https://ataliabrecho.vercel.app/sitemap.xml

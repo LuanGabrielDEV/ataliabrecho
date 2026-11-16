@@ -1,4 +1,5 @@
-import { useEffect, useId, useMemo, useState } from 'react'
+import { useId, useMemo, useState } from 'react'
+import { usePagina } from '../lib/seo'
 import { Link, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, X } from 'lucide-react'
 import CardPeca from '../features/catalogo/CardPeca'
@@ -106,9 +107,12 @@ export default function Comprar() {
   const mudar = (parcial) => setParams(escreverFiltros({ ...filtros, ...parcial }), { replace: true })
   const limpar = () => setParams(escreverFiltros({ ...lerFiltros(new URLSearchParams()), categoria: filtros.categoria, ordem: filtros.ordem }), { replace: true })
 
-  useEffect(() => {
-    document.title = `${categoria ? categoria.nome : 'Comprar peças'} · Atalia Brechó`
-  }, [categoria])
+  usePagina({
+    titulo: categoria ? categoria.nome : 'Comprar peças',
+    descricao: categoria
+      ? `${categoria.nome} de segunda mão na Atalia Brechó: peças únicas, selecionadas uma a uma, em Paulista/PE.`
+      : 'Vestidos, blusas, calças, moda praia e acessórios de segunda mão. Peças únicas na Atalia Brechó, em Paulista/PE.',
+  })
 
   const disponiveis = pecas.filter((p) => p.status === 'disponivel').length
 

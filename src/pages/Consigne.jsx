@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
+import { usePagina } from '../lib/seo'
 import { Link } from 'react-router-dom'
 import { CheckCircle2 } from 'lucide-react'
 import Perguntas from '../components/Perguntas'
@@ -229,9 +230,10 @@ function Formulario() {
 }
 
 export default function Consigne() {
-  useEffect(() => {
-    document.title = 'Consigne suas peças · Atalia Brechó'
-  }, [])
+  usePagina({
+    titulo: 'Consigne suas peças',
+    descricao: 'Consigne roupas e acessórios na Atalia Brechó: você recebe 50% do valor de venda de cada peça.',
+  })
 
   const perguntas = FAQ.find((g) => g.grupo.startsWith('Consignação'))?.itens || []
 

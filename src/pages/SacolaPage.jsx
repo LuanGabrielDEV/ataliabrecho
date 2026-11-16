@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { usePagina } from '../lib/seo'
 import { Link } from 'react-router-dom'
 import { X } from 'lucide-react'
 import { useSacola } from '../features/sacola/Sacola'
@@ -8,9 +8,7 @@ import './sacola.css'
 export default function SacolaPage() {
   const { itens, total, remover } = useSacola()
 
-  useEffect(() => {
-    document.title = 'Sacola · Atalia Brechó'
-  }, [])
+  usePagina({ titulo: 'Sacola', naoIndexar: true })
 
   return (
     <main id="conteudo" className="sacola conteiner">

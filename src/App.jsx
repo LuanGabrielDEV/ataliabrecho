@@ -15,15 +15,14 @@ import Consigne from './pages/Consigne'
 import Duvidas from './pages/Duvidas'
 import Politicas from './pages/Politicas'
 import { CatalogoProvider } from './data/catalogo'
+import { usePagina } from './lib/seo'
 
 // O painel só é baixado por quem acessa /admin
 const AdminApp = lazy(() => import('./admin/AdminApp'))
 
 // Páginas que ainda vão ser construídas
 function EmBreve({ titulo }) {
-  useEffect(() => {
-    document.title = `${titulo} · Atalia Brechó`
-  }, [titulo])
+  usePagina({ titulo, naoIndexar: true })
   return (
     <main id="conteudo" className="em-breve conteiner">
       <h1>{titulo}</h1>

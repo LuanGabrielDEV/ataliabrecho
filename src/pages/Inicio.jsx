@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { usePagina } from '../lib/seo'
 import { Link } from 'react-router-dom'
 import { ArrowRight, MapPin, Recycle, Shirt, Tag } from 'lucide-react'
 import CardPeca from '../features/catalogo/CardPeca'
@@ -20,9 +20,7 @@ const VANTAGENS = [
 ]
 
 export default function Inicio() {
-  useEffect(() => {
-    document.title = 'Atalia Brechó · Moda com propósito'
-  }, [])
+  usePagina()
 
   const { pecas, looks } = useCatalogo()
   const NOVIDADES = pecas.filter((p) => p.status !== 'vendida').slice(0, 8)

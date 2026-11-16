@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { usePagina } from '../lib/seo'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { LogOut } from 'lucide-react'
 import { LogoHorizontal } from '../components/Marca'
@@ -85,14 +86,7 @@ function useSessao() {
 export default function AdminApp() {
   const { carregando, usuario, admin, erro, recuperando, fimRecuperacao } = useSessao()
 
-  useEffect(() => {
-    document.title = 'Painel · Atalia Brechó'
-    const meta = document.createElement('meta')
-    meta.name = 'robots'
-    meta.content = 'noindex'
-    document.head.appendChild(meta)
-    return () => meta.remove()
-  }, [])
+  usePagina({ titulo: 'Painel', naoIndexar: true })
 
   if (carregando) return <main className="adm-centro">Carregando…</main>
   if (recuperando) return <NovaSenha aoTerminar={fimRecuperacao} />

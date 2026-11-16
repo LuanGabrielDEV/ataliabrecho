@@ -1,4 +1,5 @@
-import { useEffect, useId, useState } from 'react'
+import { useId, useState } from 'react'
+import { usePagina } from '../lib/seo'
 import { Mail, MapPin } from 'lucide-react'
 import Perguntas from '../components/Perguntas'
 import { IconeMarca } from '../components/Cabecalho'
@@ -112,9 +113,10 @@ function FormContato() {
 }
 
 export default function Duvidas() {
-  useEffect(() => {
-    document.title = 'Dúvidas e contato · Atalia Brechó'
-  }, [])
+  usePagina({
+    titulo: 'Dúvidas e contato',
+    descricao: 'Como comprar, formas de pagamento, entrega e retirada em Paulista/PE, e como consignar na Atalia Brechó.',
+  })
 
   return (
     <main id="conteudo" className="duvidas">

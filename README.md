@@ -69,6 +69,14 @@ O site mostra, nos cartões, a foto recortada sobre o fundo bege; na página da 
 
 Recorte automático erra em renda, tule, alças finas e peça no cabide: sempre confira o resultado.
 
+## SEO e prévia de links
+
+- `index.html` traz as tags de prévia (Open Graph) e os dados da loja; a imagem é `public/og-atalia.jpg`.
+- `src/lib/seo.js` (`usePagina`) define título, descrição, endereço canônico e dados de produto de cada página. `/admin`, `/sacola` e páginas não encontradas ficam fora dos buscadores.
+- `api/peca.js`: WhatsApp, Instagram e Facebook não executam JavaScript; o `vercel.json` manda só esses robôs para esta função, que devolve o título, o preço e a foto da peça. Pessoas continuam indo para o site.
+- `api/sitemap.js` gera `/sitemap.xml` com as páginas fixas e as peças da vitrine; `public/robots.txt` aponta para ele.
+- Se o site ganhar domínio próprio, troque o endereço em `src/lib/seo.js`, `api/_supabase.js`, `index.html` e `public/robots.txt`.
+
 ## Onde mexer
 
 ```

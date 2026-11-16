@@ -93,7 +93,7 @@
 
 .comprar__ordem select {
   font: inherit;
-  font-size: 0.9375rem;
+  font-size: 1rem; /* abaixo de 16px o iPhone dá zoom na página ao tocar no campo */
   font-weight: 600;
   color: var(--tinta);
   min-height: 44px;

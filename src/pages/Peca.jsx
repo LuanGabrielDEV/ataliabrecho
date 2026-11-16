@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ChevronLeft } from 'lucide-react'
 import { siWhatsapp } from '../components/iconesMarca'
@@ -9,6 +9,7 @@ import { IconeMarca } from '../components/Cabecalho'
 import { CATEGORIAS, CONDICOES } from '../data/pecasDemo'
 import { useCatalogo } from '../data/catalogoBase'
 import { formatarPreco, linkWhatsapp } from '../config'
+import { SITE, usePagina } from '../lib/seo'
 import './peca.css'
 
 export default function Peca() {
@@ -18,9 +19,34 @@ export default function Peca() {
   const recorteRef = useRef(null)
   const [vista, setVista] = useState('peca')
 
-  useEffect(() => {
-    document.title = peca ? `${peca.titulo} · Atalia Brechó` : 'Peça não encontrada · Atalia Brechó'
-  }, [peca])
+  const fotoAbsoluta = peca?.foto ? new URL(peca.foto, SITE).href : undefined
+  usePagina({
+    titulo: peca ? peca.titulo : carregando ? undefined : 'Peça não encontrada',
+    descricao: peca
+      ? `${peca.titulo}, tamanho ${peca.tamanho}, por ${formatarPreco(peca.preco)}. Peça única de segunda mão na Atalia Brechó.`
+      : undefined,
+    imagem: fotoAbsoluta,
+    naoIndexar: !peca && !carregando,
+    dados: peca
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: peca.titulo,
+          sku: peca.codigo,
+          ...(peca.descricao ? { description: peca.descricao } : {}),
+          ...(fotoAbsoluta ? { image: fotoAbsoluta } : {}),
+          size: peca.tamanho,
+          itemCondition: 'https://schema.org/UsedCondition',
+          offers: {
+            '@type': 'Offer',
+            price: peca.preco,
+            priceCurrency: 'BRL',
+            availability: peca.status === 'disponivel' ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+            url: `${SITE}/peca/${peca.codigo || peca.id}`,
+          },
+        }
+      : undefined,
+  })
 
   if (!peca && carregando) {
     return (

@@ -14,5 +14,6 @@ export function linkWhatsapp(mensagem) {
 }
 
 export function formatarPreco(valor) {
-  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 })
+  // valor redondo sai sem centavos (R$ 60); com centavos, sempre duas casas (R$ 59,90, nunca R$ 59,9)
+  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: Number.isInteger(valor) ? 0 : 2 })
 }

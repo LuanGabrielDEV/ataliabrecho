@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { usePagina } from '../lib/seo'
 import { Link } from 'react-router-dom'
 import { Handshake, Repeat, ShoppingBag, Sparkles } from 'lucide-react'
 import { Simbolo } from '../components/Marca'
@@ -16,9 +16,10 @@ const CAMINHOS = [
 ]
 
 export default function NossaHistoria() {
-  useEffect(() => {
-    document.title = 'Nossa história · Atalia Brechó'
-  }, [])
+  usePagina({
+    titulo: 'Nossa história',
+    descricao: 'Conheça a Wirlla Dantas e como nasceu a Atalia Brechó, um brechó de moda circular em Paulista, PE.',
+  })
 
   return (
     <main id="conteudo" className="nh">
