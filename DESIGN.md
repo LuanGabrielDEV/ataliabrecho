@@ -8,7 +8,7 @@ Segue o padrão das lojas de brechó online que funcionam: ThredUp e Modare (ref
 - **A peça é a protagonista.** Foto recortada sobre um fundo claro (`--tile`), tamanho em destaque no canto, nome, estado e preço.
 - **Uma cor de ação:** o oliva da marca (`--oliva`) nos botões, selos e links. O resto é neutro.
 - **IA com honestidade.** As fotos da modelo do Provador IA sempre levam o selo "Simulação por IA" e mostram a peça real ao lado.
-- **Compra sem atrito.** "Adicionar" em todo card, a peça voa até a sacola e a sacola abre como gaveta lateral.
+- **Compra sem atrito.** "Adicionar" em todo card (botão suave em `--oliva-clara` que enche de oliva ao passar o mouse), a peça voa até a sacola e a sacola abre como gaveta lateral.
 
 ## Tokens (`src/index.css`)
 | Token | Valor | Uso |

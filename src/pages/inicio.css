@@ -24,6 +24,8 @@
   margin: 0;
   font-size: clamp(2.3rem, 5.6vw, 4.5rem);
   max-width: 13ch;
+  font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+  line-height: 1.02;
 }
 
 .banner__texto p {
@@ -44,7 +46,11 @@
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   gap: clamp(0.6rem, 1.5vw, 1rem);
-  align-items: end;
+  align-items: start;
+}
+
+.banner__foto--2 {
+  margin-top: clamp(2rem, 6vw, 4.5rem);
 }
 
 .banner__foto {
@@ -68,12 +74,18 @@
 }
 
 .banner__foto--2 img {
-  aspect-ratio: 3 / 4.2;
+  aspect-ratio: 3 / 4;
 }
 
 .banner__foto .selo-ia {
-  top: 0.6rem;
+  top: auto;
+  bottom: 0.6rem;
   left: 0.6rem;
+}
+
+/* a etiqueta de preço fica por baixo do selo na primeira foto */
+.banner__foto--1 .selo-ia {
+  bottom: 3.9rem;
 }
 
 .banner__etiqueta {
@@ -95,6 +107,44 @@
 
 .banner__etiqueta strong {
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.banner__fatos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.banner__fatos li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.banner__fatos li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--oliva-logo);
+}
+
+@media (max-width: 520px) {
+  .banner__acoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .banner__acoes .botao {
+    padding-inline: 0.75rem;
+  }
 }
 
 /* ---------- Categorias ---------- */
@@ -200,13 +250,13 @@
 
 .vantagens__lista h3 {
   margin: 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .vantagens__lista p {
   margin: 0.15rem 0 0;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--tinta-suave);
 }
 
@@ -268,7 +318,7 @@
 }
 
 .look__foto .selo-ia {
-  top: 0.6rem;
+  bottom: 0.6rem;
   left: 0.6rem;
 }
 
@@ -602,5 +652,9 @@
 @media (max-width: 600px) {
   .banner__etiqueta {
     display: none;
+  }
+
+  .banner__foto--1 .selo-ia {
+    bottom: 0.6rem;
   }
 }

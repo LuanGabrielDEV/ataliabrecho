@@ -8,7 +8,7 @@ import { Simbolo } from '../components/Marca'
 import { CATEGORIAS } from '../data/pecasDemo'
 import { useCatalogo } from '../data/catalogoBase'
 import { DIFERENCIAIS, FUNDADORA, HISTORIA } from '../data/historia'
-import { CONTATO } from '../config'
+import { CONTATO, formatarPreco } from '../config'
 import '../features/catalogo/card-peca.css'
 import './inicio.css'
 
@@ -47,19 +47,24 @@ export default function Inicio() {
               Quero consignar
             </Link>
           </div>
+          <ul className="banner__fatos">
+            <li>Peças únicas</li>
+            <li>Fotos reais e medidas</li>
+            <li>Retirada grátis em Paulista</li>
+          </ul>
         </div>
         {capa && (
           <div className="banner__fotos">
             <Link to={`/peca/${capa.id}`} className="banner__foto banner__foto--1" viewTransition>
               <img src={capa.fotoIa} alt={`Modelo gerada por IA vestindo ${capa.titulo.toLowerCase()}`} fetchPriority="high" />
               <span className="banner__etiqueta">
-                {capa.titulo} <strong>R$ {capa.preco}</strong>
+                {capa.titulo} <strong>{formatarPreco(capa.preco)}</strong>
               </span>
             </Link>
             {capa2 && (
               <Link to={`/peca/${capa2.id}`} className="banner__foto banner__foto--2" viewTransition>
                 <img src={capa2.fotoIa} alt={`Modelo gerada por IA vestindo ${capa2.titulo.toLowerCase()}`} />
-                </Link>
+              </Link>
             )}
             <p className="banner__legenda">Looks com peças do brechó e modelo criada por IA.</p>
           </div>
@@ -137,13 +142,13 @@ export default function Inicio() {
               <Link to={`/peca/${l.id}`} className="look" viewTransition>
                 <span className="look__foto">
                   <img src={l.fotoIa} alt={`Modelo gerada por IA vestindo ${l.titulo.toLowerCase()}`} loading="lazy" />
-                      <span className="look__peca">
+                  <span className="look__peca">
                     <img src={l.recorte || l.foto} alt="" loading="lazy" />
                   </span>
                 </span>
                 <span className="look__nome">{l.titulo}</span>
                 <span className="look__preco">
-                  R$ {l.preco} · Tam. {l.tamanho}
+                  {formatarPreco(l.preco)} · Tam. {l.tamanho}
                 </span>
               </Link>
             </li>
