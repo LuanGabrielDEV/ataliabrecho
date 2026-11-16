@@ -658,3 +658,7 @@
     bottom: 0.6rem;
   }
 }
+
+.rolo-secao .secao-topo {
+  align-items: center;
+}

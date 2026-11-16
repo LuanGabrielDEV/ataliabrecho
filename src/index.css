@@ -282,9 +282,35 @@ h3 {
   margin: 0 0 1rem;
 }
 
-::view-transition-old(root),
+/* Troca de página: a antiga some rápido, a nova sobe de leve. Cabeçalho fica parado. */
+.cabecalho {
+  view-transition-name: cabecalho;
+}
+
+::view-transition-old(root) {
+  animation: vt-sai 0.18s ease both;
+}
+
 ::view-transition-new(root) {
-  animation-duration: 0.3s;
+  animation: vt-entra 0.4s var(--ease) 0.06s both;
+}
+
+::view-transition-group(peca-foto) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease);
+}
+
+@keyframes vt-sai {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-entra {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

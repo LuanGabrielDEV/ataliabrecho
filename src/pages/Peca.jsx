@@ -86,7 +86,7 @@ export default function Peca() {
           <div className="peca-pagina__vitrine" data-status={peca.status}>
             <figure className="peca-pagina__foto" data-vista={vista}>
               {vista === 'peca' && (
-                <img ref={recorteRef} src={peca.recorte || peca.foto} alt={`${peca.titulo}, foto real da peça sem o fundo`} fetchPriority="high" />
+                <img ref={recorteRef} style={{ viewTransitionName: 'peca-foto' }} src={peca.recorte || peca.foto} alt={`${peca.titulo}, foto real da peça sem o fundo`} fetchPriority="high" />
               )}
               {vista === 'original' && (
                 <img src={peca.foto} alt={`${peca.titulo}, foto original da peça no manequim`} width="720" height="960" />

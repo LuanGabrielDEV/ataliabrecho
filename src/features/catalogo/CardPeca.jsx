@@ -14,7 +14,14 @@ export default function CardPeca({ peca, prioridade = false }) {
 
   return (
     <article className="card-peca" data-status={peca.status}>
-      <Link to={url} className="card-peca__foto" tabIndex={-1} aria-hidden="true" viewTransition>
+      <Link to={url} className="card-peca__foto" tabIndex={-1}
+        aria-hidden="true"
+        viewTransition
+        onClick={() => {
+          // a foto vira a foto grande da página da peça
+          if (imagemRef.current) imagemRef.current.style.viewTransitionName = 'peca-foto'
+        }}
+      >
         <img ref={imagemRef} src={peca.recorte || peca.foto} alt="" loading={prioridade ? 'eager' : 'lazy'} />
         <span className="card-peca__tamanho">{peca.tamanho}</span>
         {STATUS[peca.status] ? (

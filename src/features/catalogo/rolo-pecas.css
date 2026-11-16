@@ -1,0 +1,106 @@
+.rolo {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.rolo__faixa {
+  display: flex;
+  width: max-content;
+  animation: rolo-passa 70s linear infinite;
+}
+
+.rolo:hover .rolo__faixa,
+.rolo:focus-within .rolo__faixa {
+  animation-play-state: paused;
+}
+
+.rolo__grupo {
+  display: flex;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0 0.9rem 0 0;
+  list-style: none;
+}
+
+.rolo__grupo li {
+  flex: none;
+  width: clamp(138px, 17vw, 200px);
+}
+
+.rolo__item {
+  display: grid;
+  gap: 0.15rem;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.rolo__foto {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 0.45rem;
+  border-radius: var(--raio-card);
+  background: var(--tile);
+  overflow: hidden;
+  transition:
+    translate 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.rolo__foto img {
+  position: absolute;
+  inset: 7% 9% 5%;
+  width: 82%;
+  height: 88%;
+  object-fit: contain;
+  filter: var(--sombra-peca);
+  transition: scale 0.5s var(--ease);
+}
+
+.rolo__item:hover .rolo__foto {
+  translate: 0 -4px;
+  box-shadow: var(--sombra);
+}
+
+.rolo__item:hover .rolo__foto img {
+  scale: 1.05;
+}
+
+.rolo__nome {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rolo__preco {
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes rolo-passa {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rolo {
+    overflow-x: auto;
+    mask-image: none;
+    scrollbar-width: none;
+  }
+
+  .rolo__faixa {
+    animation: none;
+    padding-inline: var(--margem);
+  }
+
+  .rolo__grupo[aria-hidden] {
+    display: none;
+  }
+}

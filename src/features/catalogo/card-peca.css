@@ -12,6 +12,19 @@
   border-radius: var(--raio-card);
   background: var(--tile);
   overflow: hidden;
+  transition:
+    translate 0.4s var(--ease),
+    box-shadow 0.4s var(--ease),
+    scale 0.2s var(--ease);
+}
+
+.card-peca__foto:hover {
+  translate: 0 -4px;
+  box-shadow: var(--sombra);
+}
+
+.card-peca__foto:active {
+  scale: 0.985;
 }
 
 .card-peca__foto img {
@@ -31,6 +44,35 @@
 @media (hover: none) {
   .card-peca__foto:hover img {
     scale: none;
+  }
+
+  .card-peca__foto:hover {
+    translate: none;
+    box-shadow: none;
+  }
+}
+
+/* entrada em cascata dos cards (no início, quem anima é .revelar) */
+.grade-pecas > li:not(.revelar) {
+  animation: card-entra 0.55s var(--ease) both;
+}
+
+.grade-pecas > li:nth-child(4n + 2) {
+  animation-delay: 60ms;
+}
+
+.grade-pecas > li:nth-child(4n + 3) {
+  animation-delay: 120ms;
+}
+
+.grade-pecas > li:nth-child(4n + 4) {
+  animation-delay: 180ms;
+}
+
+@keyframes card-entra {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
   }
 }
 

@@ -2,6 +2,7 @@ import { usePagina } from '../lib/seo'
 import { Link } from 'react-router-dom'
 import { ArrowRight, MapPin, Recycle, Shirt, Tag } from 'lucide-react'
 import CardPeca from '../features/catalogo/CardPeca'
+import RoloPecas from '../features/catalogo/RoloPecas'
 import { IconeMarca } from '../components/Cabecalho'
 import { siInstagram } from '../components/iconesMarca'
 import { Simbolo } from '../components/Marca'
@@ -24,6 +25,7 @@ export default function Inicio() {
 
   const { pecas, looks } = useCatalogo()
   const NOVIDADES = pecas.filter((p) => p.status !== 'vendida').slice(0, 8)
+  const ROLO = pecas.filter((p) => p.status === 'disponivel').reverse().slice(0, 14)
   const capa = looks[0]
   const capa2 = looks[1]
 
@@ -124,6 +126,21 @@ export default function Inicio() {
           ))}
         </ul>
       </section>
+
+      {/* ---------- Rolo de peças ---------- */}
+      {ROLO.length >= 6 && (
+        <section className="secao rolo-secao" aria-labelledby="rolo-titulo">
+          <div className="conteiner secao-topo">
+            <h2 id="rolo-titulo" className="titulo">
+              Um giro pelas peças
+            </h2>
+            <Link to="/comprar" className="link-seta" viewTransition>
+              Ver todas <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
+            </Link>
+          </div>
+          <RoloPecas pecas={ROLO} />
+        </section>
+      )}
 
       {/* ---------- Looks ---------- */}
       {looks.length > 1 && (

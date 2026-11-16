@@ -51,9 +51,14 @@ function Layout() {
         }),
       { rootMargin: '0px 0px -8% 0px' },
     )
-    const t = setTimeout(() => document.querySelectorAll('.revelar:not(.revelado)').forEach((el) => io.observe(el)), 50)
+    const observar = () => document.querySelectorAll('.revelar:not(.revelado)').forEach((el) => io.observe(el))
+    const t = setTimeout(observar, 50)
+    // peças que chegam do banco depois da primeira pintura também entram com a animação
+    const mo = new MutationObserver(observar)
+    mo.observe(document.body, { childList: true, subtree: true })
     return () => {
       clearTimeout(t)
+      mo.disconnect()
       io.disconnect()
     }
   }, [pathname])
